@@ -54,9 +54,12 @@ public class SplunkConfig {
     /**
      * The strategy to send events to HEC.
      * <p>
-     * In parallel mode, events are sent asynchronously and events with the same timestamp
+     * In sequential mode, there is only one HTTP connection to HEC and the order of events is preserved, but performance is
+     * lower.
+     * In parallel mode, event batches are sent asynchronously over multiple HTTP connections, and events with the same
+     * timestamp
      * (that has 1 millisecond resolution) may be indexed out of order by Splunk.
-     * In sequential mode, the order of events is preserved, but performance of sending events to the server is lower.
+     *
      */
     @ConfigItem(defaultValue = "sequential")
     public SendMode sendMode;
@@ -69,7 +72,7 @@ public class SplunkConfig {
     public Optional<String> channel;
 
     /**
-     * Batching delay before sending a group of event.
+     * Batching delay before sending a group of events.
      * If 0, the events are sent immediately.
      */
     @ConfigItem(defaultValue = "10s")
@@ -88,7 +91,7 @@ public class SplunkConfig {
     public long batchSizeBytes;
 
     /**
-     * Maximum number of retries in case of exceptions while connecting to HEC.
+     * Maximum number of retries in case of I/O exceptions with HEC connection.
      */
     @ConfigItem(defaultValue = "0")
     public long maxRetries;
