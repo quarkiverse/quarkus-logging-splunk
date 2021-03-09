@@ -4,6 +4,8 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
+import static org.testcontainers.containers.wait.strategy.Wait.*;
+
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
@@ -24,6 +26,7 @@ public class SplunkResource implements QuarkusTestResourceLifecycleManager {
                     .withEnv("SPLUNK_START_ARGS", "--accept-license")
                     .withEnv("SPLUNK_PASSWORD", "admin123")
                     .withEnv("SPLUNK_HEC_TOKEN", "29fe2838-cab6-4d17-a392-37b7b8f41f75")
+                    .waitingFor(forLogMessage(".*Ansible playbook complete.*\\n", 1))
                     .withStartupTimeout(Duration.ofMinutes(2));
 
     @Override
