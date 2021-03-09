@@ -15,7 +15,7 @@ import io.quarkus.test.QuarkusUnitTest;
 /**
  * No mock server
  */
-public class LoggingSplunkStartFailureTest {
+class LoggingSplunkStartFailureTest {
 
     @RegisterExtension
     static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
@@ -25,9 +25,9 @@ public class LoggingSplunkStartFailureTest {
     static final Logger logger = Logger.getLogger(LoggingSplunkStartFailureTest.class);
 
     @Test
-    public void testSendError() throws InterruptedException {
+    void testSendError() throws InterruptedException {
         logger.info("error starting splunk");
-        // Wait for connection timeout
-        Thread.sleep(5000);
+        // Wait for connection timeout, retried once.
+        Thread.sleep(15000);
     }
 }

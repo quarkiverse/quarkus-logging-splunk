@@ -9,6 +9,7 @@ import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.JsonBody.json;
 import static org.mockserver.model.Not.not;
 
+import org.jboss.logging.Logger;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.AfterAll;
@@ -21,7 +22,7 @@ import org.mockserver.model.ClearType;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class LoggingSplunkMinimalConfigTest {
+class LoggingSplunkMinimalConfigTest {
 
     @RegisterExtension
     static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
@@ -31,7 +32,7 @@ public class LoggingSplunkMinimalConfigTest {
 
     static ClientAndServer httpServer;
 
-    static final org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(LoggingSplunkMinimalConfigTest.class);
+    static final Logger logger = Logger.getLogger(LoggingSplunkMinimalConfigTest.class);
 
     @BeforeAll
     public static void setUpOnce() {
@@ -54,13 +55,13 @@ public class LoggingSplunkMinimalConfigTest {
     }
 
     @Test
-    public void indexIsNotSentIfUnspecified() {
+    void indexIsNotSentIfUnspecified() {
         logger.info("hello splunk");
         httpServer.verify(request().withBody(not(json("{ index: ''}"))));
     }
 
     @Test
-    public void sourceTypeDefaultsToJson() {
+    void sourceTypeDefaultsToJson() {
         logger.info("hello splunk");
         httpServer.verify(request().withBody(json("{ sourcetype: '_json'}")));
     }

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import io.quarkus.bootstrap.logging.InitialConfigurator;
 import io.quarkus.test.QuarkusUnitTest;
 
-public class LoggingSplunkDisabledTest {
+class LoggingSplunkDisabledTest {
 
     @RegisterExtension
     static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
@@ -29,7 +29,7 @@ public class LoggingSplunkDisabledTest {
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
     @Test
-    public void extensionDisabled() {
+    void extensionDisabled() {
         DelayedHandler delayedHandler = InitialConfigurator.DELAYED_HANDLER;
         assertThat(Logger.getLogger("").getHandlers(), hasItemInArray(delayedHandler));
         Handler handler = Arrays.stream(delayedHandler.getHandlers())
