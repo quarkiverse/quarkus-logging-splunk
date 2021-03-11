@@ -1,5 +1,5 @@
-name: quarkiverse-project
-title: Quarkiverse <YOUR_PROJECT>
+name: quarkus-logging-splunk
+title: Quarkus Logging Splunk
 version: dev
 nav:
   - modules/ROOT/nav.adoc

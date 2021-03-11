@@ -1,112 +1,200 @@
 //
-// This content is generated using mvn compile and copied manually to here
+// This content is generated using mvn compile and copied manually from target/asciidoc/generated/config/quarkus-log-handler-splunk.adoc to here
 //
+
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
 |===
 
-h|[[quarkus-freemarker_configuration]]link:#quarkus-freemarker_configuration[Configuration property]
+h|[[quarkus-log-handler-splunk_configuration]]link:#quarkus-log-handler-splunk_configuration[Configuration property]
 
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[quarkus-freemarker_quarkus.freemarker.resource-paths]]`link:#quarkus-freemarker_quarkus.freemarker.resource-paths[quarkus.freemarker.resource-paths]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.enabled]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.enabled[quarkus.log.handler.splunk.enabled]`
 
 [.description]
 --
-Comma-separated list of absolute resource paths to scan recursively for templates. All tree folder from 'resource-paths' will be added as a resource. Unprefixed locations or locations starting with classpath will be processed in the same way.
---|list of string
-|`freemarker/templates`
+Determine whether to enable the handler
+--|boolean 
+|`true`
 
 
-a| [[quarkus-freemarker_quarkus.freemarker.file-paths]]`link:#quarkus-freemarker_quarkus.freemarker.file-paths[quarkus.freemarker.file-paths]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.format]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.format[quarkus.log.handler.splunk.format]`
 
 [.description]
 --
-Comma-separated of file system paths where freemarker templates are located
---|list of string
+The log format.
+--|string 
+|`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.url]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.url[quarkus.log.handler.splunk.url]`
+
+[.description]
+--
+Splunk logging input url
+--|string 
+|`https://localhost:8088/`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.token]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.token[quarkus.log.handler.splunk.token]`
+
+[.description]
+--
+The application token, the token is mandatory if the extension is enabled https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++HEC_token
+--|string 
 |
 
 
-a| [[quarkus-freemarker_quarkus.freemarker.default-encoding]]`link:#quarkus-freemarker_quarkus.freemarker.default-encoding[quarkus.freemarker.default-encoding]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.send-mode]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.send-mode[quarkus.log.handler.splunk.send-mode]`
 
 [.description]
 --
-Set the preferred charset template files are stored in.
---|string
+To improve system performance tracing, events are sent asynchronously and events with the same timestamp (that has 1 millisecond resolution) may be indexed out of order by Splunk. send-mode parameter triggers "sequential mode" that guarantees preserving events order. In "sequential mode" performance of sending events to the server is lower.
+--|string 
+|`sequential`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.channel]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.channel[quarkus.log.handler.splunk.channel]`
+
+[.description]
+--
+Unique GUID for the client to send raw events to the server https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/AboutHECIDXAck++#++About_channels_and_sending_data
+--|string 
 |
 
 
-a| [[quarkus-freemarker_quarkus.freemarker.template-exception-handler]]`link:#quarkus-freemarker_quarkus.freemarker.template-exception-handler[quarkus.freemarker.template-exception-handler]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.type]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.type[quarkus.log.handler.splunk.type]`
 
 [.description]
 --
-Sets how errors will appear. rethrow, debug, html-debug, ignore.
---|string
+Specify if log events are sent in 'Raw' mode https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Raw_event_parsing
+--|string 
 |
 
 
-a| [[quarkus-freemarker_quarkus.freemarker.log-template-exceptions]]`link:#quarkus-freemarker_quarkus.freemarker.log-template-exceptions[quarkus.freemarker.log-template-exceptions]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-interval]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-interval[quarkus.log.handler.splunk.batch-interval]`
 
 [.description]
 --
-If false, don't log exceptions inside FreeMarker that it will be thrown at you anyway.
---|boolean
+Batching delay before sending a group of event. If 0, the events are sent immediately.
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor[icon:question-circle[], title=More information about the Duration format]
+|`10S`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-count]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-count[quarkus.log.handler.splunk.batch-size-count]`
+
+[.description]
+--
+Maximum number of events in a batch. By default 10, if 0 no batching
+--|long 
+|`10`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-bytes]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-bytes[quarkus.log.handler.splunk.batch-size-bytes]`
+
+[.description]
+--
+Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching
+--|long 
+|`10`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.retries-on-error]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.retries-on-error[quarkus.log.handler.splunk.retries-on-error]`
+
+[.description]
+--
+Maximum error retries count
+--|long 
+|`0`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception[quarkus.log.handler.splunk.include-exception]`
+
+[.description]
+--
+Includes the exception messages when a throwable is associated
+--|boolean 
+|`true`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name[quarkus.log.handler.splunk.include-logger-name]`
+
+[.description]
+--
+
+--|boolean 
+|`true`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name[quarkus.log.handler.splunk.include-thread-name]`
+
+[.description]
+--
+
+--|boolean 
+|`true`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation[quarkus.log.handler.splunk.disable-certificate-validation]`
+
+[.description]
+--
+Disable certificate validation
+--|boolean 
+|`false`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-host]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-host[quarkus.log.handler.splunk.metadata-host]`
+
+[.description]
+--
+The host value to assign to the event data. This is typically the hostname of the client from which you're sending data. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+--|string 
 |
 
 
-a| [[quarkus-freemarker_quarkus.freemarker.wrap-unchecked-exceptions]]`link:#quarkus-freemarker_quarkus.freemarker.wrap-unchecked-exceptions[quarkus.freemarker.wrap-unchecked-exceptions]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source[quarkus.log.handler.splunk.metadata-source]`
 
 [.description]
 --
-Wrap unchecked exceptions thrown during template processing into TemplateException-s.
---|boolean
+The source value to assign to the event data. For example, if you're sending data from an app you're developing, you could set this key to the name of the app. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+--|string 
 |
 
 
-a| [[quarkus-freemarker_quarkus.freemarker.fallback-on-null-loop-variable]]`link:#quarkus-freemarker_quarkus.freemarker.fallback-on-null-loop-variable[quarkus.freemarker.fallback-on-null-loop-variable]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type[quarkus.log.handler.splunk.metadata-source-type]`
 
 [.description]
 --
-If false, do not fall back to higher scopes when reading a null loop variable.
---|boolean
-|
+The sourcetype value to assign to the event data https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata A given sourcetype may have indexed fields extraction enabled, which is the case of the default built-in _json.
+--|string 
+|`_json`
 
 
-a| [[quarkus-freemarker_quarkus.freemarker.boolean-format]]`link:#quarkus-freemarker_quarkus.freemarker.boolean-format[quarkus.freemarker.boolean-format]`
-
-[.description]
---
-The string value for the boolean `true` and `false` values, usually intended for human consumption (not for a computer language), separated with comma.
---|string
-|
-
-
-a| [[quarkus-freemarker_quarkus.freemarker.number-format]]`link:#quarkus-freemarker_quarkus.freemarker.number-format[quarkus.freemarker.number-format]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index[quarkus.log.handler.splunk.metadata-index]`
 
 [.description]
 --
-Sets the default number format used to convert numbers to strings.
---|string
-|
-
-
-a| [[quarkus-freemarker_quarkus.freemarker.object-wrapper-expose-fields]]`link:#quarkus-freemarker_quarkus.freemarker.object-wrapper-expose-fields[quarkus.freemarker.object-wrapper-expose-fields]`
-
-[.description]
---
-If true, the object wrapper will be configured to expose fields.
---|boolean
-|
-
-
-a|icon:lock[title=Fixed at build time] [[quarkus-freemarker_quarkus.freemarker.directive-directive]]`link:#quarkus-freemarker_quarkus.freemarker.directive-directive[quarkus.freemarker.directive]`
-
-[.description]
---
-List of directives to register with format name=classname
---|`Map<String,String>`
+The optional name of the index by which the event data is to be stored. If set, it must be within the list of allowed indexes of the token (if it has the indexes parameter set). https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+--|string 
 |
 
 |===
+ifndef::no-duration-note[]
+[NOTE]
+[[duration-note-anchor]]
+.About the Duration format
+====
+The format for durations uses the standard `java.time.Duration` format.
+You can learn more about it in the link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence-[Duration#parse() javadoc].
+
+You can also provide duration values starting with a number.
+In this case, if the value consists only of a number, the converter treats the value as seconds.
+Otherwise, `PT` is implicitly prepended to the value to obtain a standard `java.time.Duration` format.
+====
+endif::no-duration-note[]
+
