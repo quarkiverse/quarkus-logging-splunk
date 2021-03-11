@@ -35,9 +35,10 @@ When used this extension is enabled by default, meaning the the client would exp
 
 So in local environment, the log handler can be disabled with the following property :
 
-```
+[source,properties]
+----
 quarkus.log.handler.splunk.enabled=false
-```
+----
 
 === Extension Configuration Reference
 
@@ -50,10 +51,11 @@ include::config.adoc[leveloffset=+1, opts=optional]
 The extension can be used transparently with any log frontend used by Quarkus (Log4j, SLF4J, ... )
 
 The default log format of the extension is the following:
+
 [source,properties]
-```
+----
 quarkus.log.handler.splunk.format="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n"
-```
+----
 
 === Connectivity failures
 
