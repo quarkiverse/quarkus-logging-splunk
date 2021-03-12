@@ -12,10 +12,13 @@ import org.jboss.logging.Logger;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockserver.integration.ClientAndServer;
+import org.mockserver.model.ClearType;
 import org.mockserver.verify.VerificationTimes;
 
 import io.quarkus.test.QuarkusUnitTest;
@@ -44,7 +47,13 @@ class LoggingSplunkSendErrorTest {
         httpServer.stop();
     }
 
+    @AfterEach
+    public void tearDown() {
+        httpServer.clear(request(), ClearType.LOG);
+    }
+
     @Test
+    @Disabled("The test is flaky in github CI")
     void testSendError() {
         logger.info("error splunk");
         // The retries-on-error is not applicable in case of HTTP error
