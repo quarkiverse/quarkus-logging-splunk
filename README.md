@@ -1,5 +1,9 @@
 # Quarkus Splunk extension
 
+[![Build](https://github.com/quarkiverse/quarkus-logging-splunk/workflows/Build/badge.svg)](https://github.com/quarkiverse/quarkus-logging-splunk/actions?query=workflow%3ABuild)
+[![Maven Central](https://img.shields.io/maven-central/v/io.quarkiverse.logging.splunk/quarkus-logging-splunk.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.quarkiverse.logging.splunk/quarkus-logging-splunk)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -15,7 +19,7 @@ To get started, add the dependency:
 </dependency>
 ```
 
-For more details, check the complete [documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-logging-splunk).
+For more details, check the complete [documentation](https://quarkiverse.github.io/quarkiverse-docs/quarkus-logging-splunk/dev/index.html).
 
 This extension is based on the [official Splunk's HEC client](https://github.com/splunk/splunk-library-javalogging).
 But, it defines its own [Java Logging Handler](https://docs.oracle.com/en/java/javase/11/docs/api/java.logging/java/util/logging/Handler.html)
