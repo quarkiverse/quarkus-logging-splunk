@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.ClearType;
+import org.mockserver.verify.VerificationTimes;
 
 import io.quarkus.bootstrap.logging.InitialConfigurator;
 import io.quarkus.test.QuarkusUnitTest;
@@ -63,7 +64,7 @@ class LoggingSplunkTest {
     }
 
     @Test
-    public void handlerShouldBeCreated() {
+    void handlerShouldBeCreated() {
         DelayedHandler delayedHandler = InitialConfigurator.DELAYED_HANDLER;
         assertThat(Logger.getLogger("").getHandlers(), hasItemInArray(delayedHandler));
         Handler handler = Arrays.stream(delayedHandler.getHandlers())
@@ -73,43 +74,56 @@ class LoggingSplunkTest {
     }
 
     @Test
-    public void handlerShouldFormatMessage() {
-        logger.infov("hello {0}", "splunk!");
+    void handlerShouldFormatMessage() {
+        logger.warnv("hello {0}", "splunk!");
         httpServer.verify(request().withBody(json("{ event: { message: 'hello splunk!' }}")));
     }
 
     @Test
-    public void eventIsAJsonObjectWithMetadata() {
-        logger.info("hello splunk");
+    void eventIsAJsonObjectWithMetadata() {
+        logger.warn("hello splunk");
         httpServer.verify(request().withBody(json("{ event: { message: 'hello splunk' }}")));
     }
 
     @Test
-    public void eventHasStandardMetadata() {
-        logger.info("hello splunk");
+    void eventHasStandardMetadata() {
+        logger.warn("hello splunk");
         httpServer.verify(request().withBody(json(
                 "{ source: 'mysource', sourcetype: 'mysourcetype', index: 'myindex'} "))
                 .withBody(regex(".*host.*")));
     }
 
     @Test
-    public void tokenIsSentAsAuthorizationHeader() {
-        logger.info("hello splunk");
+    void tokenIsSentAsAuthorizationHeader() {
+        logger.warn("hello splunk");
         httpServer.verify(request().withHeader("Authorization", "Splunk 12345678-1234-1234-1234-1234567890AB"));
     }
 
     @Test
-    public void clientAddsSomePredefinedMetadata() {
-        logger.info("hello splunk");
+    void clientAddsMinimalMetadata() {
+        logger.warn("hello splunk");
         httpServer.verify(request().withBody(json(
-                "{ event: { message: 'hello splunk', severity:'INFO', logger:'io.quarkiverse.logging.splunk.LoggingSplunkTest' }}")));
+                "{ event: { message: 'hello splunk', severity:'WARN' }}")));
     }
 
     @Test
-    public void mdcFieldsShouldBeSentAsMetadata() {
+    void mdcFieldsShouldBeSentAsMetadata() {
         MDC.put("mdc-key", "mdc-value");
-        logger.info("hello mdc");
+        logger.warn("hello mdc");
         httpServer.verify(
                 request().withBody(json("{ event: { message: 'hello mdc', properties: { 'mdc-key': 'mdc-value' }}}")));
+    }
+
+    @Test
+    void messageShouldContainException() {
+        logger.error("unexpected error", new RuntimeException("test exception"));
+        httpServer.verify(request()
+                .withBody(regex(".*unexpected error: java.lang.RuntimeException: test exception.*")));
+    }
+
+    @Test
+    void logLevelShouldBeUsed() {
+        logger.info("Info log");
+        httpServer.verify(request().withBody(json("{ event: { message: 'Info log' }}")), VerificationTimes.exactly(0));
     }
 }

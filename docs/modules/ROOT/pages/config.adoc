@@ -21,29 +21,40 @@ Determine whether to enable the handler
 |`true`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.format]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.format[quarkus.log.handler.splunk.format]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.level]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.level[quarkus.log.handler.splunk.level]`
 
 [.description]
 --
-The log format.
---|string 
-|`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
+The splunk handler log level. By default it is not more strict than the root handler level.
+--|link:https://docs.jboss.org/jbossas/javadoc/7.1.2.Final/org/jboss/logmanager/Level.html[Level]
+ 
+|`ALL`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.url]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.url[quarkus.log.handler.splunk.url]`
 
 [.description]
 --
-Splunk logging input url
+Splunk HEC endpoint base url. 
+ The actual endpoint is expected at path /services/collector/events/1.0
 --|string 
 |`https://localhost:8088/`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation[quarkus.log.handler.splunk.disable-certificate-validation]`
+
+[.description]
+--
+Disable TLS certificate validation with HEC endpoint
+--|boolean 
+|`false`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.token]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.token[quarkus.log.handler.splunk.token]`
 
 [.description]
 --
-The application token, the token is mandatory if the extension is enabled https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++HEC_token
+The application token to authenticate with HEC, the token is mandatory if the extension is enabled https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++HEC_token
 --|string 
 |
 
@@ -52,8 +63,9 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.send-mode]]`link:#qua
 
 [.description]
 --
-To improve system performance tracing, events are sent asynchronously and events with the same timestamp (that has 1 millisecond resolution) may be indexed out of order by Splunk. send-mode parameter triggers "sequential mode" that guarantees preserving events order. In "sequential mode" performance of sending events to the server is lower.
---|string 
+The strategy to send events to HEC. 
+ In sequential mode, there is only one HTTP connection to HEC and the order of events is preserved, but performance is lower. In parallel mode, event batches are sent asynchronously over multiple HTTP connections, and events with the same timestamp (that has 1 millisecond resolution) may be indexed out of order by Splunk.
+--|`sequential`, `parallel` 
 |`sequential`
 
 
@@ -61,16 +73,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.channel]]`link:#quark
 
 [.description]
 --
-Unique GUID for the client to send raw events to the server https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/AboutHECIDXAck++#++About_channels_and_sending_data
---|string 
-|
-
-
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.type]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.type[quarkus.log.handler.splunk.type]`
-
-[.description]
---
-Specify if log events are sent in 'Raw' mode https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Raw_event_parsing
+A GUID to identify an HEC client and guarantee isolation at HEC level in case of slow clients. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/AboutHECIDXAck++#++About_channels_and_sending_data
 --|string 
 |
 
@@ -79,7 +82,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-interval]]`link
 
 [.description]
 --
-Batching delay before sending a group of event. If 0, the events are sent immediately.
+Batching delay before sending a group of events. If 0, the events are sent immediately.
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
   link:#duration-note-anchor[icon:question-circle[], title=More information about the Duration format]
 |`10S`
@@ -89,7 +92,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-count]]`li
 
 [.description]
 --
-Maximum number of events in a batch. By default 10, if 0 no batching
+Maximum number of events in a batch. By default 10, if 0 no batching.
 --|long 
 |`10`
 
@@ -98,52 +101,53 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-bytes]]`li
 
 [.description]
 --
-Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching
+Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching.
 --|long 
 |`10`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.retries-on-error]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.retries-on-error[quarkus.log.handler.splunk.retries-on-error]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries[quarkus.log.handler.splunk.max-retries]`
 
 [.description]
 --
-Maximum error retries count
+Maximum number of retries in case of I/O exceptions with HEC connection.
 --|long 
 |`0`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.format]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.format[quarkus.log.handler.splunk.format]`
+
+[.description]
+--
+The log format, defining which metadata are inlined inside the log main payload. 
+ Specific metadata (hostname, category, thread name, ...), as well as MDC key/value map, can also be sent in a structured way.
+--|string 
+|`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception[quarkus.log.handler.splunk.include-exception]`
 
 [.description]
 --
-Includes the exception messages when a throwable is associated
+Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted message, it does not include the exception name or stacktrace)
 --|boolean 
-|`true`
+|`false`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name[quarkus.log.handler.splunk.include-logger-name]`
 
 [.description]
 --
-
+Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message)
 --|boolean 
-|`true`
+|`false`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name[quarkus.log.handler.splunk.include-thread-name]`
 
 [.description]
 --
-
---|boolean 
-|`true`
-
-
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation[quarkus.log.handler.splunk.disable-certificate-validation]`
-
-[.description]
---
-Disable certificate validation
+Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message)
 --|boolean 
 |`false`
 
@@ -152,9 +156,9 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-host]]`link:
 
 [.description]
 --
-The host value to assign to the event data. This is typically the hostname of the client from which you're sending data. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+Overrides the host name metadata value.
 --|string 
-|
+|`The equivalent of %h in a formatted message`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source[quarkus.log.handler.splunk.metadata-source]`
@@ -170,7 +174,8 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type]
 
 [.description]
 --
-The sourcetype value to assign to the event data https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata A given sourcetype may have indexed fields extraction enabled, which is the case of the default built-in _json.
+The source type value to assign to the event data https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata 
+ A given source type may have indexed fields extraction enabled, which is the case of the default built-in _json.
 --|string 
 |`_json`
 
@@ -197,4 +202,3 @@ In this case, if the value consists only of a number, the converter treats the v
 Otherwise, `PT` is implicitly prepended to the value to obtain a standard `java.time.Duration` format.
 ====
 endif::no-duration-note[]
-

@@ -7,7 +7,7 @@ package io.quarkiverse.logging.splunk;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.JsonBody.json;
-import static org.mockserver.model.Not.not;
+import static org.mockserver.model.RegexBody.regex;
 
 import org.jboss.logging.Logger;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -22,17 +22,17 @@ import org.mockserver.model.ClearType;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-class LoggingSplunkMinimalConfigTest {
+class LoggingSplunkWithMetadataTest {
 
     @RegisterExtension
     static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
-            .withConfigurationResource("application-splunk-logging-minimal.properties")
+            .withConfigurationResource("application-splunk-logging-with-metadata.properties")
             .withConfigurationResource("mock-server.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
     static ClientAndServer httpServer;
 
-    static final Logger logger = Logger.getLogger(LoggingSplunkMinimalConfigTest.class);
+    static final Logger logger = Logger.getLogger(LoggingSplunkWithMetadataTest.class);
 
     @BeforeAll
     public static void setUpOnce() {
@@ -55,14 +55,12 @@ class LoggingSplunkMinimalConfigTest {
     }
 
     @Test
-    void indexIsNotSentIfUnspecified() {
-        logger.info("hello splunk");
-        httpServer.verify(request().withBody(not(json("{ index: ''}"))));
-    }
-
-    @Test
-    void sourceTypeDefaultsToJson() {
-        logger.info("hello splunk");
-        httpServer.verify(request().withBody(json("{ sourcetype: '_json'}")));
+    void clientAddsStructuredMetadata() {
+        logger.error("hello splunk", new RuntimeException("test exception"));
+        httpServer.verify(request().withBody(json(
+                "{ event: { message: 'hello splunk', " +
+                        "logger:'io.quarkiverse.logging.splunk.LoggingSplunkWithMetadataTest', " +
+                        "exception: 'test exception' }}"))
+                .withBody(regex(".*thread.*")));
     }
 }

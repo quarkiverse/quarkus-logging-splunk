@@ -6,6 +6,7 @@ package io.quarkiverse.logging.splunk;
 
 import java.time.Duration;
 import java.util.Optional;
+import java.util.logging.Level;
 
 import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
@@ -24,102 +25,109 @@ public class SplunkConfig {
     public boolean enabled;
 
     /**
-     * The log format.
+     * The splunk handler log level. By default it is not more strict than the root handler level.
      */
-    @ConfigItem(defaultValue = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n")
-    String format;
+    @ConfigItem(defaultValue = "ALL")
+    public Level level;
 
     /**
-     * Splunk logging input url
+     * Splunk HEC endpoint base url.
+     * <p>
+     * The actual endpoint is expected at path /services/collector/events/1.0
      */
     @ConfigItem(defaultValue = "https://localhost:8088/")
     public String url;
 
     /**
-     * The application token, the token is mandatory if the extension is enabled
+     * Disable TLS certificate validation with HEC endpoint
+     */
+    @ConfigItem(defaultValue = "false")
+    public boolean disableCertificateValidation;
+
+    /**
+     * The application token to authenticate with HEC, the token is mandatory if the extension is enabled
      * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#HEC_token
      */
     @ConfigItem
     public Optional<String> token;
 
     /**
-     * To improve system performance tracing, events are sent asynchronously and
-     * events with the same timestamp (that has 1 millisecond resolution) may be indexed out of order by Splunk.
-     * send-mode parameter triggers "sequential mode" that guarantees preserving events order. In
-     * "sequential mode" performance of sending events to the server is lower.
+     * The strategy to send events to HEC.
+     * <p>
+     * In sequential mode, there is only one HTTP connection to HEC and the order of events is preserved, but performance is
+     * lower.
+     * In parallel mode, event batches are sent asynchronously over multiple HTTP connections, and events with the same
+     * timestamp
+     * (that has 1 millisecond resolution) may be indexed out of order by Splunk.
+     *
      */
     @ConfigItem(defaultValue = "sequential")
-    public String sendMode;
+    public SendMode sendMode;
 
     /**
-     * Unique GUID for the client to send raw events to the server
+     * A GUID to identify an HEC client and guarantee isolation at HEC level in case of slow clients.
      * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/AboutHECIDXAck#About_channels_and_sending_data
      */
     @ConfigItem
     public Optional<String> channel;
 
     /**
-     * Specify if log events are sent in 'Raw' mode
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Raw_event_parsing
-     */
-    @ConfigItem
-    public Optional<String> type;
-
-    /**
-     * Batching delay before sending a group of event.
+     * Batching delay before sending a group of events.
      * If 0, the events are sent immediately.
      */
     @ConfigItem(defaultValue = "10s")
     public Duration batchInterval;
 
     /**
-     * Maximum number of events in a batch. By default 10, if 0 no batching
+     * Maximum number of events in a batch. By default 10, if 0 no batching.
      */
     @ConfigItem(defaultValue = "10")
     public long batchSizeCount;
 
     /**
-     * Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching
+     * Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching.
      */
     @ConfigItem(defaultValue = "10")
     public long batchSizeBytes;
 
     /**
-     * Maximum error retries count
+     * Maximum number of retries in case of I/O exceptions with HEC connection.
      */
     @ConfigItem(defaultValue = "0")
-    public long retriesOnError;
+    public long maxRetries;
 
     /**
-     * Includes the exception messages when a throwable is associated
+     * The log format, defining which metadata are inlined inside the log main payload.
+     * <p>
+     * Specific metadata (hostname, category, thread name, ...), as well as MDC key/value map, can also be sent in a structured
+     * way.
      */
-    @ConfigItem(defaultValue = "true")
+    @ConfigItem(defaultValue = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n")
+    public String format;
+
+    /**
+     * Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted
+     * message, it does not include the exception name or stacktrace)
+     */
+    @ConfigItem(defaultValue = "false")
     public boolean includeException;
 
     /**
-     *
+     * Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message)
      */
-    @ConfigItem(defaultValue = "true")
+    @ConfigItem(defaultValue = "false")
     public boolean includeLoggerName;
 
     /**
-     *
+     * Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message)
      */
-    @ConfigItem(defaultValue = "true")
+    @ConfigItem(defaultValue = "false")
     public boolean includeThreadName;
 
     /**
-     * Disable certificate validation
+     * Overrides the host name metadata value.
      */
-    @ConfigItem(defaultValue = "false")
-    public boolean disableCertificateValidation;
-
-    /**
-     * The host value to assign to the event data. This is typically the hostname of
-     * the client from which you're sending data.
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Event_metadata
-     */
-    @ConfigItem
+    @ConfigItem(defaultValueDocumentation = "The equivalent of %h in a formatted message")
     public Optional<String> metadataHost;
 
     /**
@@ -131,10 +139,10 @@ public class SplunkConfig {
     public Optional<String> metadataSource;
 
     /**
-     * The sourcetype value to assign to the event data
+     * The source type value to assign to the event data
      * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Event_metadata
-     *
-     * A given sourcetype may have indexed fields extraction enabled, which is the case of the default built-in _json.
+     * <p>
+     * A given source type may have indexed fields extraction enabled, which is the case of the default built-in _json.
      */
     @ConfigItem(defaultValue = "_json")
     public String metadataSourceType;
@@ -146,4 +154,12 @@ public class SplunkConfig {
      */
     @ConfigItem
     public Optional<String> metadataIndex;
+
+    /**
+     * Mirrors com.splunk.logging.HttpEventCollectorSender.SendMode
+     */
+    public enum SendMode {
+        SEQUENTIAL,
+        PARALLEL
+    }
 }

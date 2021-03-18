@@ -32,17 +32,20 @@ public class SplunkLogHandlerRecorder {
         }
         HttpEventCollectorSender sender = createSender(config);
         SplunkLogHandler splunkLogHandler = createSplunkLogHandler(sender, config);
+        splunkLogHandler.setLevel(config.level);
         splunkLogHandler.setFormatter(new PatternFormatter(config.format));
         return new RuntimeValue<>(Optional.of(splunkLogHandler));
     }
 
     static HttpEventCollectorSender createSender(SplunkConfig config) {
         HttpEventCollectorErrorHandler.onError(new SplunkErrorCallback());
+        // Always use structured type, raw mode is buggy https://github.com/splunk/splunk-library-javalogging/issues/79
+        String type = "";
         return new HttpEventCollectorSender(
-                config.url, config.token.get(), config.channel.orElse(""), config.type.orElse(""),
+                config.url, config.token.get(), config.channel.orElse(""), type,
                 config.batchInterval.getSeconds(),
                 config.batchSizeCount, config.batchSizeBytes,
-                config.sendMode, buildMetadata(config));
+                config.sendMode.name().toLowerCase(), buildMetadata(config));
     }
 
     static Map<String, String> buildMetadata(SplunkConfig config) {
@@ -64,6 +67,6 @@ public class SplunkLogHandlerRecorder {
     private SplunkLogHandler createSplunkLogHandler(HttpEventCollectorSender sender, SplunkConfig config) {
         return new SplunkLogHandler(sender, config.includeException, config.includeLoggerName, config.includeThreadName,
                 config.disableCertificateValidation,
-                config.retriesOnError);
+                config.maxRetries);
     }
 }
