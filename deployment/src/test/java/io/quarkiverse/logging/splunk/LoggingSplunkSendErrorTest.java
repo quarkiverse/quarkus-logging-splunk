@@ -4,6 +4,8 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.JsonBody.json;
@@ -14,7 +16,6 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockserver.integration.ClientAndServer;
@@ -53,9 +54,9 @@ class LoggingSplunkSendErrorTest {
     }
 
     @Test
-    @Disabled("The test is flaky in github CI")
     void testSendError() {
         logger.info("error splunk");
+        await().atMost(1, SECONDS).until(() -> httpServer.retrieveRecordedRequests(request()).length != 0);
         // The retries-on-error is not applicable in case of HTTP error
         httpServer.verify(request().withBody(json("{ event: { message:'error splunk'} }")),
                 VerificationTimes.exactly(1));
