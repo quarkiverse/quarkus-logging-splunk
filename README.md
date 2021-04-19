@@ -8,6 +8,12 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+## Note
+This branch is currently supporting the RedHat Build of Quarkus (rhbq) **version 1.11**.
+
+* Updates from dependabot must be backported manually, excluing quarkus updates.
+* Updates from quarkus 1.11 minor version have to be checked-in manually.
+
 A quarkus Extension to send logs to a Splunk Http Event Collector (HEC).
 
 To get started, add the dependency:
