@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 
+import org.jboss.logmanager.ExtHandler;
 import org.jboss.logmanager.handlers.ConsoleHandler;
-import org.jboss.logmanager.handlers.DelayedHandler;
 
 import com.splunk.logging.HttpEventCollectorErrorHandler.ErrorCallback;
 import com.splunk.logging.HttpEventCollectorEventInfo;
@@ -65,7 +65,7 @@ class SplunkErrorCallback implements ErrorCallback {
      */
     private boolean isConsoleHandlerEnabled() {
         if (consoleEnabled == null) {
-            DelayedHandler delayedHandler = InitialConfigurator.DELAYED_HANDLER;
+            ExtHandler delayedHandler = InitialConfigurator.DELAYED_HANDLER;
             Handler consoleHandler = Arrays.stream(delayedHandler.getHandlers())
                     .filter(h -> (h instanceof ConsoleHandler))
                     .findFirst().orElse(null);
