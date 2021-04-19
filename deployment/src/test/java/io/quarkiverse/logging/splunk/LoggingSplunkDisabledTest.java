@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
-import org.jboss.logmanager.handlers.DelayedHandler;
+import org.jboss.logmanager.ExtHandler;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ class LoggingSplunkDisabledTest {
 
     @Test
     void extensionDisabled() {
-        DelayedHandler delayedHandler = InitialConfigurator.DELAYED_HANDLER;
+        ExtHandler delayedHandler = InitialConfigurator.DELAYED_HANDLER;
         assertThat(Logger.getLogger("").getHandlers(), hasItemInArray(delayedHandler));
         Handler handler = Arrays.stream(delayedHandler.getHandlers())
                 .filter(h -> (h instanceof SplunkLogHandler))
