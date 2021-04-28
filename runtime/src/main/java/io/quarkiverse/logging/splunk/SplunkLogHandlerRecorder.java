@@ -39,13 +39,14 @@ public class SplunkLogHandlerRecorder {
 
     static HttpEventCollectorSender createSender(SplunkConfig config) {
         HttpEventCollectorErrorHandler.onError(new SplunkErrorCallback());
-        // Always use structured type, raw mode is buggy https://github.com/splunk/splunk-library-javalogging/issues/79
+        // Raw mode is supported now we could support it from now on
         String type = "";
+        // Timeout settings is not used and passing a null is correct regarding the code
         return new HttpEventCollectorSender(
                 config.url, config.token.get(), config.channel.orElse(""), type,
                 config.batchInterval.getSeconds(),
                 config.batchSizeCount, config.batchSizeBytes,
-                config.sendMode.name().toLowerCase(), buildMetadata(config));
+                config.sendMode.name().toLowerCase(), buildMetadata(config), null);
     }
 
     static Map<String, String> buildMetadata(SplunkConfig config) {
