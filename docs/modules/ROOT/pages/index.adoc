@@ -18,7 +18,7 @@ In your `pom.xml` file, add:
 [source,xml]
 ----
 <dependency>
-    <groupId>io.quarkiverse</groupId>
+    <groupId>io.quarkiverse.logging.splunk</groupId>
     <artifactId>quarkus-logging-splunk</artifactId>
 </dependency>
 ----
