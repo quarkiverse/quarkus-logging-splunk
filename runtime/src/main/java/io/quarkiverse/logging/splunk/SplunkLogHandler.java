@@ -47,6 +47,7 @@ public class SplunkLogHandler extends ExtHandler {
             return;
         }
         this.sender.send(
+                record.getMillis(),
                 record.getLevel().toString(),
                 formatted,
                 includeLoggerName ? record.getLoggerName() : null,

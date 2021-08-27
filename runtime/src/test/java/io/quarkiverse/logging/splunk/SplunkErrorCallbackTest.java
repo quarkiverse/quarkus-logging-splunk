@@ -39,7 +39,7 @@ public class SplunkErrorCallbackTest {
     @Spy
     PrintStream stderr = new PrintStream(errContent);
 
-    HttpEventCollectorEventInfo logEvent = new HttpEventCollectorEventInfo("INFO", "Hello",
+    HttpEventCollectorEventInfo logEvent = new HttpEventCollectorEventInfo(System.currentTimeMillis(), "INFO", "Hello",
             SplunkErrorCallbackTest.class.getName(), "thread", null, null, null);
 
     @AfterEach

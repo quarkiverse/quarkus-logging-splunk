@@ -4,6 +4,7 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -51,7 +52,8 @@ class SplunkLogHandlerTest {
         handler.publish(record);
 
         verify(formatter).format(eq(record));
-        verify(sender).send(eq(record.getLevel().toString()),
+        verify(sender).send(anyLong(),
+                eq(record.getLevel().toString()),
                 eq("Hello world"),
                 eq(record.getLoggerName()),
                 eq("1"),
@@ -71,7 +73,8 @@ class SplunkLogHandlerTest {
 
         handler.publish(record);
 
-        verify(sender).send(eq(record.getLevel().toString()),
+        verify(sender).send(anyLong(),
+                eq(record.getLevel().toString()),
                 eq(record.getMessage()),
                 eq(record.getLoggerName()),
                 eq("1"),
