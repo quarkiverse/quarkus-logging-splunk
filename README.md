@@ -8,7 +8,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-A quarkus Extension to send logs to a Splunk Http Event Collector (HEC).
+A Quarkus extension to send logs to a Splunk HTTP Event Collector (HEC).
 
 To get started, add the dependency:
 
