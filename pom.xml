@@ -5,7 +5,7 @@
     <parent>
       <groupId>io.quarkiverse</groupId>
       <artifactId>quarkiverse-parent</artifactId>
-      <version>8</version>
+      <version>9</version>
     </parent>
 
   <groupId>io.quarkiverse.logging.splunk</groupId>
@@ -39,8 +39,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <quarkus.version>2.2.3.Final</quarkus.version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
