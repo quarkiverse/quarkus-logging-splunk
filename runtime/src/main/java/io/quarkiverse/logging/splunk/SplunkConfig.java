@@ -5,6 +5,8 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
 package io.quarkiverse.logging.splunk;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 
@@ -154,6 +156,14 @@ public class SplunkConfig {
      */
     @ConfigItem
     public Optional<String> metadataIndex;
+
+    /**
+     * Optional collection of key/value pairs to populate the "fields" key of event metadata. This key isn't
+     * applicable to raw data.
+     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Event_metadata
+     */
+    @ConfigItem
+    public Map<String, String> metadataFields = new HashMap<>();
 
     /**
      * Mirrors com.splunk.logging.HttpEventCollectorSender.SendMode
