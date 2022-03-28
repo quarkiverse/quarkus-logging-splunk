@@ -36,4 +36,18 @@ class LoggingSplunkWithMetadataTest extends AbstractMockServerTest {
                         "exception: 'test exception' }}"))
                 .withBody(regex(".*thread.*")));
     }
+
+    @Test
+    void clientAddsAdditionalMetadataFields() {
+        logger.info("hello splunk");
+        awaitMockServer();
+        httpServer.verify(request().withBody(
+                json(
+                        "{ fields: { "
+                                + "additional-field-0: 'important-information', "
+                                + "additional-field-1: 'less-important-information'"
+                                + "}"
+                                + "}")));
+    }
+
 }

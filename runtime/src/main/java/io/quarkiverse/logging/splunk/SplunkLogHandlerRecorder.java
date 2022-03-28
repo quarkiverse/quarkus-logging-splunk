@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.logging.Handler;
 
@@ -62,6 +63,11 @@ public class SplunkLogHandlerRecorder {
         }
         config.metadataSource.ifPresent(s -> metadata.put(MetadataTags.SOURCE, s));
         metadata.put(MetadataTags.SOURCETYPE, config.metadataSourceType);
+
+        for (Entry<String, String> entry : config.metadataFields.entrySet()) {
+            metadata.put(entry.getKey(), entry.getValue());
+        }
+
         return metadata;
     }
 
