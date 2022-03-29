@@ -24,10 +24,20 @@
         "code",
         "maintenance"
       ]
+    },
+    {
+      "login": "lindseyburnett",
+      "name": "Lindsey Burnett",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19955562?v=4",
+      "profile": "https://github.com/lindseyburnett",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "quarkus-splunk",
+  "projectName": "quarkus-logging-splunk",
   "projectOwner": "quarkiverse",
   "repoType": "github",
   "repoHost": "https://github.com",
