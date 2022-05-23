@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.ClearType;
+import org.mockserver.model.HttpRequest;
 
 public abstract class AbstractMockServerTest {
 
@@ -21,6 +22,9 @@ public abstract class AbstractMockServerTest {
         // This needs to be done as early as possible, so Quarkus startup logs don't fail to be sent
         httpServer
                 .when(request().withPath("/services/collector/event/1.0"))
+                .respond(response().withStatusCode(200).withBody("{}"));
+        httpServer
+                .when(request().withPath("/services/collector/raw"))
                 .respond(response().withStatusCode(200).withBody("{}"));
         httpServer.when(request()).respond(response().withStatusCode(400));
     }
@@ -42,4 +46,13 @@ public abstract class AbstractMockServerTest {
     protected void awaitMockServer() {
         await().atMost(1, SECONDS).until(() -> httpServer.retrieveRecordedRequests(request()).length != 0);
     }
+
+    protected HttpRequest requestToJsonEndpoint() {
+        return request().withPath("/services/collector/event/1.0");
+    }
+
+    protected HttpRequest requestToRawEndpoint() {
+        return request().withPath("/services/collector/raw");
+    }
+
 }

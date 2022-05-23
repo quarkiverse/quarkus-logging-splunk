@@ -188,6 +188,14 @@ The optional name of the index by which the event data is to be stored. If set, 
 --|string 
 |
 
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw[quarkus.log.handler.splunk.raw]`
+
+[.description]
+--
+Determines whether the events are sent in raw mode. In case the raw event (i.e. the actual log message) is not a JSON object you need to explicitly set a source type or Splunk will reject the event (the default source type, `_json`, assumes that the incoming event can be parsed as JSON)
+--|boolean
+|`false`
+
 |===
 ifndef::no-duration-note[]
 [NOTE]

@@ -40,8 +40,7 @@ public class SplunkLogHandlerRecorder {
 
     static HttpEventCollectorSender createSender(SplunkConfig config) {
         HttpEventCollectorErrorHandler.onError(new SplunkErrorCallback());
-        // Raw mode is supported now we could support it from now on
-        String type = "";
+        String type = config.raw ? "Raw" : "";
         // Timeout settings is not used and passing a null is correct regarding the code
         return new HttpEventCollectorSender(
                 config.url, config.token.get(), config.channel.orElse(""), type,

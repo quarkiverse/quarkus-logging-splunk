@@ -166,6 +166,12 @@ public class SplunkConfig {
     public Map<String, String> metadataFields = new HashMap<>();
 
     /**
+     * Enables the "raw" mode
+     */
+    @ConfigItem(defaultValue = "false")
+    public boolean raw;
+
+    /**
      * Mirrors com.splunk.logging.HttpEventCollectorSender.SendMode
      */
     public enum SendMode {
