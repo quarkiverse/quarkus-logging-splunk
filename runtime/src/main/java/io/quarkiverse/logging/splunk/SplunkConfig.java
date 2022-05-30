@@ -35,7 +35,8 @@ public class SplunkConfig {
     /**
      * Splunk HEC endpoint base url.
      * <p>
-     * The actual endpoint is expected at path /services/collector/events/1.0
+     * The actual endpoint is expected at path /services/collector/events/1.0 for JSON events or
+     * /services/collector/event/1.0 for raw events.
      */
     @ConfigItem(defaultValue = "https://localhost:8088/")
     public String url;
@@ -166,7 +167,9 @@ public class SplunkConfig {
     public Map<String, String> metadataFields = new HashMap<>();
 
     /**
-     * Enables the "raw" mode
+     * Determines whether the events are sent in raw mode. In case the raw event (i.e. the actual log message)
+     * is not a JSON object you need to explicitly set a source type or Splunk will reject the event (the
+     * default source type, _json, assumes that the incoming event can be parsed as JSON)
      */
     @ConfigItem(defaultValue = "false")
     public boolean raw;

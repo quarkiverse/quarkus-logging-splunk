@@ -188,6 +188,7 @@ The optional name of the index by which the event data is to be stored. If set, 
 --|string 
 |
 
+
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw[quarkus.log.handler.splunk.raw]`
 
 [.description]
