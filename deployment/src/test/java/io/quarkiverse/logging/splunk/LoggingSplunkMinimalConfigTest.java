@@ -4,7 +4,6 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
-import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.JsonBody.json;
 import static org.mockserver.model.Not.not;
 
@@ -30,13 +29,13 @@ class LoggingSplunkMinimalConfigTest extends AbstractMockServerTest {
     void indexIsNotSentIfUnspecified() {
         logger.info("hello splunk");
         awaitMockServer();
-        httpServer.verify(request().withBody(not(json("{ index: ''}"))));
+        httpServer.verify(requestToJsonEndpoint().withBody(not(json("{ index: ''}"))));
     }
 
     @Test
     void sourceTypeDefaultsToJson() {
         logger.info("hello splunk");
         awaitMockServer();
-        httpServer.verify(request().withBody(json("{ sourcetype: '_json'}")));
+        httpServer.verify(requestToJsonEndpoint().withBody(json("{ sourcetype: '_json'}")));
     }
 }

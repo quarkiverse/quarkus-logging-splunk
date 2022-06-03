@@ -36,7 +36,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.url]]`link:#quarkus-l
 [.description]
 --
 Splunk HEC endpoint base url. 
- The actual endpoint is expected at path /services/collector/events/1.0
+ The actual endpoint is expected at path /services/collector/events/1.0 for JSON events or /services/collector/raw for raw events.
 --|string 
 |`https://localhost:8088/`
 
@@ -186,6 +186,24 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index]]`link
 --
 The optional name of the index by which the event data is to be stored. If set, it must be within the list of allowed indexes of the token (if it has the indexes parameter set). https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
 --|string 
+|
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw[quarkus.log.handler.splunk.raw]`
+
+[.description]
+--
+Determines whether the events are sent in raw mode. In case the raw event (i.e. the actual log message) is not a JSON object you need to explicitly set a source type or Splunk will reject the event (the default source type, _json, assumes that the incoming event can be parsed as JSON)
+--|boolean 
+|`false`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-fields-metadata-fields]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-fields-metadata-fields[quarkus.log.handler.splunk.metadata-fields]`
+
+[.description]
+--
+Optional collection of key/value pairs to populate the "fields" key of event metadata. This key isn't applicable to raw data. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+--|`Map<String,String>` 
 |
 
 |===

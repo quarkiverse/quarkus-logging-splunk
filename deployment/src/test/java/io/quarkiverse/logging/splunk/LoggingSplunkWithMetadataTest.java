@@ -4,7 +4,6 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
-import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.JsonBody.json;
 import static org.mockserver.model.RegexBody.regex;
 
@@ -30,7 +29,7 @@ class LoggingSplunkWithMetadataTest extends AbstractMockServerTest {
     void clientAddsStructuredMetadata() {
         logger.error("hello splunk", new RuntimeException("test exception"));
         awaitMockServer();
-        httpServer.verify(request().withBody(json(
+        httpServer.verify(requestToJsonEndpoint().withBody(json(
                 "{ event: { message: 'hello splunk', " +
                         "logger:'io.quarkiverse.logging.splunk.LoggingSplunkWithMetadataTest', " +
                         "exception: 'test exception' }}"))
@@ -41,7 +40,7 @@ class LoggingSplunkWithMetadataTest extends AbstractMockServerTest {
     void clientAddsAdditionalMetadataFields() {
         logger.info("hello splunk");
         awaitMockServer();
-        httpServer.verify(request().withBody(
+        httpServer.verify(requestToJsonEndpoint().withBody(
                 json(
                         "{ fields: { "
                                 + "additional-field-0: 'important-information', "

@@ -6,7 +6,6 @@ package io.quarkiverse.logging.splunk;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.JsonBody.json;
 import static org.mockserver.model.RegexBody.regex;
 
@@ -49,21 +48,21 @@ class LoggingSplunkTest extends AbstractMockServerTest {
     void handlerShouldFormatMessage() {
         logger.warnv("hello {0}", "splunk!");
         awaitMockServer();
-        httpServer.verify(request().withBody(json("{ event: { message: 'hello splunk!' }}")));
+        httpServer.verify(requestToJsonEndpoint().withBody(json("{ event: { message: 'hello splunk!' }}")));
     }
 
     @Test
     void eventIsAJsonObjectWithMetadata() {
         logger.warn("hello splunk");
         awaitMockServer();
-        httpServer.verify(request().withBody(json("{ event: { message: 'hello splunk' }}")));
+        httpServer.verify(requestToJsonEndpoint().withBody(json("{ event: { message: 'hello splunk' }}")));
     }
 
     @Test
     void eventHasStandardMetadata() {
         logger.warn("hello splunk");
         awaitMockServer();
-        httpServer.verify(request().withBody(json(
+        httpServer.verify(requestToJsonEndpoint().withBody(json(
                 "{ source: 'mysource', sourcetype: 'mysourcetype', index: 'myindex'} "))
                 .withBody(regex(".*host.*")));
     }
@@ -72,14 +71,15 @@ class LoggingSplunkTest extends AbstractMockServerTest {
     void tokenIsSentAsAuthorizationHeader() {
         logger.warn("hello splunk");
         awaitMockServer();
-        httpServer.verify(request().withHeader("Authorization", "Splunk 12345678-1234-1234-1234-1234567890AB"));
+        httpServer
+                .verify(requestToJsonEndpoint().withHeader("Authorization", "Splunk 12345678-1234-1234-1234-1234567890AB"));
     }
 
     @Test
     void clientAddsMinimalMetadata() {
         logger.warn("hello splunk");
         awaitMockServer();
-        httpServer.verify(request().withBody(json(
+        httpServer.verify(requestToJsonEndpoint().withBody(json(
                 "{ event: { message: 'hello splunk', severity:'WARN' }}")));
     }
 
@@ -89,20 +89,22 @@ class LoggingSplunkTest extends AbstractMockServerTest {
         logger.warn("hello mdc");
         awaitMockServer();
         httpServer.verify(
-                request().withBody(json("{ event: { message: 'hello mdc', properties: { 'mdc-key': 'mdc-value' }}}")));
+                requestToJsonEndpoint()
+                        .withBody(json("{ event: { message: 'hello mdc', properties: { 'mdc-key': 'mdc-value' }}}")));
     }
 
     @Test
     void messageShouldContainException() {
         logger.error("unexpected error", new RuntimeException("test exception"));
         awaitMockServer();
-        httpServer.verify(request()
+        httpServer.verify(requestToJsonEndpoint()
                 .withBody(regex(".*unexpected error: java.lang.RuntimeException: test exception.*")));
     }
 
     @Test
     void logLevelShouldBeUsed() {
         logger.info("Info log");
-        httpServer.verify(request().withBody(json("{ event: { message: 'Info log' }}")), VerificationTimes.exactly(0));
+        httpServer.verify(requestToJsonEndpoint().withBody(json("{ event: { message: 'Info log' }}")),
+                VerificationTimes.exactly(0));
     }
 }
