@@ -1,0 +1,2 @@
+# Do not add generated content to git, to avoid confusion.
+*.adoc
