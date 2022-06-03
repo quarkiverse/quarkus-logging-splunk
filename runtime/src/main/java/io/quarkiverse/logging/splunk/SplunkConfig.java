@@ -36,7 +36,7 @@ public class SplunkConfig {
      * Splunk HEC endpoint base url.
      * <p>
      * The actual endpoint is expected at path /services/collector/events/1.0 for JSON events or
-     * /services/collector/event/1.0 for raw events.
+     * /services/collector/raw for raw events.
      */
     @ConfigItem(defaultValue = "https://localhost:8088/")
     public String url;
