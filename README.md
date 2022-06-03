@@ -24,8 +24,8 @@ For more details, check the complete [documentation](https://quarkiverse.github.
 This extension is based on the [official Splunk's HEC client](https://github.com/splunk/splunk-library-javalogging).
 But, it defines its own [Java Logging Handler](https://docs.oracle.com/en/java/javase/11/docs/api/java.logging/java/util/logging/Handler.html)
 rather than using the [official one](https://github.com/splunk/splunk-library-javalogging/blob/1.8.0/src/main/java/com/splunk/logging/HttpEventCollectorLoggingHandler.java),
-the reason for that is, it was not compatible with JBoss logger implementation used in Quarkus and, as such,
-prevent to use the ability to record steps at build time.
+since it was not compatible with JBoss logger implementation used in Quarkus and, as such,
+prevents to record steps at build time.
 
 ## Contributors ✨
 
