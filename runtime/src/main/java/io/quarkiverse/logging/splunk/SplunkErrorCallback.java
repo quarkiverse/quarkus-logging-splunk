@@ -20,7 +20,7 @@ import com.splunk.logging.HttpEventCollectorEventInfo;
 
 import io.quarkus.bootstrap.logging.InitialConfigurator;
 
-class SplunkErrorCallback implements ErrorCallback {
+public class SplunkErrorCallback implements ErrorCallback {
 
     Boolean consoleEnabled;
 
