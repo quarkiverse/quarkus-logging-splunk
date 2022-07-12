@@ -22,12 +22,12 @@ public class SplunkResource implements QuarkusTestResourceLifecycleManager {
 
     private final GenericContainer splunk = new GenericContainer(
             "splunk/splunk")
-                    .withExposedPorts(8000, 8088, 8089)
-                    .withEnv("SPLUNK_START_ARGS", "--accept-license")
-                    .withEnv("SPLUNK_PASSWORD", "admin123")
-                    .withEnv("SPLUNK_HEC_TOKEN", "29fe2838-cab6-4d17-a392-37b7b8f41f75")
-                    .waitingFor(forLogMessage(".*Ansible playbook complete.*\\n", 1))
-                    .withStartupTimeout(Duration.ofMinutes(2));
+            .withExposedPorts(8000, 8088, 8089)
+            .withEnv("SPLUNK_START_ARGS", "--accept-license")
+            .withEnv("SPLUNK_PASSWORD", "admin123")
+            .withEnv("SPLUNK_HEC_TOKEN", "29fe2838-cab6-4d17-a392-37b7b8f41f75")
+            .waitingFor(forLogMessage(".*Ansible playbook complete.*\\n", 1))
+            .withStartupTimeout(Duration.ofMinutes(2));
 
     @Override
     public Map<String, String> start() {
