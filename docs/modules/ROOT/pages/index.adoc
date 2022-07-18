@@ -75,6 +75,105 @@ Batched events that cannot be sent to the Splunk indexer will be logged to stdou
 
 In any case, the root cause of the failure is always logged to stderr.
 
+=== Asynchronous handler
+
+By default, the log handler is synchronous and only the HTTP requests to HEC endpoint are done asynchronously:
+
+[plantuml, sync, format=svg]
+....
+participant "Application" as App
+participant Slf4j
+participant SplunkLogHandler
+participant "Splunk library" as Lib
+participant "HTTP client" as OkHttp
+participant "Splunk HEC" as HEC
+
+group Application thread
+App -> Slf4j: info(message)
+Slf4j -> SplunkLogHandler: doPublish(record)
+SplunkLogHandler -> Lib: send(record)
+note left
+  synchronized
+end note
+Lib -> Lib: Add event to batch
+alt batch is full
+Lib -> OkHttp: enqueue(HTTP request)
+OkHttp --> Lib
+end
+Lib --> App
+
+end
+group HTTP client - multiple connections in parallel mode.
+OkHttp -> OkHttp: Peek from queue
+OkHttp -> HEC: HTTP POST /services/collector/events/1.0
+HEC --> OkHttp: 200
+alt status code != 200
+OkHttp --> Lib: handle errors
+Lib -> Lib: stderr.println
+end
+end
+....
+
+This can be an issue because the Splunk library `#send` is synchronized, so any preprocessing of the batch HTTP request itself happens on the application thread of the log event that triggered the batch to be full (either by reaching `quarkus.log.handler.splunk.batch-size-count` or `quarkus.log.handler.splunk.batch-size-bytes`)
+
+By enabling `quarkus.log.handler.splunk.async=true`, an intermediate event queue is used, which decouples the flushing of the batch from any application thread:
+
+[plantuml, async, format=svg]
+....
+participant "Application" as App
+participant Slf4j
+participant AsyncHandler
+participant SplunkLogHandler
+participant "Splunk library" as Lib
+participant "HTTP client" as OkHttp
+participant "Splunk HEC" as HEC
+
+group Application thread
+App -> Slf4j: info(message)
+Slf4j -> AsyncHandler: doPublish(record)
+AsyncHandler -> AsyncHandler: Capture MDC
+AsyncHandler -> AsyncHandler: Add to queue
+AsyncHandler --> App
+end
+
+group AsyncHandler single (daemon) thread
+AsyncHandler -> AsyncHandler: Peek from queue
+AsyncHandler -> SplunkLogHandler: doPublish(record)
+SplunkLogHandler -> Lib: send(record)
+note left
+  synchronized
+end note
+Lib -> Lib: Add event to batch
+alt batch is full
+Lib -> OkHttp: enqueue(HTTP request)
+OkHttp --> Lib
+end
+Lib --> SplunkLogHandler
+SplunkLogHandler --> AsyncHandler
+
+end
+group HTTP client - multiple connections in parallel mode.
+OkHttp -> OkHttp: Peek from queue
+OkHttp -> HEC: HTTP POST /services/collector/events/1.0
+HEC --> OkHttp: 200
+alt status code != 200
+OkHttp --> Lib: handle errors
+Lib -> Lib: stderr.println
+end
+end
+....
+
+By default `quarkus.log.handler.splunk.async.queue-length=block`, so applicative threads will block once the queue limit has reached `quarkus.log.handler.splunk.async.queue-length`.
+
+There's no link between `quarkus.log.handler.splunk.async.queue-length` and `quarkus.log.handler.splunk.batch-size-count`.
+
+=== Sequential and parallel modes
+
+The number of events kept in memory for batching purposes is not limited.
+After tuning `quarkus.log.handler.splunk.batch-size-count` and `quarkus.log.handler.splunk.batch-size-bytes`, in case the HEC endpoint cannot keep up with the batch throughput, using multiple HTTP connections might help to reduce memory usage on the client.
+
+By setting `quarkus.log.handler.splunk.send-mode=parallel` multiple batches will be sent over the wire in parallel, potentially increasing throughput with the HEC endpoint.
+
 == Extension Configuration Reference
 
 This extension follows the `log handlers` configuration domain that is defined by Quarkus, every configuration property of this extension will belong to the following configuration root : `quarkus.log.handler.splunk`
