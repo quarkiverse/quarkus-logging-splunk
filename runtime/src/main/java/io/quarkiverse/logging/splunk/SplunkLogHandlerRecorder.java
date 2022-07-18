@@ -11,8 +11,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.logging.Handler;
+import java.util.logging.Level;
 
 import org.jboss.logmanager.formatters.PatternFormatter;
+import org.jboss.logmanager.handlers.AsyncHandler;
 
 import com.splunk.logging.HttpEventCollectorErrorHandler;
 import com.splunk.logging.HttpEventCollectorSender;
@@ -35,7 +37,10 @@ public class SplunkLogHandlerRecorder {
         SplunkLogHandler splunkLogHandler = createSplunkLogHandler(sender, config);
         splunkLogHandler.setLevel(config.level);
         splunkLogHandler.setFormatter(new PatternFormatter(config.format));
-        return new RuntimeValue<>(Optional.of(splunkLogHandler));
+
+        Handler handler = config.async.enable ? createAsyncHandler(config.async, config.level, splunkLogHandler)
+                : splunkLogHandler;
+        return new RuntimeValue<>(Optional.of(handler));
     }
 
     static HttpEventCollectorSender createSender(SplunkConfig config) {
@@ -74,5 +79,13 @@ public class SplunkLogHandlerRecorder {
         return new SplunkLogHandler(sender, config.includeException, config.includeLoggerName, config.includeThreadName,
                 config.disableCertificateValidation,
                 config.maxRetries);
+    }
+
+    private static AsyncHandler createAsyncHandler(AsyncConfig asyncConfig, Level level, Handler handler) {
+        final AsyncHandler asyncHandler = new AsyncHandler(asyncConfig.queueLength);
+        asyncHandler.setOverflowAction(asyncConfig.overflow);
+        asyncHandler.addHandler(handler);
+        asyncHandler.setLevel(level);
+        return asyncHandler;
     }
 }

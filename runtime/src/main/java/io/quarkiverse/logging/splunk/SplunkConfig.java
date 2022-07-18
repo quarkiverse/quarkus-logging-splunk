@@ -181,4 +181,11 @@ public class SplunkConfig {
         SEQUENTIAL,
         PARALLEL
     }
+
+    /**
+     * AsyncHandler config
+     * <p>
+     * This is independent of the SendMode, i.e. whether the HTTP client is async or not.
+     */
+    AsyncConfig async;
 }
