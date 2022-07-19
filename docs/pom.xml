@@ -41,6 +41,8 @@
                   <filtering>false</filtering>
                 </resource>
               </resources>
+              <!-- Don't activate during releasing, as unstaged changes will block the rebase -->
+              <skip>${releaseVersion}</skip>
             </configuration>
           </execution>
         </executions>
