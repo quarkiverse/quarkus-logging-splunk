@@ -11,6 +11,10 @@
   <artifactId>quarkus-logging-splunk-docs</artifactId>
   <name>Splunk logging extension - Documentation</name>
 
+  <properties>
+    <skip.config.copy>false</skip.config.copy>
+  </properties>
+
   <dependencies>
     <!-- Make sure the doc is built after the other artifacts -->
     <dependency>
@@ -41,8 +45,7 @@
                   <filtering>false</filtering>
                 </resource>
               </resources>
-              <!-- Don't activate during releasing, as unstaged changes will block the rebase -->
-              <skip>${releaseVersion}</skip>
+              <skip>${skip.config.copy}</skip>
             </configuration>
           </execution>
         </executions>
@@ -65,4 +68,14 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <properties>
+        <!-- Don't activate during releasing, as unstaged changes will block the rebase -->
+        <skip.config.copy>true</skip.config.copy>
+      </properties>
+    </profile>
+  </profiles>
 </project>
