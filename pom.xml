@@ -45,7 +45,7 @@
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <quarkus.version>2.2.3.Final</quarkus.version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <splunk.logging.version>1.11.5</splunk.logging.version>
+    <splunk.logging.version>1.11.7</splunk.logging.version>
 
     <!-- https://antoniogoncalves.org/2012/12/13/lets-turn-integration-tests-with-maven-to-a-first-class-citizen/ -->
     <skipTests>false</skipTests>
