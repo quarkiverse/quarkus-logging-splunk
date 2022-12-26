@@ -39,8 +39,9 @@ class LoggingSplunkSendErrorTest {
     @BeforeAll
     public static void setUpOnce() {
         httpServer = ClientAndServer.startClientAndServer(8088);
-        // Reject all requests (ex: wrong token, ...)
-        httpServer.when(request()).respond(response().withStatusCode(401));
+        // Reject a specific request (ex: wrong token, ...)
+        httpServer.when(request().withBody(json("{ event: { message:'error splunk'} }")))
+                .respond(response().withStatusCode(401));
     }
 
     @AfterAll
