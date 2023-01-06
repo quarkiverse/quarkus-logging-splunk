@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -45,13 +44,22 @@ public class SplunkLogHandlerRecorder {
 
     static HttpEventCollectorSender createSender(SplunkConfig config) {
         HttpEventCollectorErrorHandler.onError(new SplunkErrorCallback());
-        String type = config.raw ? "Raw" : "";
+        String type = "";
+        if (config.raw || config.serialization == SplunkConfig.SerializationFormat.RAW) {
+            type = "Raw";
+        }
         // Timeout settings is not used and passing a null is correct regarding the code
-        return new HttpEventCollectorSender(
+        HttpEventCollectorSender sender = new HttpEventCollectorSender(
                 config.url, config.token.get(), config.channel.orElse(""), type,
                 config.batchInterval.getSeconds(),
                 config.batchSizeCount, config.batchSizeBytes,
                 config.sendMode.name().toLowerCase(), buildMetadata(config), null);
+        if (config.serialization == SplunkConfig.SerializationFormat.FLAT) {
+            SplunkFlatEventSerializer serializer = new SplunkFlatEventSerializer(config.metadataSeverityFieldName);
+            sender.setEventHeaderSerializer(serializer);
+            sender.setEventBodySerializer(serializer);
+        }
+        return sender;
     }
 
     static Map<String, String> buildMetadata(SplunkConfig config) {
@@ -67,11 +75,7 @@ public class SplunkLogHandlerRecorder {
         }
         config.metadataSource.ifPresent(s -> metadata.put(MetadataTags.SOURCE, s));
         metadata.put(MetadataTags.SOURCETYPE, config.metadataSourceType);
-
-        for (Entry<String, String> entry : config.metadataFields.entrySet()) {
-            metadata.put(entry.getKey(), entry.getValue());
-        }
-
+        metadata.putAll(config.metadataFields);
         return metadata;
     }
 

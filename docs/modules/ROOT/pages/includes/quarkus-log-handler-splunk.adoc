@@ -21,7 +21,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.level]]`link:#quarkus
 
 [.description]
 --
-The splunk handler log level. By default it is not more strict than the root handler level.
+The splunk handler log level. By default, it is no more strict than the root handler level.
 --|link:https://docs.jboss.org/jbossas/javadoc/7.1.2.Final/org/jboss/logmanager/Level.html[Level]
  
 |`ALL`
@@ -32,7 +32,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.url]]`link:#quarkus-l
 [.description]
 --
 Splunk HEC endpoint base url. 
- The actual endpoint is expected at path /services/collector/events/1.0 for JSON events or /services/collector/raw for raw events.
+ With raw events, the endpoint targeted is /services/collector/raw. With flat or nested JSON events, the endpoint targeted is /services/collector/events/1.0.
 --|string 
 |`https://localhost:8088/`
 
@@ -50,7 +50,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.token]]`link:#quarkus
 
 [.description]
 --
-The application token to authenticate with HEC, the token is mandatory if the extension is enabled https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++HEC_token
+The application token to authenticate with HEC, the token is mandatory if the extension is enabled https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++HEC_token
 --|string 
 |
 
@@ -69,7 +69,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.channel]]`link:#quark
 
 [.description]
 --
-A GUID to identify an HEC client and guarantee isolation at HEC level in case of slow clients. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/AboutHECIDXAck++#++About_channels_and_sending_data
+A GUID to identify an HEC client and guarantee isolation at HEC level in case of slow clients. https://docs.splunk.com/Documentation/Splunk/latest/Data/AboutHECIDXAck++#++About_channels_and_sending_data
 --|string 
 |
 
@@ -125,7 +125,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception]]`l
 
 [.description]
 --
-Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted message, it does not include the exception name or stacktrace)
+Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted message, it does not include the exception name or stacktrace). Only applicable to 'nested' serialization.
 --|boolean 
 |`false`
 
@@ -134,7 +134,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name]]
 
 [.description]
 --
-Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message)
+Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message). Only applicable to 'nested' serialization.
 --|boolean 
 |`false`
 
@@ -143,7 +143,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name]]
 
 [.description]
 --
-Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message)
+Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message). Only applicable to 'nested' serialization.
 --|boolean 
 |`false`
 
@@ -161,7 +161,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source]]`lin
 
 [.description]
 --
-The source value to assign to the event data. For example, if you're sending data from an app you're developing, you could set this key to the name of the app. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+The source value to assign to the event data. For example, if you're sending data from an app you're developing, you could set this key to the name of the app. https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata
 --|string 
 |
 
@@ -170,7 +170,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type]
 
 [.description]
 --
-The source type value to assign to the event data https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata 
+The source type value to assign to the event data https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata 
  A given source type may have indexed fields extraction enabled, which is the case of the default built-in _json.
 --|string 
 |`_json`
@@ -180,18 +180,30 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index]]`link
 
 [.description]
 --
-The optional name of the index by which the event data is to be stored. If set, it must be within the list of allowed indexes of the token (if it has the indexes parameter set). https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+The optional name of the index by which the event data is to be stored. If set, it must be within the list of allowed indexes of the token (if it has the indexes parameter set). https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata
 --|string 
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.raw[quarkus.log.handler.splunk.raw]`
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-severity-field-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-severity-field-name[quarkus.log.handler.splunk.metadata-severity-field-name]`
 
 [.description]
 --
-Determines whether the events are sent in raw mode. In case the raw event (i.e. the actual log message) is not a JSON object you need to explicitly set a source type or Splunk will reject the event (the default source type, _json, assumes that the incoming event can be parsed as JSON)
---|boolean 
-|`false`
+The name of the key used to convey the severity / log level in the metadata fields. Only applicable to 'flat' serialization. With 'nested' serialization, there is already a 'severity' field.
+--|string 
+|`severity`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.serialization]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.serialization[quarkus.log.handler.splunk.serialization]`
+
+[.description]
+--
+The format of the payload.  
+ - With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters.
+ - With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains dynamic metadata. 
+ - With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.  TODO Switch default to 'flat'
+--|`raw`, `nested`, `flat` 
+|`nested`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.async]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.async[quarkus.log.handler.splunk.async]`
@@ -225,7 +237,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-fields-metad
 
 [.description]
 --
-Optional collection of key/value pairs to populate the "fields" key of event metadata. This key isn't applicable to raw data. https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+Optional static key/value pairs to populate the "fields" key of event metadata. This isn't applicable to raw serialization. https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata
 --|`Map<String,String>` 
 |
 

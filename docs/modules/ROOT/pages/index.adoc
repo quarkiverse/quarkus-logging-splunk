@@ -27,41 +27,106 @@ In your `pom.xml` file, add:
 
 The extension can be used transparently with any log frontend used by Quarkus (Log4j, SLF4J, ... ).
 
-=== Structured vs raw log events
+=== Log message formatting
 
-Unless `quarkus.log.handler.splunk.raw` is enabled, the extension uses structured logging.
-
-The log message format is aligned with the one of Quarkus console handler:
+In all cases the log message formatter is aligned by default with the one of Quarkus console handler:
 
 [source,properties]
 ----
 quarkus.log.handler.splunk.format="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n"
 ----
 
-By default, only few structured metadata computed by the HEC client library are sent.
-Extra metadata can be added via configuration (`quarkus.log.handler.splunk.include-thread-name`, etc.).
+This can be adapted in order to avoid duplication with metadata that are passed in a structured way.
 
-The extension also provides the support of the resolution of MDC scoped properties, as defined in https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/logging_with_jboss_eap#log_formatters[JBoss supported formatters].
-MDC key/values are sent as link:++https://docs.splunk.com/Splexicon:Indexedfield++[indexed fields] in the event.
+=== Log event metadata
 
-A structured log event looks like:
+The type of metadata depends on the serialization format.
 
+If `quarkus.log.handler.splunk.raw` is enabled or `quarkus.log.handler.splunk.serialization` is `raw`,  there are no per-event metadata.
+Only few global metadata shared between all events of a batch are sent via HTTP headers and query parameters.
+
+In other cases, the extension uses structured logging, via JSON serialization.
+There are two supported structured formats:
+
+* The `nested` serialization is the default format of Splunk HEC Java client and defines the name of some pre-defined metadata. Combined with `quarkus.log.handler.splunk.format=%s%e` it also support log messages that are themselves JSON.
+* The `flat` serialization is a simpler and more generic format, also used by the https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md#splunk-hec[OpenTelemetry Splunk HEC exporter].
+
+Some metadata can be indexed by Splunk, see link:++https://docs.splunk.com/Splexicon:Indexedfield++[indexed fields].
+The default `_json` source type indexes metadata passed in the `fields` object.
+
+The extension provides the support of the resolution of MDC scoped properties, as defined in https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/logging_with_jboss_eap#log_formatters[JBoss supported formatters].
+
+[%header,cols="h,a,a"]
+|===
+|Serialization format
+|`nested`
+|`flat`
+
+|HEC metadata
+2+|`time` and `host` are always sent.
+`source`, `sourcetype`, `index` are sent if not empty.
+
+|Pre-defined metadata
+|Only `event.severity` is sent by default.
+Other metadata can be added:
+
+* `event.thread` via `quarkus.log.handler.splunk.include-thread-name`
+* `event.exception` via `quarkus.log.handler.splunk.include-exception`
+* `event.logger` via `quarkus.log.handler.splunk.include-logger-name`
+|Only `fields.severity` is sent by default.
+The metadata name can be customized via `quarkus.log.handler.splunk.metadataSeverityFieldName`
+Other metadata can be added:
+
+* `fields.thread` via `quarkus.log.handler.splunk.include-thread-name`
+* `fields.exception` via `quarkus.log.handler.splunk.include-exception`
+* `fields.logger` via `quarkus.log.handler.splunk.include-logger-name`
+|MDC properties
+|Passed via `event.properties`
+|Passed via `fields`
+
+|Static metadata
+2+|Passed via `fields`
+
+|===
+
+.Nested serialization example
 [source,json]
 ----
 {
-  "time": "timestamp",
+  "time": "1673001538.042",
   "host": "hostname",
   "source": "mysource",
-  "sourcetype": "mysourcetype",
+  "sourcetype": "_json",
   "index": "myindex",
   "event": {
-    "message": "2021-10-07 ERROR The log message",
+    "message": "2023-01-06 ERROR The log message",
     "logger": "com.acme.MyClass",
     "severity": "ERROR",
     "exception": "java.lang.NullPointerException",
     "properties": {
       "mdc-key": "mdc-value"
     }
+  },
+  "fields": {
+    "key": "static-value"
+  }
+}
+----
+
+.Flat serialization example
+[source,json]
+----
+{
+  "time": "1673001538.042",
+  "host": "hostname",
+  "source": "mysource",
+  "sourcetype": "_json",
+  "index": "myindex",
+  "event": "2023-01-06 ERROR The log message",
+  "fields": {
+    "severity": "ERROR",
+    "mdc-key": "mdc-value",
+    "key": "static-value"
   }
 }
 ----

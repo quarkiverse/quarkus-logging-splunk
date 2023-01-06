@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-class LoggingSplunkRawTest extends AbstractMockServerTest {
+class LoggingSplunkRawSerializationTest extends AbstractMockServerTest {
 
     @RegisterExtension
     static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
@@ -15,7 +15,7 @@ class LoggingSplunkRawTest extends AbstractMockServerTest {
             .withConfigurationResource("mock-server.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
-    static final org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(LoggingSplunkRawTest.class);
+    static final org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(LoggingSplunkRawSerializationTest.class);
 
     @Test
     void sendsTheRawEvent() {
