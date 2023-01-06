@@ -24,15 +24,16 @@ import org.mockserver.verify.VerificationTimes;
 import io.quarkus.bootstrap.logging.InitialConfigurator;
 import io.quarkus.test.QuarkusUnitTest;
 
-class LoggingSplunkTest extends AbstractMockServerTest {
+class LoggingSplunkNestedSerializationTest extends AbstractMockServerTest {
 
     @RegisterExtension
     static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
-            .withConfigurationResource("application-splunk-logging-default.properties")
+            .withConfigurationResource("application-splunk-logging-nested.properties")
             .withConfigurationResource("mock-server.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
-    static final org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(LoggingSplunkTest.class);
+    static final org.jboss.logging.Logger logger = org.jboss.logging.Logger
+            .getLogger(LoggingSplunkNestedSerializationTest.class);
 
     @Test
     void handlerShouldBeCreated() {
@@ -87,6 +88,7 @@ class LoggingSplunkTest extends AbstractMockServerTest {
     void mdcFieldsShouldBeSentAsMetadata() {
         MDC.put("mdc-key", "mdc-value");
         logger.warn("hello mdc");
+        MDC.remove("mdc-key");
         awaitMockServer();
         httpServer.verify(
                 requestToJsonEndpoint()
@@ -106,5 +108,32 @@ class LoggingSplunkTest extends AbstractMockServerTest {
         logger.info("Info log");
         httpServer.verify(requestToJsonEndpoint().withBody(json("{ event: { message: 'Info log' }}")),
                 VerificationTimes.exactly(0));
+    }
+
+    @Test
+    void clientAddsStructuredMetadata() {
+        logger.error("hello splunk", new RuntimeException("test exception"));
+        awaitMockServer();
+        httpServer.verify(requestToJsonEndpoint().withBody(regex(".*hello splunk.*")));
+        httpServer.verify(requestToJsonEndpoint().withBody(json(
+                "{ event: { logger:'io.quarkiverse.logging.splunk.LoggingSplunkNestedSerializationTest', " +
+                        "exception: 'test exception' }}")));
+        httpServer.verify(requestToJsonEndpoint().withBody(regex(".*thread.*")));
+    }
+
+    @Test
+    void staticMetadataFields() {
+        logger.warn("hello splunk");
+        awaitMockServer();
+        httpServer.verify(requestToJsonEndpoint().withBody(
+                json("{ fields: { metadata-0: 'value0', metadata-1: 'value1' } }")));
+    }
+
+    @Test
+    void nestedJsonMessageIsParsed() {
+        logger.warn("{ 'greeting': 'hello', 'user': 'splunk' }");
+        awaitMockServer();
+        httpServer.verify(
+                requestToJsonEndpoint().withBody(json("{ event: { message: { 'greeting': 'hello', 'user': 'splunk' }}}")));
     }
 }

@@ -27,7 +27,7 @@ public class SplunkConfig {
     public boolean enabled;
 
     /**
-     * The splunk handler log level. By default it is not more strict than the root handler level.
+     * The splunk handler log level. By default, it is no more strict than the root handler level.
      */
     @ConfigItem(defaultValue = "ALL")
     public Level level;
@@ -35,8 +35,8 @@ public class SplunkConfig {
     /**
      * Splunk HEC endpoint base url.
      * <p>
-     * The actual endpoint is expected at path /services/collector/events/1.0 for JSON events or
-     * /services/collector/raw for raw events.
+     * With raw events, the endpoint targeted is /services/collector/raw.
+     * With flat or nested JSON events, the endpoint targeted is /services/collector/events/1.0.
      */
     @ConfigItem(defaultValue = "https://localhost:8088/")
     public String url;
@@ -49,7 +49,7 @@ public class SplunkConfig {
 
     /**
      * The application token to authenticate with HEC, the token is mandatory if the extension is enabled
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#HEC_token
+     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#HEC_token
      */
     @ConfigItem
     public Optional<String> token;
@@ -62,14 +62,13 @@ public class SplunkConfig {
      * In parallel mode, event batches are sent asynchronously over multiple HTTP connections, and events with the same
      * timestamp
      * (that has 1 millisecond resolution) may be indexed out of order by Splunk.
-     *
      */
     @ConfigItem(defaultValue = "sequential")
     public SendMode sendMode;
 
     /**
      * A GUID to identify an HEC client and guarantee isolation at HEC level in case of slow clients.
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/AboutHECIDXAck#About_channels_and_sending_data
+     * https://docs.splunk.com/Documentation/Splunk/latest/Data/AboutHECIDXAck#About_channels_and_sending_data
      */
     @ConfigItem
     public Optional<String> channel;
@@ -110,19 +109,22 @@ public class SplunkConfig {
 
     /**
      * Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted
-     * message, it does not include the exception name or stacktrace)
+     * message, it does not include the exception name or stacktrace).
+     * Only applicable to 'nested' serialization.
      */
     @ConfigItem(defaultValue = "false")
     public boolean includeException;
 
     /**
-     * Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message)
+     * Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message).
+     * Only applicable to 'nested' serialization.
      */
     @ConfigItem(defaultValue = "false")
     public boolean includeLoggerName;
 
     /**
-     * Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message)
+     * Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message).
+     * Only applicable to 'nested' serialization.
      */
     @ConfigItem(defaultValue = "false")
     public boolean includeThreadName;
@@ -136,14 +138,14 @@ public class SplunkConfig {
     /**
      * The source value to assign to the event data. For example, if you're sending data from an app you're developing,
      * you could set this key to the name of the app.
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Event_metadata
+     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
      */
     @ConfigItem
     public Optional<String> metadataSource;
 
     /**
      * The source type value to assign to the event data
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Event_metadata
+     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
      * <p>
      * A given source type may have indexed fields extraction enabled, which is the case of the default built-in _json.
      */
@@ -153,26 +155,59 @@ public class SplunkConfig {
     /**
      * The optional name of the index by which the event data is to be stored. If set, it must be within the
      * list of allowed indexes of the token (if it has the indexes parameter set).
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Event_metadata
+     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
      */
     @ConfigItem
     public Optional<String> metadataIndex;
 
     /**
-     * Optional collection of key/value pairs to populate the "fields" key of event metadata. This key isn't
-     * applicable to raw data.
-     * https://docs.splunk.com/Documentation/Splunk/8.1.0/Data/FormateventsforHTTPEventCollector#Event_metadata
+     * Optional static key/value pairs to populate the "fields" key of event metadata. This isn't
+     * applicable to raw serialization.
+     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
      */
     @ConfigItem
     public Map<String, String> metadataFields = new HashMap<>();
 
     /**
+     * The name of the key used to convey the severity / log level in the metadata fields.
+     * Only applicable to 'flat' serialization.
+     * With 'nested' serialization, there is already a 'severity' field.
+     */
+    @ConfigItem(defaultValue = "severity")
+    public String metadataSeverityFieldName;
+
+    /**
      * Determines whether the events are sent in raw mode. In case the raw event (i.e. the actual log message)
      * is not a JSON object you need to explicitly set a source type or Splunk will reject the event (the
      * default source type, _json, assumes that the incoming event can be parsed as JSON)
+     *
+     * @deprecated Use {@link #serialization}
      */
+    @Deprecated(forRemoval = true)
     @ConfigItem(defaultValue = "false")
     public boolean raw;
+
+    /**
+     * The format of the payload.
+     * <ul>
+     * <li>With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole
+     * batch and are sent via HTTP parameters.
+     * <li>With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains
+     * dynamic metadata.
+     * <li>With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the
+     * 'fields' root object.
+     * </ul>
+     * TODO Switch default to 'flat'
+     */
+    @ConfigItem(defaultValue = "nested")
+    public SerializationFormat serialization;
+
+    /**
+     * AsyncHandler config
+     * <p>
+     * This is independent of the SendMode, i.e. whether the HTTP client is async or not.
+     */
+    AsyncConfig async;
 
     /**
      * Mirrors com.splunk.logging.HttpEventCollectorSender.SendMode
@@ -182,10 +217,9 @@ public class SplunkConfig {
         PARALLEL
     }
 
-    /**
-     * AsyncHandler config
-     * <p>
-     * This is independent of the SendMode, i.e. whether the HTTP client is async or not.
-     */
-    AsyncConfig async;
+    public enum SerializationFormat {
+        RAW,
+        NESTED,
+        FLAT
+    }
 }
