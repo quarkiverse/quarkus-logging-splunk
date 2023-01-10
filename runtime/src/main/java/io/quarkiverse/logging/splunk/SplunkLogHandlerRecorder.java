@@ -66,7 +66,6 @@ public class SplunkLogHandlerRecorder {
         HashMap<String, String> metadata = new HashMap<>();
         // Note: sending an empty index is invalid, the index property has to be omitted
         config.metadataIndex.ifPresent(s -> metadata.put(MetadataTags.INDEX, s));
-        //metadata.put(MetadataTags.INDEX, config.metadataIndex.orElse(""));
         try {
             String hostName = InetAddress.getLocalHost().getHostName();
             metadata.put(MetadataTags.HOST, config.metadataHost.orElse(hostName));
@@ -74,7 +73,13 @@ public class SplunkLogHandlerRecorder {
             // Ignore
         }
         config.metadataSource.ifPresent(s -> metadata.put(MetadataTags.SOURCE, s));
-        metadata.put(MetadataTags.SOURCETYPE, config.metadataSourceType);
+
+        if (config.metadataSourceType.isPresent()) {
+            metadata.put(MetadataTags.SOURCETYPE, config.metadataSourceType.get());
+        } else if (config.serialization == SplunkConfig.SerializationFormat.NESTED) {
+            metadata.put(MetadataTags.SOURCETYPE, "_json");
+        }
+
         metadata.putAll(config.metadataFields);
         return metadata;
     }

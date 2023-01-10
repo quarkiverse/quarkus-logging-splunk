@@ -33,7 +33,7 @@ public class LoggingSplunkFlatSerializationTest extends AbstractMockServerTest {
         logger.warn("hello splunk");
         awaitMockServer();
         httpServer.verify(requestToJsonEndpoint().withBody(json(
-                "{ source: 'mysource', sourcetype: 'mysourcetype', index: 'myindex'} "))
+                "{ source: 'mysource', index: 'myindex'} "))
                 .withBody(regex(".*host.*")));
     }
 

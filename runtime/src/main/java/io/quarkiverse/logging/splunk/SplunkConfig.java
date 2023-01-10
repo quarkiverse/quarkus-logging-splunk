@@ -36,7 +36,7 @@ public class SplunkConfig {
      * Splunk HEC endpoint base url.
      * <p>
      * With raw events, the endpoint targeted is /services/collector/raw.
-     * With flat or nested JSON events, the endpoint targeted is /services/collector/events/1.0.
+     * With flat or nested JSON events, the endpoint targeted is /services/collector/event/1.0.
      */
     @ConfigItem(defaultValue = "https://localhost:8088/")
     public String url;
@@ -144,13 +144,14 @@ public class SplunkConfig {
     public Optional<String> metadataSource;
 
     /**
-     * The source type value to assign to the event data
+     * The optional format of the events, to enable some parsing on Splunk side.
      * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
      * <p>
-     * A given source type may have indexed fields extraction enabled, which is the case of the default built-in _json.
+     * A given source type may have indexed fields extraction enabled, which is the case of the built-in _json used for nested
+     * serialization.
      */
-    @ConfigItem(defaultValue = "_json")
-    public String metadataSourceType;
+    @ConfigItem(defaultValueDocumentation = "_json for nested serialization, not set otherwise")
+    public Optional<String> metadataSourceType;
 
     /**
      * The optional name of the index by which the event data is to be stored. If set, it must be within the
@@ -197,7 +198,6 @@ public class SplunkConfig {
      * <li>With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the
      * 'fields' root object.
      * </ul>
-     * TODO Switch default to 'flat'
      */
     @ConfigItem(defaultValue = "nested")
     public SerializationFormat serialization;
