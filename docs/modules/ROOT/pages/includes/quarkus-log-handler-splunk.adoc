@@ -32,7 +32,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.url]]`link:#quarkus-l
 [.description]
 --
 Splunk HEC endpoint base url. 
- With raw events, the endpoint targeted is /services/collector/raw. With flat or nested JSON events, the endpoint targeted is /services/collector/events/1.0.
+ With raw events, the endpoint targeted is /services/collector/raw. With flat or nested JSON events, the endpoint targeted is /services/collector/event/1.0.
 --|string 
 |`https://localhost:8088/`
 
@@ -170,10 +170,10 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type]
 
 [.description]
 --
-The source type value to assign to the event data https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata 
- A given source type may have indexed fields extraction enabled, which is the case of the default built-in _json.
+The optional format of the events, to enable some parsing on Splunk side. https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata 
+ A given source type may have indexed fields extraction enabled, which is the case of the built-in _json used for nested serialization.
 --|string 
-|`_json`
+|`_json for nested serialization, not set otherwise`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index[quarkus.log.handler.splunk.metadata-index]`
@@ -199,9 +199,9 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.serialization]]`link:
 [.description]
 --
 The format of the payload.  
- - With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters.
+ - With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters. 
  - With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains dynamic metadata. 
- - With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.  TODO Switch default to 'flat'
+ - With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.
 --|`raw`, `nested`, `flat` 
 |`nested`
 

@@ -30,6 +30,7 @@ public class SplunkLoggingTest {
         Thread.sleep(2000);
 
         // XML REST API - see https://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTsearch#search.2Fjobs
+        // Note: we can't assert on fields, which require 2 calls: GET /services/search/jobs and GET /services/search/jobs/<id>
         RestAssured.given()
                 .request()
                 .formParam("search", "search \"hello splunk\"")
