@@ -1,3 +1,5 @@
+
+:summaryTableId: quarkus-log-handler-splunk
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
@@ -13,6 +15,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.enabled]]`link:#quark
 [.description]
 --
 Determine whether to enable the handler
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ENABLED+++`
+endif::add-copy-button-to-env-var[]
 --|boolean 
 |`true`
 
@@ -22,6 +31,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.level]]`link:#quarkus
 [.description]
 --
 The splunk handler log level. By default, it is no more strict than the root handler level.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_LEVEL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_LEVEL+++`
+endif::add-copy-button-to-env-var[]
 --|link:https://docs.jboss.org/jbossas/javadoc/7.1.2.Final/org/jboss/logmanager/Level.html[Level]
  
 |`ALL`
@@ -32,7 +48,14 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.url]]`link:#quarkus-l
 [.description]
 --
 Splunk HEC endpoint base url. 
- With raw events, the endpoint targeted is /services/collector/raw. With flat or nested JSON events, the endpoint targeted is /services/collector/event/1.0.
+With raw events, the endpoint targeted is /services/collector/raw. With flat or nested JSON events, the endpoint targeted is /services/collector/event/1.0.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_URL+++`
+endif::add-copy-button-to-env-var[]
 --|string 
 |`https://localhost:8088/`
 
@@ -42,6 +65,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-v
 [.description]
 --
 Disable TLS certificate validation with HEC endpoint
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DISABLE_CERTIFICATE_VALIDATION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DISABLE_CERTIFICATE_VALIDATION+++`
+endif::add-copy-button-to-env-var[]
 --|boolean 
 |`false`
 
@@ -51,6 +81,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.token]]`link:#quarkus
 [.description]
 --
 The application token to authenticate with HEC, the token is mandatory if the extension is enabled https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++HEC_token
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_TOKEN+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_TOKEN+++`
+endif::add-copy-button-to-env-var[]
 --|string 
 |
 
@@ -60,8 +97,16 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.send-mode]]`link:#qua
 [.description]
 --
 The strategy to send events to HEC. 
- In sequential mode, there is only one HTTP connection to HEC and the order of events is preserved, but performance is lower. In parallel mode, event batches are sent asynchronously over multiple HTTP connections, and events with the same timestamp (that has 1 millisecond resolution) may be indexed out of order by Splunk.
---|`sequential`, `parallel` 
+In sequential mode, there is only one HTTP connection to HEC and the order of events is preserved, but performance is lower. In parallel mode, event batches are sent asynchronously over multiple HTTP connections, and events with the same timestamp (that has 1 millisecond resolution) may be indexed out of order by Splunk.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_SEND_MODE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_SEND_MODE+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+`sequential`, `parallel` 
 |`sequential`
 
 
@@ -70,6 +115,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.channel]]`link:#quark
 [.description]
 --
 A GUID to identify an HEC client and guarantee isolation at HEC level in case of slow clients. https://docs.splunk.com/Documentation/Splunk/latest/Data/AboutHECIDXAck++#++About_channels_and_sending_data
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_CHANNEL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_CHANNEL+++`
+endif::add-copy-button-to-env-var[]
 --|string 
 |
 
@@ -79,8 +131,15 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-interval]]`link
 [.description]
 --
 Batching delay before sending a group of events. If 0, the events are sent immediately.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_INTERVAL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_INTERVAL+++`
+endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor[icon:question-circle[], title=More information about the Duration format]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
 |`10S`
 
 
@@ -89,6 +148,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-count]]`li
 [.description]
 --
 Maximum number of events in a batch. By default 10, if 0 no batching.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_SIZE_COUNT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_SIZE_COUNT+++`
+endif::add-copy-button-to-env-var[]
 --|long 
 |`10`
 
@@ -98,6 +164,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-bytes]]`li
 [.description]
 --
 Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_SIZE_BYTES+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_SIZE_BYTES+++`
+endif::add-copy-button-to-env-var[]
 --|long 
 |`10`
 
@@ -107,6 +180,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries]]`link:#q
 [.description]
 --
 Maximum number of retries in case of I/O exceptions with HEC connection.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_MAX_RETRIES+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_MAX_RETRIES+++`
+endif::add-copy-button-to-env-var[]
 --|long 
 |`0`
 
@@ -116,7 +196,14 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.format]]`link:#quarku
 [.description]
 --
 The log format, defining which metadata are inlined inside the log main payload. 
- Specific metadata (hostname, category, thread name, ...), as well as MDC key/value map, can also be sent in a structured way.
+Specific metadata (hostname, category, thread name, ...), as well as MDC key/value map, can also be sent in a structured way.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_FORMAT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_FORMAT+++`
+endif::add-copy-button-to-env-var[]
 --|string 
 |`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
@@ -126,6 +213,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception]]`l
 [.description]
 --
 Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted message, it does not include the exception name or stacktrace). Only applicable to 'nested' serialization.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_EXCEPTION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_EXCEPTION+++`
+endif::add-copy-button-to-env-var[]
 --|boolean 
 |`false`
 
@@ -135,6 +229,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name]]
 [.description]
 --
 Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message). Only applicable to 'nested' serialization.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_LOGGER_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_LOGGER_NAME+++`
+endif::add-copy-button-to-env-var[]
 --|boolean 
 |`false`
 
@@ -144,6 +245,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name]]
 [.description]
 --
 Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message). Only applicable to 'nested' serialization.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_THREAD_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_THREAD_NAME+++`
+endif::add-copy-button-to-env-var[]
 --|boolean 
 |`false`
 
@@ -153,8 +261,15 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-host]]`link:
 [.description]
 --
 Overrides the host name metadata value.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_HOST+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_HOST+++`
+endif::add-copy-button-to-env-var[]
 --|string 
-|`The equivalent of %h in a formatted message`
+|
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source[quarkus.log.handler.splunk.metadata-source]`
@@ -162,6 +277,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source]]`lin
 [.description]
 --
 The source value to assign to the event data. For example, if you're sending data from an app you're developing, you could set this key to the name of the app. https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SOURCE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SOURCE+++`
+endif::add-copy-button-to-env-var[]
 --|string 
 |
 
@@ -171,9 +293,16 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type]
 [.description]
 --
 The optional format of the events, to enable some parsing on Splunk side. https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata 
- A given source type may have indexed fields extraction enabled, which is the case of the built-in _json used for nested serialization.
+A given source type may have indexed fields extraction enabled, which is the case of the built-in _json used for nested serialization.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SOURCE_TYPE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SOURCE_TYPE+++`
+endif::add-copy-button-to-env-var[]
 --|string 
-|`_json for nested serialization, not set otherwise`
+|
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index[quarkus.log.handler.splunk.metadata-index]`
@@ -181,6 +310,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index]]`link
 [.description]
 --
 The optional name of the index by which the event data is to be stored. If set, it must be within the list of allowed indexes of the token (if it has the indexes parameter set). https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_INDEX+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_INDEX+++`
+endif::add-copy-button-to-env-var[]
 --|string 
 |
 
@@ -190,6 +326,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-severity-fie
 [.description]
 --
 The name of the key used to convey the severity / log level in the metadata fields. Only applicable to 'flat' serialization. With 'nested' serialization, there is already a 'severity' field.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SEVERITY_FIELD_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SEVERITY_FIELD_NAME+++`
+endif::add-copy-button-to-env-var[]
 --|string 
 |`severity`
 
@@ -202,7 +345,15 @@ The format of the payload.
  - With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters. 
  - With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains dynamic metadata. 
  - With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.
---|`raw`, `nested`, `flat` 
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_SERIALIZATION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_SERIALIZATION+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+`raw`, `nested`, `flat` 
 |`nested`
 
 
@@ -211,6 +362,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.async]]`link:#quarkus
 [.description]
 --
 Indicates whether to log asynchronously
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC+++`
+endif::add-copy-button-to-env-var[]
 --|boolean 
 |`false`
 
@@ -220,6 +378,13 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.async.queue-length]]`
 [.description]
 --
 The queue length to use before flushing writing
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_QUEUE_LENGTH+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_QUEUE_LENGTH+++`
+endif::add-copy-button-to-env-var[]
 --|int 
 |`512`
 
@@ -229,7 +394,15 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.async.overflow]]`link
 [.description]
 --
 Determine whether to block the publisher (rather than drop the message) when the queue is full
---|`block`, `discard` 
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_OVERFLOW+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_OVERFLOW+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+`block`, `discard` 
 |`block`
 
 
@@ -238,13 +411,20 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-fields-metad
 [.description]
 --
 Optional static key/value pairs to populate the "fields" key of event metadata. This isn't applicable to raw serialization. https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector++#++Event_metadata
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_FIELDS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_FIELDS+++`
+endif::add-copy-button-to-env-var[]
 --|`Map<String,String>` 
 |
 
 |===
 ifndef::no-duration-note[]
 [NOTE]
-[[duration-note-anchor]]
+[id='duration-note-anchor-{summaryTableId}']
 .About the Duration format
 ====
 The format for durations uses the standard `java.time.Duration` format.

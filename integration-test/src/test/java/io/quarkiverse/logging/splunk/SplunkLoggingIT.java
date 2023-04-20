@@ -4,8 +4,8 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
-import io.quarkus.test.junit.NativeImageTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 
-@NativeImageTest
+@QuarkusIntegrationTest
 public class SplunkLoggingIT extends SplunkLoggingTest {
 }

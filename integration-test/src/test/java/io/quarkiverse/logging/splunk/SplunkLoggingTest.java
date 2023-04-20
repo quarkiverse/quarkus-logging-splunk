@@ -4,7 +4,7 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
-import static javax.ws.rs.core.Response.Status.*;
+import static jakarta.ws.rs.core.Response.Status.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 

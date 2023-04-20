@@ -4,9 +4,9 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 import org.jboss.logging.Logger;
 import org.jboss.logging.MDC;
