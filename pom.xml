@@ -45,7 +45,7 @@
     <skipUTs>${skipTests}</skipUTs>
   </properties>
   <scm>
-    <connection>:git:git@github.com:quarkiverse/quarkus-logging-splunk.git</connection>
+    <connection>scm:git:git@github.com:quarkiverse/quarkus-logging-splunk.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-logging-splunk.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-logging-splunk</url>
   </scm>
