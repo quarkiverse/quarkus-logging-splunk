@@ -1,5 +1,5 @@
 name: quarkus-logging-splunk
-title: Quarkus Logging Splunk
+title: Logging Splunk
 version: dev
 nav:
   - modules/ROOT/nav.adoc
