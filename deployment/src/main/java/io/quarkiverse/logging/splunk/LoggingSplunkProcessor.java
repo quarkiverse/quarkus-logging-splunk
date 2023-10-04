@@ -12,6 +12,7 @@ import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.ExtensionSslNativeSupportBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.LogHandlerBuildItem;
+import io.quarkus.deployment.builditem.NamedLogHandlersBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
 
 class LoggingSplunkProcessor {
@@ -27,6 +28,12 @@ class LoggingSplunkProcessor {
     @Record(ExecutionTime.RUNTIME_INIT)
     LogHandlerBuildItem logHandler(SplunkLogHandlerRecorder recorder, SplunkConfig config) {
         return new LogHandlerBuildItem(recorder.initializeHandler(config));
+    }
+
+    @BuildStep
+    @Record(ExecutionTime.RUNTIME_INIT)
+    NamedLogHandlersBuildItem logNamedHandlers(SplunkLogHandlerRecorder recorder, SplunkConfig config) {
+        return new NamedLogHandlersBuildItem(recorder.initializeHandlers(config));
     }
 
     @BuildStep

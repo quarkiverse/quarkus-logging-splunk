@@ -242,6 +242,43 @@ After tuning `quarkus.log.handler.splunk.batch-size-count` and `quarkus.log.hand
 
 By setting `quarkus.log.handler.splunk.send-mode=parallel` multiple batches will be sent over the wire in parallel, potentially increasing throughput with the HEC endpoint.
 
+=== Named Splunk log handlers
+
+A named log handler can be configured to manage multiple Splunk configurations for particular log emissions. Like for core Quarkus handlers (*console*, *file* or *syslog*),
+Splunk named handlers follow the same configuration:
+
+```
+# Global configuration
+quarkus.log.handler.splunk.token=12345678-1234-1234-1234-1234567890AB
+quarkus.log.handler.splunk.metadata-index=mylogindex
+
+# Splunk named handler configuration, named here MONITORING
+quarkus.log.handler.splunk."MONITORING".token=12345678-0000-0000-0000-1234567890AB
+quarkus.log.handler.splunk."MONITORING".metadata-index=mystatsindex
+
+# Registration of the custom handler through Quarkus core category management, here monitoring as the logging category
+quarkus.log.category."monitoring".handlers=MONITORING
+quarkus.log.category."monitoring".use-parent-handlers=false
+```
+
+Next to use such logger in actual code, you can rely on annotation or factory:
+
+* With annotation:
+```
+@LoggerName("monitoring")
+Logger monitoringLogger;
+```
+
+* With factory:
+```
+static final Logger monitoringLogger = Logger.getLogger("monitoring");
+```
+
+==== Some important considerations
+* Every handler is isolated and uses a separate Splunk client and connection pool, which means it has a cost.
+* The configuration from the root handler are not inherited by named handlers.
+* Use `quarkus.log.category."named-handler".use-parent-handlers=false` is required if you do not want the root handler to also receive log events already sent to named handlers.
+
 == Extension Configuration Reference
 
 This extension follows the `log handlers` configuration domain that is defined by Quarkus, every configuration property of this extension will belong to the following configuration root : `quarkus.log.handler.splunk`
