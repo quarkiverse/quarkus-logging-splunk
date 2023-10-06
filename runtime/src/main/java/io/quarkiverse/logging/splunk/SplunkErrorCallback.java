@@ -28,14 +28,14 @@ public class SplunkErrorCallback implements ErrorCallback {
 
     PrintStream stderr;
 
-    SplunkErrorCallback() {
+    public SplunkErrorCallback() {
         this(System.out, System.err); // NOSONAR
     }
 
     /**
      * For unit tests
      */
-    SplunkErrorCallback(PrintStream stdout, PrintStream stderr) {
+    public SplunkErrorCallback(PrintStream stdout, PrintStream stderr) {
         this.stdout = stdout;
         this.stderr = stderr;
     }
