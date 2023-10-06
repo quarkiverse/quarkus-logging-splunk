@@ -4,14 +4,15 @@ Contributor(s): Kevin Viet, Romain Quinio, Yohann Puyhaubert (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
-import io.quarkus.test.QuarkusUnitTest;
+import static org.mockserver.model.JsonBody.json;
+
 import org.jboss.logging.Logger;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static org.mockserver.model.JsonBody.json;
+import io.quarkus.test.QuarkusUnitTest;
 
 class LoggingSplunkNamedHandlerConfigTest extends AbstractMockServerTest {
 
