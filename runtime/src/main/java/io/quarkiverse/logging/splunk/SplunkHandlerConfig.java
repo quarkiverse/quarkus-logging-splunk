@@ -87,8 +87,8 @@ public class SplunkHandlerConfig {
     /**
      * Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching.
      */
-    @ConfigItem(defaultValue = "10")
-    public long batchSizeBytes = 10;
+    @ConfigItem(defaultValue = "10240")
+    public long batchSizeBytes = 10 * 1024;
 
     /**
      * Maximum number of retries in case of I/O exceptions with HEC connection.
