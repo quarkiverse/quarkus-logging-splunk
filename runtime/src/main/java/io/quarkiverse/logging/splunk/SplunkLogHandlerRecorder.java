@@ -81,7 +81,7 @@ public class SplunkLogHandlerRecorder {
                 config.token.get(),
                 config.channel.orElse(""),
                 type,
-                config.batchInterval.getSeconds(),
+                config.batchInterval.toMillis(),
                 config.batchSizeCount,
                 config.batchSizeBytes,
                 config.sendMode.name().toLowerCase(),

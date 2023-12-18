@@ -184,7 +184,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_SIZE_BYTES+++`
 endif::add-copy-button-to-env-var[]
 --|long 
-|`10`
+|`10240`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries[quarkus.log.handler.splunk.max-retries]`
@@ -626,7 +626,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_SIZE_BYTES+++`
 endif::add-copy-button-to-env-var[]
 --|long 
-|`10`
+|`10240`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.max-retries]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.max-retries[quarkus.log.handler.splunk."named-handlers".max-retries]`
