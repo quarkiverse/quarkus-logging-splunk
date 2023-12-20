@@ -51,7 +51,7 @@ public class SplunkLogHandlerRecorder {
         // Timeout settings is not used and passing a null is correct regarding the code
         HttpEventCollectorSender sender = new HttpEventCollectorSender(
                 config.url, config.token.get(), config.channel.orElse(""), type,
-                config.batchInterval.getSeconds(),
+                config.batchInterval.toMillis(),
                 config.batchSizeCount, config.batchSizeBytes,
                 config.sendMode.name().toLowerCase(), buildMetadata(config), null);
         if (config.serialization == SplunkConfig.SerializationFormat.FLAT) {

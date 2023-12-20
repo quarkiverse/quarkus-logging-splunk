@@ -99,7 +99,7 @@ a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-bytes]]`li
 --
 Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching.
 --|long 
-|`10`
+|`10240`
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries[quarkus.log.handler.splunk.max-retries]`
