@@ -20,6 +20,7 @@ In your `pom.xml` file, add:
 <dependency>
     <groupId>io.quarkiverse.logging.splunk</groupId>
     <artifactId>quarkus-logging-splunk</artifactId>
+    <version>{project-version}</version>
 </dependency>
 ----
 

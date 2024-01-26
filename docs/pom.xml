@@ -27,11 +27,28 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>it.ozimov</groupId>
+        <artifactId>yaml-properties-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>read-project-properties</goal>
+            </goals>
+            <configuration>
+              <files>
+                <file>${project.basedir}/../.github/project.yml</file>
+              </files>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
           <execution>
             <id>copy-resources</id>
-            <phase>prepare-package</phase>
+            <phase>generate-resources</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -44,8 +61,29 @@
                   <include>quarkus-log-handler-splunk.adoc</include>
                   <filtering>false</filtering>
                 </resource>
+                <resource>
+                  <directory>${project.basedir}/templates/includes</directory>
+                  <include>attributes.adoc</include>
+                  <filtering>true</filtering>
+                </resource>
               </resources>
               <skip>${skip.config.copy}</skip>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-images</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/generated-docs/_images/</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/modules/ROOT/assets/images/</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
             </configuration>
           </execution>
         </executions>
