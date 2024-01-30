@@ -1,0 +1,16 @@
+# https://quarkus.io/version/main/guides/extension-metadata#quarkus-extension-yaml
+name: "Logging Splunk"
+description: "Send logs to a Splunk HTTP Event Collector (HEC)"
+sponsor: "Amadeus IT Group"
+metadata:
+  short-name: "logging-splunk"
+  keywords:
+    - "logging"
+    - "splunk"
+    - "hec"
+  categories:
+    - "logging"
+  status: "stable"
+  guide: https://docs.quarkiverse.io/quarkus-logging-splunk/dev/index.html
+  config:
+    - "quarkus.log.handler.splunk"
