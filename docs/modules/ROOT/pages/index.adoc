@@ -280,6 +280,115 @@ static final Logger monitoringLogger = Logger.getLogger("monitoring");
 * The configuration from the root handler are not inherited by named handlers.
 * Use `quarkus.log.category."named-handler".use-parent-handlers=false` is required if you do not want the root handler to also receive log events already sent to named handlers.
 
+== Developer experience
+
+To enhance the developer experience, some integration in the Development mode of Quarkus is provided.
+
+=== Dev service
+
+The extension provides a Dev Service that starts in background a splunk container.
+It is deactivated by default, to maintain the compatibility with disabling the splunk extension at runtime.
+
+==== Activation
+
+To activate the dev service, the following needs to be configured with this link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-enabled[property]:
+
+[source,properties]
+----
+quarkus.log.handler.splunk.devservices.enabled=true
+----
+
+Obviously in "normal" mode (not dev, not test), this has no effect.
+The https://quarkus.io/guides/dev-services[Quarkus dev services] framework picks up the configuration and starts the splunk container.
+When eventually the container is considered started, some configuration is injected to expose the link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-url[random] port on which splunk is listening.
+It also injects the following:
+
+[source,properties]
+----
+quarkus.log.handler.splunk.token=local-dev-token
+quarkus.log.handler.splunk.disable-certificate-validation=true
+quarkus.log.handler.splunk.enabled=true
+----
+
+Namely:
+
+* the link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-token[HEC token] configured in the Splunk container at boot
+* Splunk enforces HTTPS on endpoints but with self-signed certificates, so we need to link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-disable-certificate-validation[ignore certificate validation]
+* forcing the link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-enabled[activation] of the `quarkus-logging-splunk` extension when its dev service has been activated at build time.
+
+==== Support of named handlers
+
+Named handlers are supported through additional build time configuration.
+Example:
+
+[source,properties]
+----
+quarkus.log.handler.splunk.devservices.plug-named-handlers.<myhandler>=true
+----
+
+link:[Here] is the config property table entry.
+
+The result is that it will override for that named handler the following configuration:
+
+* the link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-url[HEC endpoint]
+* the link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-token[token]
+* remove of link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-disable-certificate-validation[certificate verification]
+* force link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-enabled[enabled] the splunk log handler
+
+==== Usage in tests
+
+a `quarkus-logging-splunk-test-utils` module proposes some test framework layer allowing access to the link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-api-url[Splunk API URL].
+This is useful to launch searches after the test run to do some assertions on the logs eventually sent to Splunk.
+It is definitely not to be used in all tests, as it quite lengthens the test run time.
+I.e. the start of splunk takes about 30s.
+And there needs to be added some delay after the test run to make sure log entries have been properly propagated to Splunk.
+
+The search in Splunk can be done using its https://dev.splunk.com/enterprise/reference/[API].
+We propose a custom QuarkusTestResourceLifecycleManager to inject the URL to the Splunk API (for compatibility with `QuarkusIntegrationTest` when `microprofile-config` injection is disallowed):
+
+.Example of usage of test utils
+[source,java]
+----
+@QuarkusTest
+@QuarkusTestResource(LoggingSplunkInjectionTestResource.class) // <1>
+class MyQuarkusTest {
+    @LoggingSplunkApiUrl // <2>
+    String splunkApiUrl;
+
+    @Test
+    void test() {
+        RestAssured.given()
+                .request()
+                .formParam("search", "search \"hello splunk\"")
+                .formParam("exec_mode", "oneshot")
+                .relaxedHTTPSValidation()
+                .auth()
+                .basic("admin", "admin123") // <3>
+                .log()
+                .ifValidationFails()
+                .post(splunkApiUrl + "/services/search/jobs") // <4>
+                .then()
+                .statusCode(200)
+                .body(containsString("hello splunk"), containsString("mdc-value"));
+    }
+}
+----
+
+<1> The `QuarkusTestResource` to declare, which will also be picked by the potential `IT` test extending this `QuarkusTest` class.
+<2> The annotation to use on a `String` field, where the Splunk API will be injected
+<3> The default credentials configured in the Splunk container (user admin, password admin123)
+<4> The URL injected has the `https://host:port` pattern, so it need to be completed with the actual service path you want to access.
+
+==== Additional configuration
+
+To customize a bit the splunk container started, a few configuration options are given:
+
+* customize the actual container image used through `link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-image-name[quarkus.log.handler.splunk.devservices.image-name]`
+* enforce that in dev mode the splunk instances are shared between runs of microservices run in Dev mode with `link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-shared[quarkus.log.handler.splunk.devservices.shared]` (boolean).
+Default is shared true.
+* Add/customize environment variables with `link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-container-env-container-env[quarkus.log.handler.splunk.devservices.container-env]`.
+Map of key values.
+
 == Extension Configuration Reference
 
 This extension follows the `log handlers` configuration domain that is defined by Quarkus, every configuration property of this extension will belong to the following configuration root : `quarkus.log.handler.splunk`

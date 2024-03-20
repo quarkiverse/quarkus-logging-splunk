@@ -10,7 +10,58 @@ h|[[quarkus-log-handler-splunk_configuration]]link:#quarkus-log-handler-splunk_c
 h|Type
 h|Default
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.enabled]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.enabled[quarkus.log.handler.splunk.enabled]`
+a|icon:lock[title=Fixed at build time] [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-enabled]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-enabled[quarkus.log.handler.splunk.devservices.enabled]`
+
+
+[.description]
+--
+whether to activate dev services or not
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-image-name]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-image-name[quarkus.log.handler.splunk.devservices.image-name]`
+
+
+[.description]
+--
+Override the docker image used for the Splunk dev service
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_IMAGE_NAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_IMAGE_NAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-shared]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-shared[quarkus.log.handler.splunk.devservices.shared]`
+
+
+[.description]
+--
+Whether the instance of splunk can be shared between runs in DEV mode.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_SHARED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_SHARED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-enabled]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-enabled[quarkus.log.handler.splunk.enabled]`
 
 
 [.description]
@@ -27,7 +78,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.level]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.level[quarkus.log.handler.splunk.level]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-level]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-level[quarkus.log.handler.splunk.level]`
 
 
 [.description]
@@ -45,7 +96,7 @@ endif::add-copy-button-to-env-var[]
 |`ALL`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.url]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.url[quarkus.log.handler.splunk.url]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-url]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-url[quarkus.log.handler.splunk.url]`
 
 
 [.description]
@@ -64,7 +115,7 @@ endif::add-copy-button-to-env-var[]
 |`https://localhost:8088/`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.disable-certificate-validation[quarkus.log.handler.splunk.disable-certificate-validation]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-disable-certificate-validation]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-disable-certificate-validation[quarkus.log.handler.splunk.disable-certificate-validation]`
 
 
 [.description]
@@ -81,7 +132,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.token]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.token[quarkus.log.handler.splunk.token]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-token]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-token[quarkus.log.handler.splunk.token]`
 
 
 [.description]
@@ -98,7 +149,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.send-mode]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.send-mode[quarkus.log.handler.splunk.send-mode]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-send-mode]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-send-mode[quarkus.log.handler.splunk.send-mode]`
 
 
 [.description]
@@ -118,7 +169,7 @@ endif::add-copy-button-to-env-var[]
 |`sequential`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.channel]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.channel[quarkus.log.handler.splunk.channel]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-channel]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-channel[quarkus.log.handler.splunk.channel]`
 
 
 [.description]
@@ -135,7 +186,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-interval]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-interval[quarkus.log.handler.splunk.batch-interval]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-batch-interval]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-batch-interval[quarkus.log.handler.splunk.batch-interval]`
 
 
 [.description]
@@ -149,11 +200,11 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`10S`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-count]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-count[quarkus.log.handler.splunk.batch-size-count]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-batch-size-count]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-batch-size-count[quarkus.log.handler.splunk.batch-size-count]`
 
 
 [.description]
@@ -170,7 +221,7 @@ endif::add-copy-button-to-env-var[]
 |`10`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-bytes]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.batch-size-bytes[quarkus.log.handler.splunk.batch-size-bytes]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-batch-size-bytes]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-batch-size-bytes[quarkus.log.handler.splunk.batch-size-bytes]`
 
 
 [.description]
@@ -187,7 +238,7 @@ endif::add-copy-button-to-env-var[]
 |`10240`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.max-retries[quarkus.log.handler.splunk.max-retries]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-max-retries]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-max-retries[quarkus.log.handler.splunk.max-retries]`
 
 
 [.description]
@@ -204,7 +255,7 @@ endif::add-copy-button-to-env-var[]
 |`0`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.format]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.format[quarkus.log.handler.splunk.format]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-format]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-format[quarkus.log.handler.splunk.format]`
 
 
 [.description]
@@ -223,7 +274,7 @@ endif::add-copy-button-to-env-var[]
 |`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-exception[quarkus.log.handler.splunk.include-exception]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-include-exception]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-include-exception[quarkus.log.handler.splunk.include-exception]`
 
 
 [.description]
@@ -240,7 +291,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-logger-name[quarkus.log.handler.splunk.include-logger-name]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-include-logger-name]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-include-logger-name[quarkus.log.handler.splunk.include-logger-name]`
 
 
 [.description]
@@ -257,7 +308,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.include-thread-name[quarkus.log.handler.splunk.include-thread-name]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-include-thread-name]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-include-thread-name[quarkus.log.handler.splunk.include-thread-name]`
 
 
 [.description]
@@ -274,7 +325,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-host]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-host[quarkus.log.handler.splunk.metadata-host]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-host]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-host[quarkus.log.handler.splunk.metadata-host]`
 
 
 [.description]
@@ -291,7 +342,7 @@ endif::add-copy-button-to-env-var[]
 |`The equivalent of %h in a formatted message`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source[quarkus.log.handler.splunk.metadata-source]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-source]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-source[quarkus.log.handler.splunk.metadata-source]`
 
 
 [.description]
@@ -308,7 +359,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-source-type[quarkus.log.handler.splunk.metadata-source-type]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-source-type]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-source-type[quarkus.log.handler.splunk.metadata-source-type]`
 
 
 [.description]
@@ -327,7 +378,7 @@ endif::add-copy-button-to-env-var[]
 |`_json for nested serialization, not set otherwise`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-index[quarkus.log.handler.splunk.metadata-index]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-index]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-index[quarkus.log.handler.splunk.metadata-index]`
 
 
 [.description]
@@ -344,7 +395,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-severity-field-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-severity-field-name[quarkus.log.handler.splunk.metadata-severity-field-name]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-severity-field-name]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-severity-field-name[quarkus.log.handler.splunk.metadata-severity-field-name]`
 
 
 [.description]
@@ -361,7 +412,7 @@ endif::add-copy-button-to-env-var[]
 |`severity`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.serialization]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.serialization[quarkus.log.handler.splunk.serialization]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-serialization]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-serialization[quarkus.log.handler.splunk.serialization]`
 
 
 [.description]
@@ -383,7 +434,7 @@ endif::add-copy-button-to-env-var[]
 |`nested`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.async]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.async[quarkus.log.handler.splunk.async]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-async]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-async[quarkus.log.handler.splunk.async]`
 
 
 [.description]
@@ -400,7 +451,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.async.queue-length]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.async.queue-length[quarkus.log.handler.splunk.async.queue-length]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-async-queue-length]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-async-queue-length[quarkus.log.handler.splunk.async.queue-length]`
 
 
 [.description]
@@ -417,7 +468,7 @@ endif::add-copy-button-to-env-var[]
 |`512`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.async.overflow]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.async.overflow[quarkus.log.handler.splunk.async.overflow]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-async-overflow]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-async-overflow[quarkus.log.handler.splunk.async.overflow]`
 
 
 [.description]
@@ -435,7 +486,60 @@ endif::add-copy-button-to-env-var[]
 |`block`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-fields-metadata-fields]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.metadata-fields-metadata-fields[quarkus.log.handler.splunk.metadata-fields]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-api-url]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-api-url[quarkus.log.handler.splunk.devservices.api-url]`
+
+
+[.description]
+--
+The API URL the splunk dev service listens on.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_API_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_API_URL+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-container-env-container-env]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-container-env-container-env[quarkus.log.handler.splunk.devservices.container-env]`
+
+
+[.description]
+--
+Additional environment variables to inject.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_CONTAINER_ENV+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_CONTAINER_ENV+++`
+endif::add-copy-button-to-env-var[]
+--|`Map<String,String>` 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-plug-named-handlers-plug-named-handlers]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-devservices-plug-named-handlers-plug-named-handlers[quarkus.log.handler.splunk.devservices.plug-named-handlers]`
+
+
+[.description]
+--
+Map that allows to tell to plug the following named handlers to the dev service
+
+It is necessary as we do not have access to runtime configuration when starting the Splunk container.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_PLUG_NAMED_HANDLERS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_PLUG_NAMED_HANDLERS+++`
+endif::add-copy-button-to-env-var[]
+--|`Map<String,Boolean>` 
+|
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-fields-metadata-fields]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-metadata-fields-metadata-fields[quarkus.log.handler.splunk.metadata-fields]`
 
 
 [.description]
@@ -452,7 +556,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.enabled]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.enabled[quarkus.log.handler.splunk."named-handlers".enabled]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-enabled]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-enabled[quarkus.log.handler.splunk."named-handlers".enabled]`
 
 
 [.description]
@@ -469,7 +573,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.level]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.level[quarkus.log.handler.splunk."named-handlers".level]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-level]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-level[quarkus.log.handler.splunk."named-handlers".level]`
 
 
 [.description]
@@ -487,7 +591,7 @@ endif::add-copy-button-to-env-var[]
 |`ALL`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.url]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.url[quarkus.log.handler.splunk."named-handlers".url]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-url]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-url[quarkus.log.handler.splunk."named-handlers".url]`
 
 
 [.description]
@@ -506,7 +610,7 @@ endif::add-copy-button-to-env-var[]
 |`https://localhost:8088/`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.disable-certificate-validation]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.disable-certificate-validation[quarkus.log.handler.splunk."named-handlers".disable-certificate-validation]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-disable-certificate-validation]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-disable-certificate-validation[quarkus.log.handler.splunk."named-handlers".disable-certificate-validation]`
 
 
 [.description]
@@ -523,7 +627,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.token]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.token[quarkus.log.handler.splunk."named-handlers".token]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-token]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-token[quarkus.log.handler.splunk."named-handlers".token]`
 
 
 [.description]
@@ -540,7 +644,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.send-mode]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.send-mode[quarkus.log.handler.splunk."named-handlers".send-mode]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-send-mode]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-send-mode[quarkus.log.handler.splunk."named-handlers".send-mode]`
 
 
 [.description]
@@ -560,7 +664,7 @@ endif::add-copy-button-to-env-var[]
 |`sequential`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.channel]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.channel[quarkus.log.handler.splunk."named-handlers".channel]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-channel]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-channel[quarkus.log.handler.splunk."named-handlers".channel]`
 
 
 [.description]
@@ -577,7 +681,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.batch-interval]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.batch-interval[quarkus.log.handler.splunk."named-handlers".batch-interval]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-batch-interval]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-batch-interval[quarkus.log.handler.splunk."named-handlers".batch-interval]`
 
 
 [.description]
@@ -591,11 +695,11 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`10S`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.batch-size-count]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.batch-size-count[quarkus.log.handler.splunk."named-handlers".batch-size-count]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-count]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-count[quarkus.log.handler.splunk."named-handlers".batch-size-count]`
 
 
 [.description]
@@ -612,7 +716,7 @@ endif::add-copy-button-to-env-var[]
 |`10`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.batch-size-bytes]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.batch-size-bytes[quarkus.log.handler.splunk."named-handlers".batch-size-bytes]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-bytes]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-bytes[quarkus.log.handler.splunk."named-handlers".batch-size-bytes]`
 
 
 [.description]
@@ -629,7 +733,7 @@ endif::add-copy-button-to-env-var[]
 |`10240`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.max-retries]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.max-retries[quarkus.log.handler.splunk."named-handlers".max-retries]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-max-retries]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-max-retries[quarkus.log.handler.splunk."named-handlers".max-retries]`
 
 
 [.description]
@@ -646,7 +750,7 @@ endif::add-copy-button-to-env-var[]
 |`0`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.format]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.format[quarkus.log.handler.splunk."named-handlers".format]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-format]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-format[quarkus.log.handler.splunk."named-handlers".format]`
 
 
 [.description]
@@ -665,7 +769,7 @@ endif::add-copy-button-to-env-var[]
 |`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.include-exception]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.include-exception[quarkus.log.handler.splunk."named-handlers".include-exception]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-include-exception]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-include-exception[quarkus.log.handler.splunk."named-handlers".include-exception]`
 
 
 [.description]
@@ -682,7 +786,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.include-logger-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.include-logger-name[quarkus.log.handler.splunk."named-handlers".include-logger-name]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-include-logger-name]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-include-logger-name[quarkus.log.handler.splunk."named-handlers".include-logger-name]`
 
 
 [.description]
@@ -699,7 +803,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.include-thread-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.include-thread-name[quarkus.log.handler.splunk."named-handlers".include-thread-name]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-include-thread-name]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-include-thread-name[quarkus.log.handler.splunk."named-handlers".include-thread-name]`
 
 
 [.description]
@@ -716,7 +820,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-host]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-host[quarkus.log.handler.splunk."named-handlers".metadata-host]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-host]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-host[quarkus.log.handler.splunk."named-handlers".metadata-host]`
 
 
 [.description]
@@ -733,7 +837,7 @@ endif::add-copy-button-to-env-var[]
 |`The equivalent of %h in a formatted message`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-source]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-source[quarkus.log.handler.splunk."named-handlers".metadata-source]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source[quarkus.log.handler.splunk."named-handlers".metadata-source]`
 
 
 [.description]
@@ -750,7 +854,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-source-type]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-source-type[quarkus.log.handler.splunk."named-handlers".metadata-source-type]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source-type]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source-type[quarkus.log.handler.splunk."named-handlers".metadata-source-type]`
 
 
 [.description]
@@ -769,7 +873,7 @@ endif::add-copy-button-to-env-var[]
 |`_json for nested serialization, not set otherwise`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-index]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-index[quarkus.log.handler.splunk."named-handlers".metadata-index]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-index]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-index[quarkus.log.handler.splunk."named-handlers".metadata-index]`
 
 
 [.description]
@@ -786,7 +890,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-fields-metadata-fields]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-fields-metadata-fields[quarkus.log.handler.splunk."named-handlers".metadata-fields]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-fields-metadata-fields]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-fields-metadata-fields[quarkus.log.handler.splunk."named-handlers".metadata-fields]`
 
 
 [.description]
@@ -803,7 +907,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-severity-field-name]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.metadata-severity-field-name[quarkus.log.handler.splunk."named-handlers".metadata-severity-field-name]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-severity-field-name]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-metadata-severity-field-name[quarkus.log.handler.splunk."named-handlers".metadata-severity-field-name]`
 
 
 [.description]
@@ -820,7 +924,7 @@ endif::add-copy-button-to-env-var[]
 |`severity`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.serialization]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.serialization[quarkus.log.handler.splunk."named-handlers".serialization]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-serialization]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-serialization[quarkus.log.handler.splunk."named-handlers".serialization]`
 
 
 [.description]
@@ -842,7 +946,7 @@ endif::add-copy-button-to-env-var[]
 |`nested`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.async]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.async[quarkus.log.handler.splunk."named-handlers".async]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async[quarkus.log.handler.splunk."named-handlers".async]`
 
 
 [.description]
@@ -859,7 +963,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.async.queue-length]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.async.queue-length[quarkus.log.handler.splunk."named-handlers".async.queue-length]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async-queue-length]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async-queue-length[quarkus.log.handler.splunk."named-handlers".async.queue-length]`
 
 
 [.description]
@@ -876,7 +980,7 @@ endif::add-copy-button-to-env-var[]
 |`512`
 
 
-a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.async.overflow]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.async.overflow[quarkus.log.handler.splunk."named-handlers".async.overflow]`
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async-overflow]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async-overflow[quarkus.log.handler.splunk."named-handlers".async.overflow]`
 
 
 [.description]
@@ -899,11 +1003,17 @@ ifndef::no-duration-note[]
 [id='duration-note-anchor-{summaryTableId}']
 .About the Duration format
 ====
-The format for durations uses the standard `java.time.Duration` format.
-You can learn more about it in the link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence-[Duration#parse() javadoc].
+To write duration values, use the standard `java.time.Duration` format.
+See the link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)[Duration#parse() Java API documentation] for more information.
 
-You can also provide duration values starting with a number.
-In this case, if the value consists only of a number, the converter treats the value as seconds.
-Otherwise, `PT` is implicitly prepended to the value to obtain a standard `java.time.Duration` format.
+You can also use a simplified format, starting with a number:
+
+* If the value is only a number, it represents time in seconds.
+* If the value is a number followed by `ms`, it represents time in milliseconds.
+
+In other cases, the simplified format is translated to the `java.time.Duration` format for parsing:
+
+* If the value is a number followed by `h`, `m`, or `s`, it is prefixed with `PT`.
+* If the value is a number followed by `d`, it is prefixed with `P`.
 ====
 endif::no-duration-note[]

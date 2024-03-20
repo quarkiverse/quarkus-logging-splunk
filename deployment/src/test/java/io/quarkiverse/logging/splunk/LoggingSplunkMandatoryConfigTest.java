@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -19,8 +18,8 @@ class LoggingSplunkMandatoryConfigTest {
 
     @RegisterExtension
     static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
-            .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class)
-                    .addAsResource(new StringAsset("quarkus.log.handler.splunk.enabled=true"), "application.properties"))
+            .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class))
+            .withConfigurationResource("application-splunk-logging-mandatory.properties")
             .assertException(e -> {
                 assertSame(IllegalArgumentException.class, e.getClass());
                 assertTrue(e.getMessage().contains("quarkus.log.handler.splunk.token"));

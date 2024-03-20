@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 import java.util.logging.Level;
 
 import io.quarkus.runtime.annotations.ConfigGroup;
@@ -23,6 +24,20 @@ public class SplunkHandlerConfig {
      */
     @ConfigItem(defaultValue = "true")
     public boolean enabled = true;
+
+    public static class Enabled implements BooleanSupplier {
+
+        final SplunkHandlerConfig config;
+
+        public Enabled(SplunkHandlerConfig config) {
+            this.config = config;
+        }
+
+        @Override
+        public boolean getAsBoolean() {
+            return config.enabled;
+        }
+    }
 
     /**
      * The splunk handler log level. By default, it is no more strict than the root handler level.

@@ -27,4 +27,5 @@ public class SplunkConfig {
     @ConfigItem(name = ConfigItem.PARENT)
     public Map<String, SplunkHandlerConfig> namedHandlers;
 
+    public DevServicesLoggingSplunkRuntimeConfig devservices;
 }

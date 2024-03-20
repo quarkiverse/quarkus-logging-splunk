@@ -10,22 +10,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import io.quarkiverse.logging.splunk.test.LoggingSplunkApiUrl;
+import io.quarkiverse.logging.splunk.test.LoggingSplunkInjectingTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 
 @QuarkusTest
-@QuarkusTestResource(SplunkResource.class)
+@QuarkusTestResource(LoggingSplunkInjectingTestResource.class)
 public class SplunkLoggingTest {
-
-    static int splunkAPIPort = 0;
-
-    static String dockerHost = null;
+    @LoggingSplunkApiUrl
+    String splunkApiUrl;
 
     @Test
     public void test() throws InterruptedException {
-        assertTrue(splunkAPIPort > 0);
-        assertNotNull(dockerHost);
         RestAssured.given().when().get("/log-to-splunk").then().statusCode(NO_CONTENT.getStatusCode());
         Thread.sleep(2000);
 
@@ -39,7 +37,7 @@ public class SplunkLoggingTest {
                 .relaxedHTTPSValidation()
                 .auth().basic("admin", "admin123")
                 .log().all()
-                .post("https://" + dockerHost + ":" + splunkAPIPort + "/services/search/jobs")
+                .post(splunkApiUrl + "/services/search/jobs")
                 .then().statusCode(200).body(containsString("hello splunk"), containsString("mdc-value"));
     }
 }
