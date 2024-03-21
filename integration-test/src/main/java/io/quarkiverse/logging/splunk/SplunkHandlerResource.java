@@ -21,6 +21,7 @@ public class SplunkHandlerResource {
     public void log() {
         MDC.put("mdc-key", "mdc-value");
         logger.info("hello splunk");
+        logger.info("Sensitive log");
         MDC.remove("mdc-key");
     }
 }
