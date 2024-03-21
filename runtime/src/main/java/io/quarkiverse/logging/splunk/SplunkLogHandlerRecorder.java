@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.logging.Filter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -24,20 +26,24 @@ import com.splunk.logging.hec.MetadataTags;
 
 import io.quarkus.runtime.RuntimeValue;
 import io.quarkus.runtime.annotations.Recorder;
+import io.quarkus.runtime.logging.DiscoveredLogComponents;
+import io.quarkus.runtime.logging.LogFilterFactory;
 
 @Recorder
 public class SplunkLogHandlerRecorder {
 
-    public RuntimeValue<Optional<Handler>> initializeHandler(SplunkConfig rootConfig) {
+    public RuntimeValue<Optional<Handler>> initializeHandler(SplunkConfig rootConfig,
+            DiscoveredLogComponents discoveredLogComponents) {
         if (!rootConfig.config.enabled) {
             return new RuntimeValue<>(Optional.empty());
         }
 
-        Handler handler = buildHandlerFromConfig(rootConfig.config);
+        Handler handler = buildHandlerFromConfig(rootConfig.config, discoveredLogComponents);
         return new RuntimeValue<>(Optional.of(handler));
     }
 
-    public RuntimeValue<Map<String, Handler>> initializeHandlers(SplunkConfig rootConfig) {
+    public RuntimeValue<Map<String, Handler>> initializeHandlers(SplunkConfig rootConfig,
+            DiscoveredLogComponents discoveredLogComponents) {
         if (rootConfig.namedHandlers == null || rootConfig.namedHandlers.isEmpty()) {
             return new RuntimeValue<>(Collections.EMPTY_MAP);
         }
@@ -48,12 +54,12 @@ public class SplunkLogHandlerRecorder {
                 .filter(e -> e.getValue().enabled)
                 .collect(Collectors.toMap(
                         e -> e.getKey(),
-                        e -> buildHandlerFromConfig(e.getValue())));
+                        e -> buildHandlerFromConfig(e.getValue(), discoveredLogComponents)));
 
         return new RuntimeValue<>(namedHandlers);
     }
 
-    private Handler buildHandlerFromConfig(SplunkHandlerConfig config) {
+    private Handler buildHandlerFromConfig(SplunkHandlerConfig config, DiscoveredLogComponents discoveredLogComponents) {
         if (!config.token.isPresent()) {
             throw new IllegalArgumentException("The property quarkus.log.handler.splunk.token is mandatory");
         }
@@ -62,6 +68,7 @@ public class SplunkLogHandlerRecorder {
         splunkLogHandler.setLevel(config.level);
         splunkLogHandler.setFormatter(
                 new PatternFormatter(config.format));
+        applyFilter(discoveredLogComponents, config.filter, splunkLogHandler);
 
         Handler handler = config.async.enable
                 ? createAsyncHandler(config.async,
@@ -144,5 +151,39 @@ public class SplunkLogHandlerRecorder {
         asyncHandler.addHandler(handler);
         asyncHandler.setLevel(level);
         return asyncHandler;
+    }
+
+    private static void applyFilter(DiscoveredLogComponents discoveredLogComponents,
+            Optional<String> filterName, Handler handler) {
+        if (filterName.isPresent()) {
+            Map<String, Filter> namedFilters = createNamedFilters(discoveredLogComponents);
+            String name = filterName.get();
+            Filter namedFilter = namedFilters.get(name);
+            if (namedFilter == null) {
+                throw new IllegalStateException("Unable to find named filter '" + name);
+            } else {
+                handler.setFilter(namedFilter);
+            }
+        }
+    }
+
+    private static Map<String, Filter> createNamedFilters(DiscoveredLogComponents discoveredLogComponents) {
+        if (discoveredLogComponents.getNameToFilterClass().isEmpty()) {
+            return Collections.emptyMap();
+        }
+
+        Map<String, Filter> nameToFilter = new HashMap<>();
+        LogFilterFactory logFilterFactory = LogFilterFactory.load();
+        discoveredLogComponents.getNameToFilterClass().forEach(new BiConsumer<>() {
+            @Override
+            public void accept(String name, String className) {
+                try {
+                    nameToFilter.put(name, logFilterFactory.create(className));
+                } catch (Exception e) {
+                    throw new RuntimeException("Unable to create instance of Logging Filter '" + className + "'");
+                }
+            }
+        });
+        return nameToFilter;
     }
 }
