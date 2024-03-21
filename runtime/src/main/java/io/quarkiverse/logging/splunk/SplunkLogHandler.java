@@ -4,12 +4,15 @@ Contributor(s): Kevin Viet, Romain Quinio (Amadeus s.a.s.)
  */
 package io.quarkiverse.logging.splunk;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.ErrorManager;
+import java.util.logging.Filter;
 import java.util.logging.Formatter;
 
 import org.jboss.logmanager.ExtHandler;
 import org.jboss.logmanager.ExtLogRecord;
+import org.jboss.logmanager.filters.AllFilter;
 
 import com.splunk.logging.HttpEventCollectorResendMiddleware;
 import com.splunk.logging.HttpEventCollectorSender;
@@ -77,5 +80,15 @@ public class SplunkLogHandler extends ExtHandler {
             reportError("Formatting error", ex, ErrorManager.FORMAT_FAILURE);
         }
         return formatted;
+    }
+
+    @Override
+    public void setFilter(Filter newFilter) throws SecurityException {
+        if (this.getFilter() != null) {
+            // setFilter gets called by io.quarkus.runtime.logging.LoggingSetupRecorder with cleanupFilter
+            super.setFilter(new AllFilter(List.of(this.getFilter(), newFilter)));
+        } else {
+            super.setFilter(newFilter);
+        }
     }
 }
