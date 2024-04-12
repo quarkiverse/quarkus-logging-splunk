@@ -21,7 +21,7 @@ public class SplunkResource implements QuarkusTestResourceLifecycleManager {
     private static final Logger logger = LoggerFactory.getLogger(SplunkResource.class);
 
     private final GenericContainer splunk = new GenericContainer(
-            "splunk/splunk")
+            "splunk/splunk:9.2.0.1")
             .withExposedPorts(8000, 8088, 8089)
             .withEnv("SPLUNK_START_ARGS", "--accept-license")
             .withEnv("SPLUNK_PASSWORD", "admin123")
