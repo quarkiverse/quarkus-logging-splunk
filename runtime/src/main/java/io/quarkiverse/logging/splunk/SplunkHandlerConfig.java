@@ -201,6 +201,12 @@ public class SplunkHandlerConfig {
     public SerializationFormat serialization = SerializationFormat.NESTED;
 
     /**
+     * The name of the named filter to link to the splunk handler.
+     */
+    @ConfigItem
+    public Optional<String> filter;
+
+    /**
      * AsyncHandler config
      * <p>
      * This is independent of the SendMode, i.e. whether the HTTP client is async or not.
