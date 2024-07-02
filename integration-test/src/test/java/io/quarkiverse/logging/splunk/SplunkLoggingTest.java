@@ -40,6 +40,9 @@ public class SplunkLoggingTest {
                 .auth().basic("admin", "admin123")
                 .log().all()
                 .post("https://" + dockerHost + ":" + splunkAPIPort + "/services/search/jobs")
-                .then().statusCode(200).body(containsString("hello splunk"), containsString("mdc-value"));
+                .then().statusCode(200).body(
+                        containsString("hello splunk"),
+                        containsString("mdc-value"),
+                        containsString("myValue"));
     }
 }
