@@ -204,6 +204,23 @@ endif::add-copy-button-to-env-var[]
 |`0`
 
 
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.middleware]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.middleware[quarkus.log.handler.splunk.middleware]`
+
+
+[.description]
+--
+A middleware to customize the behavior of sending events to Splunk.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_MIDDLEWARE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_MIDDLEWARE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.format]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.format[quarkus.log.handler.splunk.format]`
 
 
@@ -644,6 +661,23 @@ Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MAX_RETRIE
 endif::add-copy-button-to-env-var[]
 --|long 
 |`0`
+
+
+a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.middleware]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.middleware[quarkus.log.handler.splunk."named-handlers".middleware]`
+
+
+[.description]
+--
+A middleware to customize the behavior of sending events to Splunk.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MIDDLEWARE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MIDDLEWARE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
 
 
 a| [[quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.format]]`link:#quarkus-log-handler-splunk_quarkus.log.handler.splunk.-named-handlers-.format[quarkus.log.handler.splunk."named-handlers".format]`

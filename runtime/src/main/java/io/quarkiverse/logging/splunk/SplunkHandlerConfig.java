@@ -97,6 +97,14 @@ public class SplunkHandlerConfig {
     public long maxRetries = 0;
 
     /**
+     * A middleware to customize the behavior of sending events to Splunk.
+     *
+     * @see com.splunk.logging.HttpEventCollectorMiddleware
+     */
+    @ConfigItem
+    public Optional<String> middleware;
+
+    /**
      * The log format, defining which metadata are inlined inside the log main payload.
      * <p>
      * Specific metadata (hostname, category, thread name, ...), as well as MDC key/value map, can also be sent in a structured
