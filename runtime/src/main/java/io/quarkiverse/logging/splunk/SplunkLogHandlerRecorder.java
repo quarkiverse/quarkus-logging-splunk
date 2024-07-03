@@ -18,6 +18,7 @@ import org.jboss.logmanager.formatters.PatternFormatter;
 import org.jboss.logmanager.handlers.AsyncHandler;
 
 import com.splunk.logging.HttpEventCollectorErrorHandler;
+import com.splunk.logging.HttpEventCollectorMiddleware.HttpSenderMiddleware;
 import com.splunk.logging.HttpEventCollectorSender;
 import com.splunk.logging.hec.MetadataTags;
 
@@ -90,6 +91,17 @@ public class SplunkLogHandlerRecorder {
             SplunkFlatEventSerializer serializer = new SplunkFlatEventSerializer(config.metadataSeverityFieldName);
             sender.setEventHeaderSerializer(serializer);
             sender.setEventBodySerializer(serializer);
+        }
+        if (config.middleware.isPresent()) {
+            try {
+                sender.addMiddleware(
+                        Thread.currentThread().getContextClassLoader().loadClass(config.middleware.get())
+                                .asSubclass(HttpSenderMiddleware.class)
+                                .getDeclaredConstructor()
+                                .newInstance());
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Could not instantiate middleware " + config.middleware.get(), e);
+            }
         }
         return sender;
     }
