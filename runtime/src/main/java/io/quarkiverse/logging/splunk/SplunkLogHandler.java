@@ -55,6 +55,7 @@ public class SplunkLogHandler extends ExtHandler {
                 record.getMdcCopy(),
                 (!includeException || record.getThrown() == null) ? null : record.getThrown().getMessage(),
                 null);
+        this.flush();
     }
 
     @Override
