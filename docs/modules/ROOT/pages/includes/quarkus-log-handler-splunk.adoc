@@ -451,6 +451,23 @@ endif::add-copy-button-to-env-var[]
 |`nested`
 
 
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-filter]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-filter[quarkus.log.handler.splunk.filter]`
+
+
+[.description]
+--
+The name of the named filter to link to the splunk handler.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_FILTER+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_FILTER+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
 a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-async]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-async[quarkus.log.handler.splunk.async]`
 
 
@@ -978,6 +995,23 @@ endif::add-copy-button-to-env-var[]
 -- a|
 `raw`, `nested`, `flat` 
 |`nested`
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-filter]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-filter[quarkus.log.handler.splunk."named-handlers".filter]`
+
+
+[.description]
+--
+The name of the named filter to link to the splunk handler.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FILTER+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FILTER+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
 
 
 a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async[quarkus.log.handler.splunk."named-handlers".async]`
