@@ -76,6 +76,16 @@ public class SplunkLogHandlerRecorder {
         if (config.raw || config.serialization == SplunkHandlerConfig.SerializationFormat.RAW) {
             type = "Raw";
         }
+
+        HttpEventCollectorSender.TimeoutSettings rto = null;
+        if ((config.connectTimeout != HttpEventCollectorSender.TimeoutSettings.DEFAULT_CONNECT_TIMEOUT)
+                || (config.callTimeout != HttpEventCollectorSender.TimeoutSettings.DEFAULT_CALL_TIMEOUT) ||
+                (config.readTimeout != HttpEventCollectorSender.TimeoutSettings.DEFAULT_READ_TIMEOUT)
+                || (config.writeTimeout != HttpEventCollectorSender.TimeoutSettings.DEFAULT_WRITE_TIMEOUT) ||
+                (config.terminationTimeout != HttpEventCollectorSender.TimeoutSettings.DEFAULT_TERMINATION_TIMEOUT)) {
+            rto = new HttpEventCollectorSender.TimeoutSettings(config.connectTimeout, config.callTimeout,
+                    config.readTimeout, config.writeTimeout, config.terminationTimeout);
+        }
         // Timeout settings is not used and passing a null is correct regarding the code
         HttpEventCollectorSender sender = new HttpEventCollectorSender(
                 config.url,
@@ -86,7 +96,7 @@ public class SplunkLogHandlerRecorder {
                 config.batchSizeCount,
                 config.batchSizeBytes,
                 config.sendMode.name().toLowerCase(),
-                buildMetadata(config), null);
+                buildMetadata(config), rto);
         if (config.serialization == SplunkHandlerConfig.SerializationFormat.FLAT) {
             SplunkFlatEventSerializer serializer = new SplunkFlatEventSerializer(config.metadataSeverityFieldName);
             sender.setEventHeaderSerializer(serializer);
