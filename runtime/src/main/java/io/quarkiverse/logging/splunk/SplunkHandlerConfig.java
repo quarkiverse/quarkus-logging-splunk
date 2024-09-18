@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.function.BooleanSupplier;
 import java.util.logging.Level;
 
+import com.splunk.logging.HttpEventCollectorSender;
+
 import io.quarkus.runtime.annotations.ConfigGroup;
 import io.quarkus.runtime.annotations.ConfigItem;
 
@@ -251,4 +253,33 @@ public class SplunkHandlerConfig {
         FLAT
     }
 
+    /**
+     * Sets the default connect timeout for new connections in milliseconds.
+     */
+    @ConfigItem(defaultValue = "3000")
+    public long connectTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_CONNECT_TIMEOUT;
+
+    /**
+     * Sets the default timeout for complete calls in milliseconds.
+     */
+    @ConfigItem(defaultValue = "0")
+    public long callTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_CALL_TIMEOUT;
+
+    /**
+     * Sets the default read timeout for new connections in milliseconds.
+     */
+    @ConfigItem(defaultValue = "10000")
+    public long readTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_READ_TIMEOUT;
+
+    /**
+     * Sets the default write timeout for new connections in milliseconds.
+     */
+    @ConfigItem(defaultValue = "10000")
+    public long writeTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_WRITE_TIMEOUT;
+
+    /**
+     * Sets the default termination timeout during a flush in milliseconds.
+     */
+    @ConfigItem(defaultValue = "0")
+    public long terminationTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_TERMINATION_TIMEOUT;
 }

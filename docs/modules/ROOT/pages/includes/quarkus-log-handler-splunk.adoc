@@ -1065,6 +1065,95 @@ endif::add-copy-button-to-env-var[]
 `block`, `discard` 
 |`block`
 
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-connectTimeout]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-connectTimeout[quarkus.log.handler.splunk.connectTimeout]`
+
+
+[.description]
+--
+Sets the default connect timeout for new connections in milliseconds.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_CONNECTTIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_CONNECTTIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+long
+|`3000`
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-callTimeout]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-callTimeout[quarkus.log.handler.splunk.callTimeout]`
+
+
+[.description]
+--
+Sets the default timeout for complete calls in milliseconds.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_CALLTIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_CALLTIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+long
+|`0`
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-readTimeout]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-readTimeout[quarkus.log.handler.splunk.readTimeout]`
+
+
+[.description]
+--
+Sets the default read timeout for new connections in milliseconds.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_READTIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_READTIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+long
+|`10000`
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-writeTimeout]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-writeTimeout[quarkus.log.handler.splunk.writeTimeout]`
+
+
+[.description]
+--
+Sets the default write timeout for new connections in milliseconds.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_WRITETIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_WRITETIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+long
+|`10000`
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-terminationTimeout]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-terminationTimeout[quarkus.log.handler.splunk.terminationTimeout]`
+
+
+[.description]
+--
+Sets the default termination timeout during a flush in milliseconds.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_TERMINATIONTIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_TERMINATIONTIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+-- a|
+long
+|`0`
+
 |===
 ifndef::no-duration-note[]
 [NOTE]
@@ -1083,5 +1172,4 @@ In other cases, the simplified format is translated to the `java.time.Duration` 
 
 * If the value is a number followed by `h`, `m`, or `s`, it is prefixed with `PT`.
 * If the value is a number followed by `d`, it is prefixed with `P`.
-====
-endif::no-duration-note[]
+
