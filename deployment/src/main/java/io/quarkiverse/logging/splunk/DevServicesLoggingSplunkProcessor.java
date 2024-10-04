@@ -57,7 +57,7 @@ public class DevServicesLoggingSplunkProcessor {
         // Figure out if we need to shut down and restart existing Splunk containers
         // if not and the Splunk containers have already started we just return
         if (devService != null) {
-            if (config.devservices.equals(capturedDevServiceConfig)) {
+            if (config.devservices().equals(capturedDevServiceConfig)) {
                 return devService.toBuildItem();
             }
             try {
@@ -70,13 +70,13 @@ public class DevServicesLoggingSplunkProcessor {
         }
 
         // Re-initialize captured config and dev services.
-        capturedDevServiceConfig = config.devservices;
+        capturedDevServiceConfig = config.devservices();
 
         StartupLogCompressor compressor = new StartupLogCompressor(
                 (launchMode.isTest() ? "(test) " : "") + "Splunk Dev Services Starting:", consoleInstalledBuildItem,
                 loggingSetupBuildItem);
         try {
-            devService = startContainer(config.devservices, dockerStatusBuildItem,
+            devService = startContainer(config.devservices(), dockerStatusBuildItem,
                     launchMode.getLaunchMode(), devServicesConfig.timeout);
 
             if (devService == null) {
@@ -120,18 +120,18 @@ public class DevServicesLoggingSplunkProcessor {
             return null;
         }
 
-        if (!dockerStatusBuildItem.isDockerAvailable()) {
+        if (!dockerStatusBuildItem.isContainerRuntimeAvailable()) {
             log.warn("Configure quarkus.log.handler.splunk.url or have a working docker daemon");
             return null;
         }
 
-        DockerImageName dockerImageName = DockerImageName.parse(config.imageName.orElse(SPLUNK_LATEST))
+        DockerImageName dockerImageName = DockerImageName.parse(config.imageName().orElse(SPLUNK_LATEST))
                 .asCompatibleSubstituteFor(SPLUNK_LATEST);
 
         SplunkContainer splunkContainer = new SplunkContainer(dockerImageName);
 
         // Add envs and timeout if provided.
-        splunkContainer.withEnv(config.containerEnv);
+        splunkContainer.withEnv(config.containerEnv());
         timeout.ifPresent(splunkContainer::withStartupTimeout);
 
         splunkContainer.start();
@@ -148,7 +148,7 @@ public class DevServicesLoggingSplunkProcessor {
         exposedConfig.put("quarkus.log.handler.splunk.token", SplunkContainer.HEC_TOKEN);
         exposedConfig.put("quarkus.log.handler.splunk.disable-certificate-validation", "true");
         exposedConfig.put("quarkus.log.handler.splunk.enabled", "true");
-        config.plugNamedHandlers.forEach((k, v) -> {
+        config.plugNamedHandlers().forEach((k, v) -> {
             // Named handlers are configured using runtime configuration, which we do not have access to here
             // so a dedicated build time map was introduced to still be able to generate the configuration
             // to inject for each named handler.
@@ -163,6 +163,6 @@ public class DevServicesLoggingSplunkProcessor {
     }
 
     private boolean isEnabled(DevServicesLoggingSplunkBuildTimeConfig config) {
-        return config.enabled.orElse(false);
+        return config.enabled();
     }
 }

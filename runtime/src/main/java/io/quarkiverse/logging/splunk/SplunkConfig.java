@@ -6,26 +6,32 @@ package io.quarkiverse.logging.splunk;
 
 import java.util.Map;
 
-import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithParentName;
 
 /**
  * Configuration for Splunk HEC logging
  */
-@ConfigRoot(phase = ConfigPhase.RUN_TIME, name = "log.handler.splunk")
-public class SplunkConfig {
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+@ConfigMapping(prefix = "quarkus.log.handler.splunk")
+public interface SplunkConfig {
 
     /**
      * Configuration for Splunk HEC logging for the root level.
      */
-    @ConfigItem(name = ConfigItem.PARENT)
-    public SplunkHandlerConfig config;
+    @WithParentName
+    SplunkHandlerConfig config();
+
     /**
      * Map of all the custom/named handlers configuration using Splunk implementation.
      */
-    @ConfigItem(name = ConfigItem.PARENT)
-    public Map<String, SplunkHandlerConfig> namedHandlers;
+    @WithParentName
+    Map<String, SplunkHandlerConfig> namedHandlers();
 
-    public DevServicesLoggingSplunkRuntimeConfig devservices;
+    /**
+     * Runtime configuration for the Splunk DevService.
+     */
+    DevServicesLoggingSplunkRuntimeConfig devservices();
 }

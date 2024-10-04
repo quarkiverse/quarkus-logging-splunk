@@ -2,14 +2,9 @@ package io.quarkiverse.logging.splunk;
 
 import java.util.Optional;
 
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
-
-@ConfigGroup
-public class DevServicesLoggingSplunkRuntimeConfig {
+public interface DevServicesLoggingSplunkRuntimeConfig {
     /**
      * The API URL the splunk dev service listens on.
      */
-    @ConfigItem
-    public Optional<String> apiUrl;
+    Optional<String> apiUrl();
 }

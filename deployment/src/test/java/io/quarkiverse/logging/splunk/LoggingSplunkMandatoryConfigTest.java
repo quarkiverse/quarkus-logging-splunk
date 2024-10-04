@@ -21,6 +21,7 @@ class LoggingSplunkMandatoryConfigTest {
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class))
             .withConfigurationResource("application-splunk-logging-mandatory.properties")
             .assertException(e -> {
+                System.out.println(e.getMessage());
                 assertSame(IllegalArgumentException.class, e.getClass());
                 assertTrue(e.getMessage().contains("quarkus.log.handler.splunk.token"));
             });
