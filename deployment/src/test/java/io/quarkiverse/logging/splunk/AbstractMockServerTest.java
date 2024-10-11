@@ -8,6 +8,7 @@ import static org.mockserver.model.HttpResponse.response;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.mockserver.configuration.ConfigurationProperties;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.ClearType;
 import org.mockserver.model.HttpRequest;
@@ -18,6 +19,8 @@ public abstract class AbstractMockServerTest {
 
     @BeforeAll
     public static void setUpOnce() {
+        ConfigurationProperties.dynamicallyCreateCertificateAuthorityCertificate(false);
+        ConfigurationProperties.assumeAllRequestsAreHttp(true);
         httpServer = ClientAndServer.startClientAndServer(8088);
         // This needs to be done as early as possible, so Quarkus startup logs don't fail to be sent
         httpServer

@@ -5,47 +5,29 @@ Contributor(s): Kevin Viet, Romain Quinio, Yohann Puyhaubert (Amadeus s.a.s.)
 package io.quarkiverse.logging.splunk;
 
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BooleanSupplier;
 import java.util.logging.Level;
 
 import com.splunk.logging.HttpEventCollectorSender;
 
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
+import io.smallrye.config.WithDefault;
 
 /**
  * The configuration of the Splunk root or any Splunk named handler.
  */
-@ConfigGroup
-public class SplunkHandlerConfig {
+public interface SplunkHandlerConfig {
     /**
      * Determine whether to enable the handler
      */
-    @ConfigItem(defaultValue = "true")
-    public boolean enabled = true;
-
-    public static class Enabled implements BooleanSupplier {
-
-        final SplunkHandlerConfig config;
-
-        public Enabled(SplunkHandlerConfig config) {
-            this.config = config;
-        }
-
-        @Override
-        public boolean getAsBoolean() {
-            return config.enabled;
-        }
-    }
+    @WithDefault("true")
+    boolean enabled();
 
     /**
      * The splunk handler log level. By default, it is no more strict than the root handler level.
      */
-    @ConfigItem(defaultValue = "ALL")
-    public Level level = Level.ALL;
+    @WithDefault("ALL")
+    Level level();
 
     /**
      * Splunk HEC endpoint base url.
@@ -53,21 +35,20 @@ public class SplunkHandlerConfig {
      * With raw events, the endpoint targeted is /services/collector/raw.
      * With flat or nested JSON events, the endpoint targeted is /services/collector/event/1.0.
      */
-    @ConfigItem(defaultValue = "https://localhost:8088/")
-    public String url = "https://localhost:8088/";
+    @WithDefault("https://localhost:8088/")
+    String url();
 
     /**
      * Disable TLS certificate validation with HEC endpoint
      */
-    @ConfigItem(defaultValue = "false")
-    public boolean disableCertificateValidation = false;
+    @WithDefault("false")
+    boolean disableCertificateValidation();
 
     /**
      * The application token to authenticate with HEC, the token is mandatory if the extension is enabled
      * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#HEC_token
      */
-    @ConfigItem
-    public Optional<String> token;
+    Optional<String> token();
 
     /**
      * The strategy to send events to HEC.
@@ -78,48 +59,51 @@ public class SplunkHandlerConfig {
      * timestamp
      * (that has 1 millisecond resolution) may be indexed out of order by Splunk.
      */
-    @ConfigItem(defaultValue = "sequential")
-    public SendMode sendMode = SendMode.SEQUENTIAL;
+    @WithDefault("sequential")
+    SendMode sendMode();
 
     /**
      * A GUID to identify an HEC client and guarantee isolation at HEC level in case of slow clients.
-     * https://docs.splunk.com/Documentation/Splunk/latest/Data/AboutHECIDXAck#About_channels_and_sending_data
+     *
+     * @see <a href=
+     *      "https://docs.splunk.com/Documentation/Splunk/latest/Data/AboutHECIDXAck#About_channels_and_sending_data">splunk
+     *      guide</a>
      */
-    @ConfigItem
-    public Optional<String> channel;
+    Optional<String> channel();
 
     /**
      * Batching delay before sending a group of events.
+     * <p>
      * If 0, the events are sent immediately.
+     * </p>
      */
-    @ConfigItem(defaultValue = "10s")
-    public Duration batchInterval = Duration.ofSeconds(10);
+    @WithDefault("10s")
+    Duration batchInterval();
 
     /**
      * Maximum number of events in a batch. By default 10, if 0 no batching.
      */
-    @ConfigItem(defaultValue = "10")
-    public long batchSizeCount = 10;
+    @WithDefault("10")
+    long batchSizeCount();
 
     /**
      * Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batching.
      */
-    @ConfigItem(defaultValue = "10240")
-    public long batchSizeBytes = 10 * 1024;
+    @WithDefault("10240")
+    long batchSizeBytes();
 
     /**
      * Maximum number of retries in case of I/O exceptions with HEC connection.
      */
-    @ConfigItem(defaultValue = "0")
-    public long maxRetries = 0;
+    @WithDefault("0")
+    long maxRetries();
 
     /**
      * A middleware to customize the behavior of sending events to Splunk.
      *
      * @see com.splunk.logging.HttpEventCollectorMiddleware
      */
-    @ConfigItem
-    public Optional<String> middleware;
+    Optional<String> middleware();
 
     /**
      * The log format, defining which metadata are inlined inside the log main payload.
@@ -127,78 +111,93 @@ public class SplunkHandlerConfig {
      * Specific metadata (hostname, category, thread name, ...), as well as MDC key/value map, can also be sent in a structured
      * way.
      */
-    @ConfigItem(defaultValue = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n")
-    public String format = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n";
+    @WithDefault("%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n")
+    String format();
 
     /**
      * Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted
      * message, it does not include the exception name or stacktrace).
      * Only applicable to 'nested' serialization.
      */
-    @ConfigItem(defaultValue = "false")
-    public boolean includeException = false;
+    @WithDefault("false")
+    boolean includeException();
 
     /**
      * Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message).
      * Only applicable to 'nested' serialization.
      */
-    @ConfigItem(defaultValue = "false")
-    public boolean includeLoggerName = false;
+    @WithDefault("false")
+    boolean includeLoggerName();
 
     /**
      * Whether to send the thread name as a structured metadata of the log event (equivalent of %t in a formatted message).
      * Only applicable to 'nested' serialization.
      */
-    @ConfigItem(defaultValue = "false")
-    public boolean includeThreadName = false;
+    @WithDefault("false")
+    boolean includeThreadName();
 
     /**
      * Overrides the host name metadata value.
+     * <p>
+     * Default value: the equivalent of %h in a formatted message.
+     * </p>
      */
-    @ConfigItem(defaultValueDocumentation = "The equivalent of %h in a formatted message")
-    public Optional<String> metadataHost;
+    Optional<String> metadataHost();
 
     /**
      * The source value to assign to the event data. For example, if you're sending data from an app you're developing,
      * you could set this key to the name of the app.
-     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
+     *
+     * @see <a href=
+     *      "https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata">splunk
+     *      guide</a>
      */
-    @ConfigItem
-    public Optional<String> metadataSource;
+    Optional<String> metadataSource();
 
     /**
      * The optional format of the events, to enable some parsing on Splunk side.
-     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
+     *
      * <p>
      * A given source type may have indexed fields extraction enabled, which is the case of the built-in _json used for nested
      * serialization.
+     * </p>
+     * <p>
+     * Default value: _json for nested serialization, not set otherwise
+     * </p>
+     *
+     * @see <a href=
+     *      "https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata">splunk
+     *      guide</a>
      */
-    @ConfigItem(defaultValueDocumentation = "_json for nested serialization, not set otherwise")
-    public Optional<String> metadataSourceType;
+    Optional<String> metadataSourceType();
 
     /**
      * The optional name of the index by which the event data is to be stored. If set, it must be within the
      * list of allowed indexes of the token (if it has the indexes parameter set).
-     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
+     *
+     * @see <a href=
+     *      "https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata">splunk
+     *      guide</a>
      */
-    @ConfigItem
-    public Optional<String> metadataIndex;
+    Optional<String> metadataIndex();
 
     /**
      * Optional static key/value pairs to populate the "fields" key of event metadata. This isn't
      * applicable to raw serialization.
-     * https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata
+     *
+     * @see <a href=
+     *      "https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector#Event_metadata">splunk
+     *      guide</a>
      */
-    @ConfigItem
-    public Map<String, String> metadataFields = new HashMap<>();
+    Map<String, String> metadataFields();
 
     /**
      * The name of the key used to convey the severity / log level in the metadata fields.
      * Only applicable to 'flat' serialization.
      * With 'nested' serialization, there is already a 'severity' field.
      */
-    @ConfigItem(defaultValue = "severity")
-    public String metadataSeverityFieldName = "severity";
+    @WithDefault("severity")
+    String metadataSeverityFieldName();
 
     /**
      * Determines whether the events are sent in raw mode. In case the raw event (i.e. the actual log message)
@@ -208,8 +207,8 @@ public class SplunkHandlerConfig {
      * @deprecated Use {@link #serialization}
      */
     @Deprecated(forRemoval = true)
-    @ConfigItem(defaultValue = "false")
-    public boolean raw = false;
+    @WithDefault("false")
+    boolean raw();
 
     /**
      * The format of the payload.
@@ -222,32 +221,30 @@ public class SplunkHandlerConfig {
      * 'fields' root object.
      * </ul>
      */
-    @ConfigItem(defaultValue = "nested")
-    public SerializationFormat serialization = SerializationFormat.NESTED;
+    @WithDefault("nested")
+    SerializationFormat serialization();
 
     /**
      * The name of the named filter to link to the splunk handler.
      */
-    @ConfigItem
-    public Optional<String> filter;
+    Optional<String> filter();
 
     /**
      * AsyncHandler config
      * <p>
      * This is independent of the SendMode, i.e. whether the HTTP client is async or not.
      */
-    @ConfigItem
-    AsyncConfig async;
+    AsyncConfig async();
 
     /**
      * Mirrors com.splunk.logging.HttpEventCollectorSender.SendMode
      */
-    public enum SendMode {
+    enum SendMode {
         SEQUENTIAL,
         PARALLEL
     }
 
-    public enum SerializationFormat {
+    enum SerializationFormat {
         RAW,
         NESTED,
         FLAT
@@ -256,30 +253,30 @@ public class SplunkHandlerConfig {
     /**
      * Sets the default connect timeout for new connections in milliseconds.
      */
-    @ConfigItem(defaultValue = "3000")
-    public long connectTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_CONNECT_TIMEOUT;
+    @WithDefault("3000")
+    long connectTimeout();
 
     /**
      * Sets the default timeout for complete calls in milliseconds.
      */
-    @ConfigItem(defaultValue = "0")
-    public long callTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_CALL_TIMEOUT;
+    @WithDefault("0")
+    long callTimeout();
 
     /**
      * Sets the default read timeout for new connections in milliseconds.
      */
-    @ConfigItem(defaultValue = "10000")
-    public long readTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_READ_TIMEOUT;
+    @WithDefault("10000")
+    long readTimeout();
 
     /**
      * Sets the default write timeout for new connections in milliseconds.
      */
-    @ConfigItem(defaultValue = "10000")
-    public long writeTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_WRITE_TIMEOUT;
+    @WithDefault("10000")
+    long writeTimeout();
 
     /**
      * Sets the default termination timeout during a flush in milliseconds.
      */
-    @ConfigItem(defaultValue = "0")
-    public long terminationTimeout = HttpEventCollectorSender.TimeoutSettings.DEFAULT_TERMINATION_TIMEOUT;
+    @WithDefault("0")
+    long terminationTimeout();
 }
