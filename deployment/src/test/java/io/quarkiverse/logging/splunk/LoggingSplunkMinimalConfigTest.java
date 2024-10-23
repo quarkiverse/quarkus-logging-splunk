@@ -18,9 +18,9 @@ import io.quarkus.test.QuarkusUnitTest;
 class LoggingSplunkMinimalConfigTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
+    static final QuarkusUnitTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-minimal.properties")
-            .withConfigurationResource("mock-server.properties")
+            .overrideConfigKey("quarkus.log.handler.splunk.token", "12345678-1234-1234-1234-1234567890AB")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
     static final Logger logger = Logger.getLogger(LoggingSplunkMinimalConfigTest.class);

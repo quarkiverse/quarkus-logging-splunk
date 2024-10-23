@@ -23,9 +23,8 @@ import io.quarkus.test.QuarkusUnitTest;
 class LoggingSplunkFilteringTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
+    static final QuarkusUnitTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-filtering.properties")
-            .withConfigurationResource("mock-server.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
     static final Logger logger = Logger.getLogger(LoggingSplunkFilteringTest.class);

@@ -10,9 +10,8 @@ import io.quarkus.test.QuarkusUnitTest;
 class LoggingSplunkRawSerializationTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
+    static final QuarkusUnitTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-raw.properties")
-            .withConfigurationResource("mock-server.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
     static final org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger(LoggingSplunkRawSerializationTest.class);

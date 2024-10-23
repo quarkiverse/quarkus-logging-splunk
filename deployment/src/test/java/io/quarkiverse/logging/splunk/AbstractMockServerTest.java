@@ -13,6 +13,8 @@ import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.ClearType;
 import org.mockserver.model.HttpRequest;
 
+import io.quarkus.test.QuarkusUnitTest;
+
 public abstract class AbstractMockServerTest {
 
     static ClientAndServer httpServer;
@@ -58,4 +60,25 @@ public abstract class AbstractMockServerTest {
         return request().withPath("/services/collector/raw");
     }
 
+    /**
+     * QuarkusUnitTest 3.16+ only supports one call to #withConfigurationResource
+     * So use #overrideConfigKey instead of a properties.
+     * See https://github.com/quarkusio/quarkus/issues/43914
+     */
+    protected static QuarkusUnitTest withMockServerConfig() {
+
+        return new QuarkusUnitTest()
+                // Switch from HTTPS to HTTP
+                .overrideConfigKey("quarkus.log.handler.splunk.url", "http://localhost:8088")
+                // Avoid infinite loop of logging via splunk handler, mockserver must only log to stdout !
+                .overrideConfigKey("quarkus.log.handler.console.\"stdout\".format", "%s%e%n")
+                .overrideConfigKey("quarkus.log.category.\"org.mockserver\".handlers", "stdout")
+                .overrideConfigKey("quarkus.log.category.\"org.mockserver\".use-parent-handlers", "false")
+                // Avoid batching and send events immediately, to make unit tests more synchronous
+                // Note that OKHttp client still executes its I/O on a separate thread
+                .overrideConfigKey("quarkus.log.handler.splunk.batch-interval", "0")
+                .overrideConfigKey("quarkus.log.handler.splunk.batch-size-bytes", "0")
+                .overrideConfigKey("quarkus.log.handler.splunk.batch-size-count", "0")
+                .overrideConfigKey("quarkus.log.handler.splunk.send-mode", "sequential");
+    }
 }

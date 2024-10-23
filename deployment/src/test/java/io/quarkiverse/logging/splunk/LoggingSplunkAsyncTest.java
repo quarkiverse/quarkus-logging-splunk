@@ -13,9 +13,8 @@ import io.quarkus.test.QuarkusUnitTest;
 public class LoggingSplunkAsyncTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
+    static final QuarkusUnitTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-async.properties")
-            .withConfigurationResource("mock-server.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
     static final Logger logger = Logger.getLogger(LoggingSplunkAsyncTest.class);
