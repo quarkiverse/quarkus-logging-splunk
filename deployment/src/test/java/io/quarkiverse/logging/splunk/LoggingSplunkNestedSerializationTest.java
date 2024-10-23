@@ -27,9 +27,8 @@ import io.quarkus.test.QuarkusUnitTest;
 class LoggingSplunkNestedSerializationTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
+    static final QuarkusUnitTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-nested.properties")
-            .withConfigurationResource("mock-server.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
     static final org.jboss.logging.Logger logger = org.jboss.logging.Logger

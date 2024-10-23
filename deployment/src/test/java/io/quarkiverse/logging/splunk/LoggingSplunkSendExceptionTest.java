@@ -23,10 +23,9 @@ import io.quarkus.test.QuarkusUnitTest;
 class LoggingSplunkSendExceptionTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = new QuarkusUnitTest()
+    static final QuarkusUnitTest unitTest = AbstractMockServerTest.withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-failure.properties")
-            .withConfigurationResource("mock-server.properties")
-            .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
+            .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class).addClass(AbstractMockServerTest.class));
 
     static final Logger logger = Logger.getLogger(LoggingSplunkSendExceptionTest.class);
 
