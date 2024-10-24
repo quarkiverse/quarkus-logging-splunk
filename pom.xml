@@ -53,7 +53,6 @@
     <module>test-utils</module>
     <module>runtime</module>
     <module>deployment</module>
-    <module>integration-test</module>
   </modules>
   <repositories>
     <repository>
@@ -162,6 +161,7 @@
       </activation>
       <modules>
         <module>docs</module>
+        <module>integration-tests</module>
       </modules>
     </profile>
   </profiles>
