@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.quarkiverse</groupId>
     <artifactId>quarkiverse-parent</artifactId>
-    <version>16</version>
+    <version>18</version>
   </parent>
   <groupId>io.quarkiverse.logging.splunk</groupId>
   <artifactId>quarkus-logging-splunk-parent</artifactId>
@@ -52,8 +52,6 @@
   <modules>
     <module>runtime</module>
     <module>deployment</module>
-    <module>integration-test</module>
-    <module>docs</module>
   </modules>
   <repositories>
     <repository>
@@ -151,4 +149,19 @@
       </plugins>
     </pluginManagement>
   </build>
+  <profiles>
+    <profile>
+      <id>docs</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <modules>
+        <module>docs</module>
+        <module>integration-test</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>
