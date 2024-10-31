@@ -151,11 +151,10 @@
   </build>
   <profiles>
     <profile>
-      <id>docs</id>
+      <id>not-to-release</id>
       <activation>
         <property>
-          <name>performRelease</name>
-          <value>!true</value>
+          <name>!performRelease</name>
         </property>
       </activation>
       <modules>
