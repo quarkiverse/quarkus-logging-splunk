@@ -232,7 +232,7 @@ end
 end
 ....
 
-By default `quarkus.log.handler.splunk.async.queue-length=block`, so applicative threads will block once the queue limit has reached `quarkus.log.handler.splunk.async.queue-length`.
+By default `quarkus.log.handler.splunk.async.overflow=block`, so applicative threads will block once the queue limit has reached `quarkus.log.handler.splunk.async.queue-length`.
 
 There's no link between `quarkus.log.handler.splunk.async.queue-length` and `quarkus.log.handler.splunk.batch-size-count`.
 
