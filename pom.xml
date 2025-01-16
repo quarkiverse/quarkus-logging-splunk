@@ -56,9 +56,20 @@
   </modules>
   <repositories>
     <repository>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>splunk</id>
       <name>Splunk Releases</name>
       <url>https://splunk.jfrog.io/splunk/ext-releases-local</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
   </repositories>
   <dependencyManagement>
