@@ -60,6 +60,12 @@ public class SplunkLogHandler extends ExtHandler {
                 null);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Warning: explicit calls to flush bypass event batching checks, so events are sent too early. Do not rely on APIs
+     * calling flush directly, like the AsyncHandler's autoflush mechanism.
+     */
     @Override
     public void flush() {
         this.sender.flush();
