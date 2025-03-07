@@ -7,11 +7,15 @@ import static org.mockito.Mockito.when;
 
 import java.time.Duration;
 import java.util.Optional;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 
+import org.jboss.logmanager.handlers.AsyncHandler;
 import org.junit.jupiter.api.Test;
 
 import com.splunk.logging.HttpEventCollectorSender;
+
+import io.quarkus.runtime.RuntimeValue;
 
 class SplunkLogHandlerRecorderTest {
 
@@ -52,6 +56,20 @@ class SplunkLogHandlerRecorderTest {
         assertThrows(IllegalArgumentException.class, () -> SplunkLogHandlerRecorder.createSender(config));
     }
 
+    @Test
+    void shouldCreateAsyncHandlerWithoutAutoflush() {
+        // Arrange
+        SplunkConfig rootConfig = createAsyncRootConfig();
+
+        // Act
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+
+        // Assert
+        assertTrue(handler.getValue().isPresent());
+        AsyncHandler asyncHandler = assertInstanceOf(AsyncHandler.class, handler.getValue().get());
+        assertFalse(asyncHandler.isAutoFlush());
+    }
+
     private SplunkHandlerConfig createConfig() {
         SplunkHandlerConfig config = mock(SplunkHandlerConfig.class);
         when(config.token()).thenReturn(Optional.of("token"));
@@ -84,6 +102,25 @@ class SplunkLogHandlerRecorderTest {
         when(config.terminationTimeout()).thenReturn(0L);
 
         return config;
+    }
+
+    private SplunkConfig createAsyncRootConfig() {
+        SplunkHandlerConfig handlerConfig = createConfig();
+        when(handlerConfig.middleware()).thenReturn(Optional.of(TestMiddleware.class.getName()));
+        // Override batchInterval duration
+        when(handlerConfig.batchInterval()).thenReturn(Duration.ofSeconds(10));
+
+        SplunkConfig rootConfig = mock(SplunkConfig.class);
+        when(rootConfig.config()).thenReturn(handlerConfig);
+
+        // Enable async
+        AsyncConfig asyncConfig = mock(AsyncConfig.class);
+        when(asyncConfig.enable()).thenReturn(true);
+        when(asyncConfig.queueLength()).thenReturn(512);
+        when(asyncConfig.overflow()).thenReturn(AsyncHandler.OverflowAction.BLOCK);
+        when(handlerConfig.async()).thenReturn(asyncConfig);
+
+        return rootConfig;
     }
 
 }

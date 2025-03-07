@@ -144,7 +144,7 @@ public class SplunkLogHandlerRecorder {
         return metadata;
     }
 
-    private SplunkLogHandler createSplunkLogHandler(HttpEventCollectorSender sender,
+    private static SplunkLogHandler createSplunkLogHandler(HttpEventCollectorSender sender,
             SplunkHandlerConfig config) {
         return new SplunkLogHandler(sender,
                 config.includeException(),
@@ -159,6 +159,8 @@ public class SplunkLogHandlerRecorder {
         asyncHandler.setOverflowAction(asyncConfig.overflow());
         asyncHandler.addHandler(handler);
         asyncHandler.setLevel(level);
+        // autoflush ignores event batch configuration and sends events immediately, disable it
+        asyncHandler.setAutoFlush(false);
         return asyncHandler;
     }
 
