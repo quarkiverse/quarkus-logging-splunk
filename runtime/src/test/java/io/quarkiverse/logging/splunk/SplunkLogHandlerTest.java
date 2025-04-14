@@ -23,8 +23,9 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.splunk.logging.HttpEventCollectorResendMiddleware;
 import com.splunk.logging.HttpEventCollectorSender;
+
+import io.quarkiverse.logging.splunk.middleware.HttpEventCollectorResendMiddleware;
 
 @ExtendWith(MockitoExtension.class)
 class SplunkLogHandlerTest {
