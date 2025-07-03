@@ -19,11 +19,11 @@ import io.quarkus.deployment.builditem.DockerStatusBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.console.ConsoleInstalledBuildItem;
 import io.quarkus.deployment.console.StartupLogCompressor;
-import io.quarkus.deployment.dev.devservices.GlobalDevServicesConfig;
+import io.quarkus.deployment.dev.devservices.DevServicesConfig;
 import io.quarkus.deployment.logging.LoggingSetupBuildItem;
 import io.quarkus.runtime.LaunchMode;
 
-@BuildSteps(onlyIfNot = IsNormal.class, onlyIf = { GlobalDevServicesConfig.Enabled.class })
+@BuildSteps(onlyIfNot = IsNormal.class, onlyIf = { DevServicesConfig.Enabled.class })
 public class DevServicesLoggingSplunkProcessor {
     private static final Logger log = Logger.getLogger(DevServicesLoggingSplunkProcessor.class);
 
@@ -52,7 +52,7 @@ public class DevServicesLoggingSplunkProcessor {
             Optional<ConsoleInstalledBuildItem> consoleInstalledBuildItem,
             CuratedApplicationShutdownBuildItem closeBuildItem,
             LoggingSetupBuildItem loggingSetupBuildItem,
-            GlobalDevServicesConfig devServicesConfig) {
+            DevServicesConfig devServicesConfig) {
 
         // Figure out if we need to shut down and restart existing Splunk containers
         // if not and the Splunk containers have already started we just return
@@ -77,7 +77,7 @@ public class DevServicesLoggingSplunkProcessor {
                 loggingSetupBuildItem);
         try {
             devService = startContainer(config.devservices(), dockerStatusBuildItem,
-                    launchMode.getLaunchMode(), devServicesConfig.timeout);
+                    launchMode.getLaunchMode(), devServicesConfig.timeout());
 
             if (devService == null) {
                 compressor.closeAndDumpCaptured();
