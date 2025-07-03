@@ -51,7 +51,7 @@ public class SplunkLogHandlerRecorder {
         Map<String, Handler> namedHandlers = rootConfig.namedHandlers()
                 .entrySet()
                 .stream()
-                .filter(e -> !"devservices".equals(e.getKey()))
+                .filter(e -> !"devservices".equals(e.getKey()) && !"async".equals(e.getKey()))
                 .filter(e -> e.getValue().enabled())
                 .collect(Collectors.toMap(
                         e -> e.getKey(),
@@ -71,7 +71,7 @@ public class SplunkLogHandlerRecorder {
                 new PatternFormatter(config.format()));
         applyFilter(discoveredLogComponents, config.filter(), splunkLogHandler);
 
-        return config.async().enable()
+        return config.async().enabled()
                 ? createAsyncHandler(config.async(), config.level(), splunkLogHandler)
                 : splunkLogHandler;
     }
@@ -111,7 +111,9 @@ public class SplunkLogHandlerRecorder {
         if (config.middleware().isPresent()) {
             try {
                 sender.addMiddleware(
-                        Thread.currentThread().getContextClassLoader().loadClass(config.middleware().get())
+                        Thread.currentThread()
+                                .getContextClassLoader()
+                                .loadClass(config.middleware().get())
                                 .asSubclass(HttpSenderMiddleware.class)
                                 .getDeclaredConstructor()
                                 .newInstance());

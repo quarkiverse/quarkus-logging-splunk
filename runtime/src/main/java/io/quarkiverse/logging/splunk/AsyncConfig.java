@@ -14,7 +14,18 @@ public interface AsyncConfig {
      * Indicates whether to log asynchronously
      */
     @WithDefault("false")
+    boolean enabled();
+
+    /**
+     * Indicates whether to log asynchronously
+     *
+     * @deprecated Use {@link #enabled()} instead. This method is kept for backward compatibility. Deprecated because it
+     *             breaks YAML and JSON parsing, when simultaneously has boolean value and sub-nodes like queueLength and
+     *             overflow.
+     */
+    @WithDefault("false")
     @WithParentName
+    @Deprecated
     boolean enable();
 
     /**
