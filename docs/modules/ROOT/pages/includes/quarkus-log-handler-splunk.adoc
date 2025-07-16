@@ -1,8 +1,9 @@
-
 :summaryTableId: quarkus-log-handler-splunk
+
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
-[.configuration-reference.searchable, cols="80,.^10,.^10"]
+
+[.configuration-reference.searchable,cols="80,.^10,.^10"]
 |===
 
 h|[[quarkus-log-handler-splunk_configuration]]link:#quarkus-log-handler-splunk_configuration[Configuration property]
@@ -23,7 +24,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |
 
 
@@ -40,7 +41,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_IMAGE_NAME+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -57,7 +58,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_SHARED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`true`
 
 
@@ -74,7 +75,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`true`
 
 
@@ -92,7 +93,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_LEVEL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.jboss.org/jbossas/javadoc/7.1.2.Final/org/jboss/logmanager/Level.html[Level]
- 
+
 |`ALL`
 
 
@@ -111,7 +112,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_URL+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`https://localhost:8088/`
 
 
@@ -128,7 +129,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DISABLE_CERTIFICATE_VALIDATION+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -145,7 +146,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_TOKEN+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -165,7 +166,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_SEND_MODE+++`
 endif::add-copy-button-to-env-var[]
 -- a|
-`sequential`, `parallel` 
+`sequential`, `parallel`
 |`sequential`
 
 
@@ -182,7 +183,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_CHANNEL+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -200,7 +201,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`10S`
 
 
@@ -217,7 +218,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_SIZE_COUNT+++`
 endif::add-copy-button-to-env-var[]
---|long 
+--|long
 |`10`
 
 
@@ -234,7 +235,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_SIZE_BYTES+++`
 endif::add-copy-button-to-env-var[]
---|long 
+--|long
 |`10240`
 
 
@@ -251,7 +252,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_MAX_RETRIES+++`
 endif::add-copy-button-to-env-var[]
---|long 
+--|long
 |`0`
 
 
@@ -268,7 +269,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_MIDDLEWARE+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -287,7 +288,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_FORMAT+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
 
@@ -304,7 +305,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_EXCEPTION+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -321,7 +322,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_LOGGER_NAME+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -338,7 +339,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_INCLUDE_THREAD_NAME+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -355,7 +356,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_HOST+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`The equivalent of %h in a formatted message`
 
 
@@ -372,7 +373,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SOURCE+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -391,7 +392,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SOURCE_TYPE+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`_json for nested serialization, not set otherwise`
 
 
@@ -408,7 +409,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_INDEX+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -425,7 +426,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_SEVERITY_FIELD_NAME+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`severity`
 
 
@@ -436,9 +437,9 @@ a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-serialization]]`link:
 --
 The format of the payload.
 
- - With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters.
- - With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains dynamic metadata.
- - With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.
+- With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters.
+- With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains dynamic metadata.
+- With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_SERIALIZATION+++[]
@@ -447,7 +448,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_SERIALIZATION+++`
 endif::add-copy-button-to-env-var[]
 -- a|
-`raw`, `nested`, `flat` 
+`raw`, `nested`, `flat`
 |`nested`
 
 
@@ -464,8 +465,25 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_FILTER+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-async-enabled]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-async-enabled[quarkus.log.handler.splunk.async.enabled]`
+
+
+[.description]
+--
+Indicates whether to log asynchronously
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean
+|`false`
 
 
 a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-async]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-async[quarkus.log.handler.splunk.async]`
@@ -473,6 +491,8 @@ a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-async]]`link:#quarkus
 
 [.description]
 --
+Deprecated.
+The `quarkus.log.handler.splunk.async.enabled` property is used instead.
 Indicates whether to log asynchronously
 
 ifdef::add-copy-button-to-env-var[]
@@ -481,7 +501,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -498,7 +518,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_QUEUE_LENGTH+++`
 endif::add-copy-button-to-env-var[]
---|int 
+--|int
 |`512`
 
 
@@ -516,7 +536,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_OVERFLOW+++`
 endif::add-copy-button-to-env-var[]
 -- a|
-`block`, `discard` 
+`block`, `discard`
 |`block`
 
 
@@ -533,7 +553,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_API_URL+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -550,7 +570,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_CONTAINER_ENV+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,String>` 
+--|`Map<String,String>`
 |
 
 
@@ -569,7 +589,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_PLUG_NAMED_HANDLERS+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,Boolean>` 
+--|`Map<String,Boolean>`
 |
 
 
@@ -586,7 +606,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_METADATA_FIELDS+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,String>` 
+--|`Map<String,String>`
 |
 
 
@@ -603,7 +623,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`true`
 
 
@@ -621,7 +641,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__LEVEL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.jboss.org/jbossas/javadoc/7.1.2.Final/org/jboss/logmanager/Level.html[Level]
- 
+
 |`ALL`
 
 
@@ -640,7 +660,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__URL+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`https://localhost:8088/`
 
 
@@ -657,7 +677,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__DISABLE_CERTIFICATE_VALIDATION+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -674,7 +694,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__TOKEN+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -694,7 +714,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__SEND_MODE+++`
 endif::add-copy-button-to-env-var[]
 -- a|
-`sequential`, `parallel` 
+`sequential`, `parallel`
 |`sequential`
 
 
@@ -711,7 +731,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__CHANNEL+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -729,7 +749,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`10S`
 
 
@@ -746,7 +766,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_SIZE_COUNT+++`
 endif::add-copy-button-to-env-var[]
---|long 
+--|long
 |`10`
 
 
@@ -763,7 +783,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_SIZE_BYTES+++`
 endif::add-copy-button-to-env-var[]
---|long 
+--|long
 |`10240`
 
 
@@ -780,7 +800,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MAX_RETRIES+++`
 endif::add-copy-button-to-env-var[]
---|long 
+--|long
 |`0`
 
 
@@ -797,7 +817,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MIDDLEWARE+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -816,7 +836,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FORMAT+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
 
@@ -833,7 +853,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_EXCEPTION+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -850,7 +870,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_LOGGER_NAME+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -867,7 +887,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_THREAD_NAME+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -884,7 +904,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_HOST+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`The equivalent of %h in a formatted message`
 
 
@@ -901,7 +921,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SOURCE+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -920,7 +940,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SOURCE_TYPE+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`_json for nested serialization, not set otherwise`
 
 
@@ -937,7 +957,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_INDEX+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
 
 
@@ -954,7 +974,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_FIELDS+++`
 endif::add-copy-button-to-env-var[]
---|`Map<String,String>` 
+--|`Map<String,String>`
 |
 
 
@@ -971,7 +991,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SEVERITY_FIELD_NAME+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |`severity`
 
 
@@ -982,9 +1002,9 @@ a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-serial
 --
 The format of the payload.
 
- - With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters.
- - With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains dynamic metadata.
- - With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.
+- With raw serialization, the log message is sent 'as is' in the HTTP body. Metadata can only be common to a whole batch and are sent via HTTP parameters.
+- With nested serialization, the log message is sent into a 'message' field of a JSON structure which also contains dynamic metadata.
+- With flat serialization, the log message is sent into the root 'event' field. Dynamic metadata is sent via the 'fields' root object.
 
 ifdef::add-copy-button-to-env-var[]
 Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__SERIALIZATION+++[]
@@ -993,7 +1013,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__SERIALIZATION+++`
 endif::add-copy-button-to-env-var[]
 -- a|
-`raw`, `nested`, `flat` 
+`raw`, `nested`, `flat`
 |`nested`
 
 
@@ -1010,8 +1030,25 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FILTER+++`
 endif::add-copy-button-to-env-var[]
---|string 
+--|string
 |
+
+
+a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async-enabled]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async-enabled[quarkus.log.handler.splunk."named-handlers".async.enabled]`
+
+
+[.description]
+--
+Indicates whether to log asynchronously
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean
+|`false`
 
 
 a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async]]`link:#quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async[quarkus.log.handler.splunk."named-handlers".async]`
@@ -1019,6 +1056,8 @@ a| [[quarkus-log-handler-splunk_quarkus-log-handler-splunk-named-handlers-async]
 
 [.description]
 --
+Deprecated.
+The `quarkus.log.handler.splunk."named-handlers".async.enabled` property is used instead.
 Indicates whether to log asynchronously
 
 ifdef::add-copy-button-to-env-var[]
@@ -1027,7 +1066,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC+++`
 endif::add-copy-button-to-env-var[]
---|boolean 
+--|boolean
 |`false`
 
 
@@ -1044,7 +1083,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_QUEUE_LENGTH+++`
 endif::add-copy-button-to-env-var[]
---|int 
+--|int
 |`512`
 
 
@@ -1062,7 +1101,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_OVERFLOW+++`
 endif::add-copy-button-to-env-var[]
 -- a|
-`block`, `discard` 
+`block`, `discard`
 |`block`
 
 

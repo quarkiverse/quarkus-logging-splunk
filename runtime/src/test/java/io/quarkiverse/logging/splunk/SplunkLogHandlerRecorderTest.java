@@ -1,7 +1,11 @@
 package io.quarkiverse.logging.splunk;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -115,7 +119,8 @@ class SplunkLogHandlerRecorderTest {
 
         // Enable async
         AsyncConfig asyncConfig = mock(AsyncConfig.class);
-        when(asyncConfig.enable()).thenReturn(true);
+        when(asyncConfig.enable()).thenReturn(false);
+        when(asyncConfig.enabled()).thenReturn(true);
         when(asyncConfig.queueLength()).thenReturn(512);
         when(asyncConfig.overflow()).thenReturn(AsyncHandler.OverflowAction.BLOCK);
         when(handlerConfig.async()).thenReturn(asyncConfig);
