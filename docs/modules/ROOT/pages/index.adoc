@@ -409,4 +409,4 @@ quarkus.log.handler.splunk.enabled=false
 
 Every configuration property of the extension is overridable at runtime.
 
-include::includes/quarkus-log-handler-splunk.adoc[leveloffset=+1,opts=optional]
+include::includes/quarkus-logging-splunk.adoc[leveloffset=+1,opts=optional]
