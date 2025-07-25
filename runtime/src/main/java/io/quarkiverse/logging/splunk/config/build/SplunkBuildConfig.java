@@ -1,5 +1,6 @@
 package io.quarkiverse.logging.splunk.config.build;
 
+import io.quarkus.runtime.annotations.ConfigDocSection;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 import io.smallrye.config.ConfigMapping;
@@ -11,7 +12,8 @@ import io.smallrye.config.ConfigMapping;
 @ConfigMapping(prefix = "quarkus.log.handler.splunk")
 public interface SplunkBuildConfig {
     /**
-     * Configuration for the dev services.
+     * Dev Services.
      */
+    @ConfigDocSection
     DevServicesLoggingSplunkBuildTimeConfig devservices();
 }

@@ -2,8 +2,7 @@
 
 == Introduction
 
-https://www.splunk.com/en_us/software/splunk-enterprise.html[Splunk] is a middleware
-solution that receives, stores, indexes and finally allows to exploit the logs of an application.
+https://www.splunk.com/en_us/software/splunk-enterprise.html[Splunk] is a middleware solution that receives, stores, indexes and finally allows to exploit the logs of an application.
 
 This Quarkus extension provides the support of the official Splunk client library to index log events through the HTTP Event collection, provided by Splunk enterprise solution.
 
@@ -49,7 +48,8 @@ Only few global metadata shared between all events of a batch are sent via HTTP 
 In other cases, the extension uses structured logging, via JSON serialization.
 There are two supported structured formats:
 
-* The `nested` serialization is the default format of Splunk HEC Java client and defines the name of some pre-defined metadata. Combined with `quarkus.log.handler.splunk.format=%s%e` it also support log messages that are themselves JSON.
+* The `nested` serialization is the default format of Splunk HEC Java client and defines the name of some pre-defined metadata.
+Combined with `quarkus.log.handler.splunk.format=%s%e` it also support log messages that are themselves JSON.
 * The `flat` serialization is a simpler and more generic format, also used by the https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md#splunk-hec[OpenTelemetry Splunk HEC exporter].
 
 Some metadata can be indexed by Splunk, see link:++https://docs.splunk.com/Splexicon:Indexedfield++[indexed fields].
@@ -148,7 +148,7 @@ In any case, the root cause of the failure is always logged to stderr.
 
 By default, the log handler is synchronous and only the HTTP requests to HEC endpoint are done asynchronously:
 
-[plantuml, sync, format=svg]
+[plantuml,sync,format=svg]
 ....
 participant "Application" as App
 participant Slf4j
@@ -187,7 +187,7 @@ This can be an issue because the Splunk library `#send` is synchronized, so any 
 
 By enabling `quarkus.log.handler.splunk.async=true`, an intermediate event queue is used, which decouples the flushing of the batch from any application thread:
 
-[plantuml, async, format=svg]
+[plantuml,async,format=svg]
 ....
 participant "Application" as App
 participant Slf4j
@@ -245,8 +245,8 @@ By setting `quarkus.log.handler.splunk.send-mode=parallel` multiple batches will
 
 === Named Splunk log handlers
 
-A named log handler can be configured to manage multiple Splunk configurations for particular log emissions. Like for core Quarkus handlers (*console*, *file* or *syslog*),
-Splunk named handlers follow the same configuration:
+A named log handler can be configured to manage multiple Splunk configurations for particular log emissions.
+Like for core Quarkus handlers (*console*, *file* or *syslog*), Splunk named handlers follow the same configuration:
 
 ```
 # Global configuration
@@ -265,17 +265,21 @@ quarkus.log.category."monitoring".use-parent-handlers=false
 Next to use such logger in actual code, you can rely on annotation or factory:
 
 * With annotation:
-```
++
+[source,java]
+----
 @LoggerName("monitoring")
 Logger monitoringLogger;
-```
-
+----
 * With factory:
-```
++
+[source,java]
+----
 static final Logger monitoringLogger = Logger.getLogger("monitoring");
-```
+----
 
 ==== Some important considerations
+
 * Every handler is isolated and uses a separate Splunk client and connection pool, which means it has a cost.
 * The configuration from the root handler are not inherited by named handlers.
 * Use `quarkus.log.category."named-handler".use-parent-handlers=false` is required if you do not want the root handler to also receive log events already sent to named handlers.
@@ -404,4 +408,4 @@ quarkus.log.handler.splunk.enabled=false
 
 Every configuration property of the extension is overridable at runtime.
 
-include::includes/quarkus-log-handler-splunk.adoc[leveloffset=+1, opts=optional]
+include::includes/quarkus-logging-splunk.adoc[leveloffset=+1,opts=optional]
