@@ -1,3 +1,4 @@
+:summaryTableId: quarkus-logging-splunk_quarkus-log
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
@@ -7,11 +8,11 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-enabled[`quarkus.log.handler.splunk.devservices.enabled`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.devservices.enabled+++[]
-endif::add-copy-button-to-config-props[]
+h|[[quarkus-logging-splunk_section_quarkus-log-handler-splunk-devservices]] [.section-name.section-level0]##link:#quarkus-logging-splunk_section_quarkus-log-handler-splunk-devservices[Dev Services]##
+h|Type
+h|Default
 
+a|icon:lock[title=Fixed at build time] [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-enabled[`quarkus.log.handler.splunk.devservices.enabled`]##
 
 [.description]
 --
@@ -29,10 +30,6 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-image-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-image-name[`quarkus.log.handler.splunk.devservices.image-name`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.devservices.image-name+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -50,10 +47,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a|icon:lock[title=Fixed at build time] [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-shared]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-shared[`quarkus.log.handler.splunk.devservices.shared`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.devservices.shared+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -71,10 +64,6 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-container-env-container-env]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-container-env-container-env[`quarkus.log.handler.splunk.devservices.container-env."container-env"`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.devservices.container-env."container-env"+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -92,10 +81,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a|icon:lock[title=Fixed at build time] [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-plug-named-handlers-plug-named-handlers]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-plug-named-handlers-plug-named-handlers[`quarkus.log.handler.splunk.devservices.plug-named-handlers."plug-named-handlers"`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.devservices.plug-named-handlers."plug-named-handlers"+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -114,11 +99,29 @@ endif::add-copy-button-to-env-var[]
 |Map<String,Boolean>
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-enabled[`quarkus.log.handler.splunk.enabled`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.enabled+++[]
-endif::add-copy-button-to-config-props[]
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-api-url]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-api-url[`quarkus.log.handler.splunk.devservices.api-url`]##
 
+[.description]
+--
+The API URL the splunk dev service listens on.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_API_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_API_URL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+
+h|[[quarkus-logging-splunk_section_quarkus-log-handler-splunk]] [.section-name.section-level0]##link:#quarkus-logging-splunk_section_quarkus-log-handler-splunk[Root level]##
+h|Type
+h|Default
+
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-enabled[`quarkus.log.handler.splunk.enabled`]##
 
 [.description]
 --
@@ -136,10 +139,6 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-level]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-level[`quarkus.log.handler.splunk.level`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.level+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -157,10 +156,6 @@ endif::add-copy-button-to-env-var[]
 |`ALL`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-url]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-url[`quarkus.log.handler.splunk.url`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.url+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -180,10 +175,6 @@ endif::add-copy-button-to-env-var[]
 |`https://localhost:8088/`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-disable-certificate-validation]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-disable-certificate-validation[`quarkus.log.handler.splunk.disable-certificate-validation`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.disable-certificate-validation+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -201,10 +192,6 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-token]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-token[`quarkus.log.handler.splunk.token`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.token+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -222,10 +209,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-send-mode]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-send-mode[`quarkus.log.handler.splunk.send-mode`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.send-mode+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -241,14 +224,10 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_SEND_MODE+++`
 endif::add-copy-button-to-env-var[]
 --
-a|`sequential`, `parallel`
+a|SendMode
 |`sequential`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-channel]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-channel[`quarkus.log.handler.splunk.channel`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.channel+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -266,10 +245,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-batch-interval]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-batch-interval[`quarkus.log.handler.splunk.batch-interval`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.batch-interval+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -285,14 +260,10 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_BATCH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --
-|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-logging-splunk_quarkus-log[icon:question-circle[title=More information about the Duration format]]
+|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`10S`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-batch-size-count]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-batch-size-count[`quarkus.log.handler.splunk.batch-size-count`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.batch-size-count+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -310,10 +281,6 @@ endif::add-copy-button-to-env-var[]
 |`10`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-batch-size-bytes]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-batch-size-bytes[`quarkus.log.handler.splunk.batch-size-bytes`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.batch-size-bytes+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -331,10 +298,6 @@ endif::add-copy-button-to-env-var[]
 |`10240`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-max-retries]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-max-retries[`quarkus.log.handler.splunk.max-retries`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.max-retries+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -352,10 +315,6 @@ endif::add-copy-button-to-env-var[]
 |`0`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-middleware]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-middleware[`quarkus.log.handler.splunk.middleware`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.middleware+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -373,10 +332,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-format]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-format[`quarkus.log.handler.splunk.format`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.format+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -396,10 +351,6 @@ endif::add-copy-button-to-env-var[]
 |`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-include-exception]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-include-exception[`quarkus.log.handler.splunk.include-exception`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.include-exception+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -417,10 +368,6 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-include-logger-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-include-logger-name[`quarkus.log.handler.splunk.include-logger-name`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.include-logger-name+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -438,10 +385,6 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-include-thread-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-include-thread-name[`quarkus.log.handler.splunk.include-thread-name`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.include-thread-name+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -459,10 +402,6 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-host]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-host[`quarkus.log.handler.splunk.metadata-host`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.metadata-host+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -482,10 +421,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-source]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-source[`quarkus.log.handler.splunk.metadata-source`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.metadata-source+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -503,10 +438,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-source-type]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-source-type[`quarkus.log.handler.splunk.metadata-source-type`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.metadata-source-type+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -528,10 +459,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-index]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-index[`quarkus.log.handler.splunk.metadata-index`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.metadata-index+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -549,10 +476,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-fields-metadata-fields]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-fields-metadata-fields[`quarkus.log.handler.splunk.metadata-fields."metadata-fields"`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.metadata-fields."metadata-fields"+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -570,10 +493,6 @@ endif::add-copy-button-to-env-var[]
 |
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-severity-field-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-metadata-severity-field-name[`quarkus.log.handler.splunk.metadata-severity-field-name`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.metadata-severity-field-name+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -591,10 +510,6 @@ endif::add-copy-button-to-env-var[]
 |`severity`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-serialization]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-serialization[`quarkus.log.handler.splunk.serialization`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.serialization+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -612,14 +527,10 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_SERIALIZATION+++`
 endif::add-copy-button-to-env-var[]
 --
-a|`raw`, `nested`, `flat`
+a|SerializationFormat
 |`nested`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-filter]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-filter[`quarkus.log.handler.splunk.filter`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.filter+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -636,11 +547,7 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-async-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-async-enabled[`quarkus.log.handler.splunk.async.enabled`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.async.enabled+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-async]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-async[`quarkus.log.handler.splunk.async`]##
 
 [.description]
 --
@@ -648,20 +555,16 @@ Indicates whether to log asynchronously
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_ENABLED+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_ENABLED+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`false`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-async-queue-length]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-async-queue-length[`quarkus.log.handler.splunk.async.queue-length`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.async.queue-length+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -679,10 +582,6 @@ endif::add-copy-button-to-env-var[]
 |`512`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-async-overflow]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-async-overflow[`quarkus.log.handler.splunk.async.overflow`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.async.overflow+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -696,14 +595,10 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_ASYNC_OVERFLOW+++`
 endif::add-copy-button-to-env-var[]
 --
-a|`block`, `discard`
+a|OverflowAction
 |`block`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-connect-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-connect-timeout[`quarkus.log.handler.splunk.connect-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.connect-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -721,10 +616,6 @@ endif::add-copy-button-to-env-var[]
 |`3000`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-call-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-call-timeout[`quarkus.log.handler.splunk.call-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.call-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -742,10 +633,6 @@ endif::add-copy-button-to-env-var[]
 |`0`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-read-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-read-timeout[`quarkus.log.handler.splunk.read-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.read-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -763,10 +650,6 @@ endif::add-copy-button-to-env-var[]
 |`10000`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-write-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-write-timeout[`quarkus.log.handler.splunk.write-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.write-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -784,10 +667,6 @@ endif::add-copy-button-to-env-var[]
 |`10000`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-termination-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-termination-timeout[`quarkus.log.handler.splunk.termination-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.termination-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
 
 [.description]
 --
@@ -804,32 +683,7 @@ endif::add-copy-button-to-env-var[]
 |long
 |`0`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-api-url]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-devservices-api-url[`quarkus.log.handler.splunk.devservices.api-url`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk.devservices.api-url+++[]
-endif::add-copy-button-to-config-props[]
-
-
-[.description]
---
-The API URL the splunk dev service listens on.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_API_URL+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_DEVSERVICES_API_URL+++`
-endif::add-copy-button-to-env-var[]
---
-|string
-|
-
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-enabled[`quarkus.log.handler.splunk."named-handlers".enabled`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".enabled+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-enabled[`quarkus.log.handler.splunk."handler-name".enabled`]##
 
 [.description]
 --
@@ -837,20 +691,16 @@ Determine whether to enable the handler
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ENABLED+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ENABLED+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ENABLED+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`true`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-level]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-level[`quarkus.log.handler.splunk."named-handlers".level`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".level+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-level]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-level[`quarkus.log.handler.splunk."handler-name".level`]##
 
 [.description]
 --
@@ -858,20 +708,16 @@ The splunk handler log level. By default, it is no more strict than the root han
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__LEVEL+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__LEVEL+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__LEVEL+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__LEVEL+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://javadoc.io/doc/org.jboss.logmanager/jboss-logmanager/latest/org/jboss/logmanager/Level.html[Level]
 |`ALL`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-url]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-url[`quarkus.log.handler.splunk."named-handlers".url`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".url+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-url]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-url[`quarkus.log.handler.splunk."handler-name".url`]##
 
 [.description]
 --
@@ -881,20 +727,16 @@ With raw events, the endpoint targeted is /services/collector/raw. With flat or 
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__URL+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__URL+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__URL+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__URL+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |`https://localhost:8088/`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-disable-certificate-validation]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-disable-certificate-validation[`quarkus.log.handler.splunk."named-handlers".disable-certificate-validation`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".disable-certificate-validation+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-disable-certificate-validation]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-disable-certificate-validation[`quarkus.log.handler.splunk."handler-name".disable-certificate-validation`]##
 
 [.description]
 --
@@ -902,20 +744,16 @@ Disable TLS certificate validation with HEC endpoint
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__DISABLE_CERTIFICATE_VALIDATION+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__DISABLE_CERTIFICATE_VALIDATION+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__DISABLE_CERTIFICATE_VALIDATION+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__DISABLE_CERTIFICATE_VALIDATION+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`false`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-token]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-token[`quarkus.log.handler.splunk."named-handlers".token`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".token+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-token]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-token[`quarkus.log.handler.splunk."handler-name".token`]##
 
 [.description]
 --
@@ -923,20 +761,16 @@ The application token to authenticate with HEC, the token is mandatory if the ex
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__TOKEN+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__TOKEN+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__TOKEN+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__TOKEN+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-send-mode]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-send-mode[`quarkus.log.handler.splunk."named-handlers".send-mode`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".send-mode+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-send-mode]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-send-mode[`quarkus.log.handler.splunk."handler-name".send-mode`]##
 
 [.description]
 --
@@ -946,20 +780,16 @@ In sequential mode, there is only one HTTP connection to HEC and the order of ev
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__SEND_MODE+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__SEND_MODE+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__SEND_MODE+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__SEND_MODE+++`
 endif::add-copy-button-to-env-var[]
 --
-a|`sequential`, `parallel`
+a|SendMode
 |`sequential`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-channel]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-channel[`quarkus.log.handler.splunk."named-handlers".channel`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".channel+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-channel]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-channel[`quarkus.log.handler.splunk."handler-name".channel`]##
 
 [.description]
 --
@@ -967,20 +797,16 @@ A GUID to identify an HEC client and guarantee isolation at HEC level in case of
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__CHANNEL+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__CHANNEL+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__CHANNEL+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__CHANNEL+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-batch-interval]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-batch-interval[`quarkus.log.handler.splunk."named-handlers".batch-interval`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".batch-interval+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-batch-interval]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-batch-interval[`quarkus.log.handler.splunk."handler-name".batch-interval`]##
 
 [.description]
 --
@@ -990,20 +816,16 @@ If 0, the events are sent immediately.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_INTERVAL+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__BATCH_INTERVAL+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_INTERVAL+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__BATCH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --
-|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-logging-splunk_quarkus-log[icon:question-circle[title=More information about the Duration format]]
+|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`10S`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-count]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-count[`quarkus.log.handler.splunk."named-handlers".batch-size-count`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".batch-size-count+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-batch-size-count]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-batch-size-count[`quarkus.log.handler.splunk."handler-name".batch-size-count`]##
 
 [.description]
 --
@@ -1011,20 +833,16 @@ Maximum number of events in a batch. By default 10, if 0 no batching.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_SIZE_COUNT+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__BATCH_SIZE_COUNT+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_SIZE_COUNT+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__BATCH_SIZE_COUNT+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`10`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-bytes]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-batch-size-bytes[`quarkus.log.handler.splunk."named-handlers".batch-size-bytes`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".batch-size-bytes+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-batch-size-bytes]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-batch-size-bytes[`quarkus.log.handler.splunk."handler-name".batch-size-bytes`]##
 
 [.description]
 --
@@ -1032,20 +850,16 @@ Maximum total size in bytes of events in a batch. By default 10KB, if 0 no batch
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_SIZE_BYTES+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__BATCH_SIZE_BYTES+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__BATCH_SIZE_BYTES+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__BATCH_SIZE_BYTES+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`10240`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-max-retries]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-max-retries[`quarkus.log.handler.splunk."named-handlers".max-retries`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".max-retries+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-max-retries]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-max-retries[`quarkus.log.handler.splunk."handler-name".max-retries`]##
 
 [.description]
 --
@@ -1053,20 +867,16 @@ Maximum number of retries in case of I/O exceptions with HEC connection.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MAX_RETRIES+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__MAX_RETRIES+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MAX_RETRIES+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__MAX_RETRIES+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`0`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-middleware]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-middleware[`quarkus.log.handler.splunk."named-handlers".middleware`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".middleware+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-middleware]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-middleware[`quarkus.log.handler.splunk."handler-name".middleware`]##
 
 [.description]
 --
@@ -1074,20 +884,16 @@ A middleware to customize the behavior of sending events to Splunk.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MIDDLEWARE+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__MIDDLEWARE+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__MIDDLEWARE+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__MIDDLEWARE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-format]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-format[`quarkus.log.handler.splunk."named-handlers".format`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".format+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-format]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-format[`quarkus.log.handler.splunk."handler-name".format`]##
 
 [.description]
 --
@@ -1097,20 +903,16 @@ Specific metadata (hostname, category, thread name, ...), as well as MDC key/val
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FORMAT+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__FORMAT+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FORMAT+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__FORMAT+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |`%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-include-exception]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-include-exception[`quarkus.log.handler.splunk."named-handlers".include-exception`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".include-exception+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-exception]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-exception[`quarkus.log.handler.splunk."handler-name".include-exception`]##
 
 [.description]
 --
@@ -1118,20 +920,16 @@ Whether to send the thrown exception message as a structured metadata of the log
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_EXCEPTION+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__INCLUDE_EXCEPTION+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_EXCEPTION+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__INCLUDE_EXCEPTION+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`false`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-include-logger-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-include-logger-name[`quarkus.log.handler.splunk."named-handlers".include-logger-name`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".include-logger-name+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-logger-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-logger-name[`quarkus.log.handler.splunk."handler-name".include-logger-name`]##
 
 [.description]
 --
@@ -1139,20 +937,16 @@ Whether to send the logger name as a structured metadata of the log event (equiv
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_LOGGER_NAME+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__INCLUDE_LOGGER_NAME+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_LOGGER_NAME+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__INCLUDE_LOGGER_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`false`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-include-thread-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-include-thread-name[`quarkus.log.handler.splunk."named-handlers".include-thread-name`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".include-thread-name+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-thread-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-thread-name[`quarkus.log.handler.splunk."handler-name".include-thread-name`]##
 
 [.description]
 --
@@ -1160,20 +954,16 @@ Whether to send the thread name as a structured metadata of the log event (equiv
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_THREAD_NAME+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__INCLUDE_THREAD_NAME+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__INCLUDE_THREAD_NAME+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__INCLUDE_THREAD_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`false`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-host]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-host[`quarkus.log.handler.splunk."named-handlers".metadata-host`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".metadata-host+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-host]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-host[`quarkus.log.handler.splunk."handler-name".metadata-host`]##
 
 [.description]
 --
@@ -1183,20 +973,16 @@ Default value: the equivalent of %h in a formatted message.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_HOST+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_HOST+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_HOST+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_HOST+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source[`quarkus.log.handler.splunk."named-handlers".metadata-source`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".metadata-source+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-source]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-source[`quarkus.log.handler.splunk."handler-name".metadata-source`]##
 
 [.description]
 --
@@ -1204,20 +990,16 @@ The source value to assign to the event data. For example, if you're sending dat
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SOURCE+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_SOURCE+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SOURCE+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_SOURCE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source-type]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-source-type[`quarkus.log.handler.splunk."named-handlers".metadata-source-type`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".metadata-source-type+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-source-type]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-source-type[`quarkus.log.handler.splunk."handler-name".metadata-source-type`]##
 
 [.description]
 --
@@ -1229,20 +1011,16 @@ Default value: _json for nested serialization, not set otherwise
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SOURCE_TYPE+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_SOURCE_TYPE+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SOURCE_TYPE+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_SOURCE_TYPE+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-index]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-index[`quarkus.log.handler.splunk."named-handlers".metadata-index`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".metadata-index+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-index]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-index[`quarkus.log.handler.splunk."handler-name".metadata-index`]##
 
 [.description]
 --
@@ -1250,20 +1028,16 @@ The optional name of the index by which the event data is to be stored. If set, 
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_INDEX+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_INDEX+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_INDEX+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_INDEX+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-fields-metadata-fields]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-fields-metadata-fields[`quarkus.log.handler.splunk."named-handlers".metadata-fields."metadata-fields"`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".metadata-fields."metadata-fields"+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-fields-metadata-fields]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-fields-metadata-fields[`quarkus.log.handler.splunk."handler-name".metadata-fields."metadata-fields"`]##
 
 [.description]
 --
@@ -1271,20 +1045,16 @@ Optional static key/value pairs to populate the "fields" key of event metadata. 
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_FIELDS__METADATA_FIELDS_+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_FIELDS__METADATA_FIELDS_+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_FIELDS__METADATA_FIELDS_+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_FIELDS__METADATA_FIELDS_+++`
 endif::add-copy-button-to-env-var[]
 --
 |Map<String,String>
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-severity-field-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-metadata-severity-field-name[`quarkus.log.handler.splunk."named-handlers".metadata-severity-field-name`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".metadata-severity-field-name+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-severity-field-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-metadata-severity-field-name[`quarkus.log.handler.splunk."handler-name".metadata-severity-field-name`]##
 
 [.description]
 --
@@ -1292,20 +1062,16 @@ The name of the key used to convey the severity / log level in the metadata fiel
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SEVERITY_FIELD_NAME+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_SEVERITY_FIELD_NAME+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__METADATA_SEVERITY_FIELD_NAME+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__METADATA_SEVERITY_FIELD_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |`severity`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-serialization]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-serialization[`quarkus.log.handler.splunk."named-handlers".serialization`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".serialization+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-serialization]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-serialization[`quarkus.log.handler.splunk."handler-name".serialization`]##
 
 [.description]
 --
@@ -1317,20 +1083,16 @@ The format of the payload.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__SERIALIZATION+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__SERIALIZATION+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__SERIALIZATION+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__SERIALIZATION+++`
 endif::add-copy-button-to-env-var[]
 --
-a|`raw`, `nested`, `flat`
+a|SerializationFormat
 |`nested`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-filter]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-filter[`quarkus.log.handler.splunk."named-handlers".filter`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".filter+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-filter]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-filter[`quarkus.log.handler.splunk."handler-name".filter`]##
 
 [.description]
 --
@@ -1338,20 +1100,16 @@ The name of the named filter to link to the splunk handler.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FILTER+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__FILTER+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__FILTER+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__FILTER+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-async-enabled]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-async-enabled[`quarkus.log.handler.splunk."named-handlers".async.enabled`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".async.enabled+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-async]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-async[`quarkus.log.handler.splunk."handler-name".async`]##
 
 [.description]
 --
@@ -1359,20 +1117,16 @@ Indicates whether to log asynchronously
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_ENABLED+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ASYNC+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_ENABLED+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ASYNC+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`false`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-async-queue-length]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-async-queue-length[`quarkus.log.handler.splunk."named-handlers".async.queue-length`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".async.queue-length+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-async-queue-length]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-async-queue-length[`quarkus.log.handler.splunk."handler-name".async.queue-length`]##
 
 [.description]
 --
@@ -1380,20 +1134,16 @@ The queue length to use before flushing writing
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_QUEUE_LENGTH+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ASYNC_QUEUE_LENGTH+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_QUEUE_LENGTH+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ASYNC_QUEUE_LENGTH+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
 |`512`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-async-overflow]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-async-overflow[`quarkus.log.handler.splunk."named-handlers".async.overflow`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".async.overflow+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-async-overflow]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-async-overflow[`quarkus.log.handler.splunk."handler-name".async.overflow`]##
 
 [.description]
 --
@@ -1401,20 +1151,16 @@ Determine whether to block the publisher (rather than drop the message) when the
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_OVERFLOW+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ASYNC_OVERFLOW+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__ASYNC_OVERFLOW+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__ASYNC_OVERFLOW+++`
 endif::add-copy-button-to-env-var[]
 --
-a|`block`, `discard`
+a|OverflowAction
 |`block`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-connect-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-connect-timeout[`quarkus.log.handler.splunk."named-handlers".connect-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".connect-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-connect-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-connect-timeout[`quarkus.log.handler.splunk."handler-name".connect-timeout`]##
 
 [.description]
 --
@@ -1422,20 +1168,16 @@ Sets the default connect timeout for new connections in milliseconds.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__CONNECT_TIMEOUT+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__CONNECT_TIMEOUT+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__CONNECT_TIMEOUT+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__CONNECT_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`3000`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-call-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-call-timeout[`quarkus.log.handler.splunk."named-handlers".call-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".call-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-call-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-call-timeout[`quarkus.log.handler.splunk."handler-name".call-timeout`]##
 
 [.description]
 --
@@ -1443,20 +1185,16 @@ Sets the default timeout for complete calls in milliseconds.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__CALL_TIMEOUT+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__CALL_TIMEOUT+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__CALL_TIMEOUT+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__CALL_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`0`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-read-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-read-timeout[`quarkus.log.handler.splunk."named-handlers".read-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".read-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-read-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-read-timeout[`quarkus.log.handler.splunk."handler-name".read-timeout`]##
 
 [.description]
 --
@@ -1464,20 +1202,16 @@ Sets the default read timeout for new connections in milliseconds.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__READ_TIMEOUT+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__READ_TIMEOUT+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__READ_TIMEOUT+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__READ_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`10000`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-write-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-write-timeout[`quarkus.log.handler.splunk."named-handlers".write-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".write-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-write-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-write-timeout[`quarkus.log.handler.splunk."handler-name".write-timeout`]##
 
 [.description]
 --
@@ -1485,20 +1219,16 @@ Sets the default write timeout for new connections in milliseconds.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__WRITE_TIMEOUT+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__WRITE_TIMEOUT+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__WRITE_TIMEOUT+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__WRITE_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`10000`
 
-a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-termination-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-named-handlers-termination-timeout[`quarkus.log.handler.splunk."named-handlers".termination-timeout`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.log.handler.splunk."named-handlers".termination-timeout+++[]
-endif::add-copy-button-to-config-props[]
-
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-termination-timeout]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-termination-timeout[`quarkus.log.handler.splunk."handler-name".termination-timeout`]##
 
 [.description]
 --
@@ -1506,14 +1236,15 @@ Sets the default termination timeout during a flush in milliseconds.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__TERMINATION_TIMEOUT+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__TERMINATION_TIMEOUT+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__NAMED_HANDLERS__TERMINATION_TIMEOUT+++`
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__TERMINATION_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |long
 |`0`
+
 
 |===
 
@@ -1536,3 +1267,5 @@ In other cases, the simplified format is translated to the `java.time.Duration` 
 * If the value is a number followed by `d`, it is prefixed with `P`.
 ====
 endif::no-duration-note[]
+
+:!summaryTableId:
