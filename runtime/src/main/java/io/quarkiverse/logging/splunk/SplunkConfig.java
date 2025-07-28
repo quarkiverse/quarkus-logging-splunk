@@ -6,6 +6,8 @@ package io.quarkiverse.logging.splunk;
 
 import java.util.Map;
 
+import io.quarkus.runtime.annotations.ConfigDocMapKey;
+import io.quarkus.runtime.annotations.ConfigDocSection;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 import io.smallrye.config.ConfigMapping;
@@ -19,19 +21,23 @@ import io.smallrye.config.WithParentName;
 public interface SplunkConfig {
 
     /**
-     * Configuration for Splunk HEC logging for the root level.
+     * Root level.
      */
     @WithParentName
+    @ConfigDocSection
     SplunkHandlerConfig config();
 
     /**
-     * Map of all the custom/named handlers configuration using Splunk implementation.
+     * Named handlers.
      */
     @WithParentName
+    @ConfigDocSection
+    @ConfigDocMapKey("handler-name")
     Map<String, SplunkHandlerConfig> namedHandlers();
 
     /**
-     * Runtime configuration for the Splunk DevService.
+     * Dev Services.
      */
+    @ConfigDocSection
     DevServicesLoggingSplunkRuntimeConfig devservices();
 }
