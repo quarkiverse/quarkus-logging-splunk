@@ -77,7 +77,7 @@ public class SplunkLogHandlerRecorder {
     }
 
     static HttpEventCollectorSender createSender(SplunkHandlerConfig config) {
-        HttpEventCollectorErrorHandler.onError(new SplunkErrorCallback());
+        HttpEventCollectorErrorHandler.onError(new SplunkErrorCallback(config.printEventsToStdoutOnError()));
         String type = "";
         if (config.raw() || config.serialization() == SplunkHandlerConfig.SerializationFormat.RAW) {
             type = "Raw";

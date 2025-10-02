@@ -49,7 +49,7 @@ public class SplunkErrorCallbackTest {
 
     @Test
     public void splunkErrorShouldBeLoggedToStderr() {
-        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr);
+        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr, true);
 
         callback.error(Collections.singletonList(logEvent), new Exception("Test exception"));
 
@@ -59,7 +59,7 @@ public class SplunkErrorCallbackTest {
     @Test
     public void originalLogShouldNotBeLoggedIfConsoleHandlerEnabled() {
         InitialConfigurator.DELAYED_HANDLER.addHandler(new ConsoleHandler());
-        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr);
+        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr, true);
 
         callback.error(Collections.singletonList(logEvent), new Exception("Test exception"));
 
@@ -71,7 +71,7 @@ public class SplunkErrorCallbackTest {
         Handler handler = new ConsoleHandler();
         handler.setLevel(Level.OFF);
         InitialConfigurator.DELAYED_HANDLER.addHandler(handler);
-        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr);
+        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr, true);
 
         callback.error(Collections.singletonList(logEvent), new Exception("Test exception"));
 
@@ -80,10 +80,19 @@ public class SplunkErrorCallbackTest {
 
     @Test
     public void originalLogShouldBeLoggedToStdoutIfConsoleHandlerDisabled() {
-        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr);
+        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr, true);
 
         callback.error(Collections.singletonList(logEvent), new Exception("Test exception"));
 
         verify(stdout).println("Hello");
+    }
+
+    @Test
+    public void originalLogShouldNotBePrintedToStdoutWhenLog() {
+        SplunkErrorCallback callback = new SplunkErrorCallback(stdout, stderr, false);
+
+        callback.error(Collections.singletonList(logEvent), new Exception("Test exception"));
+
+        verify(stdout, org.mockito.Mockito.never()).println("Hello");
     }
 }
