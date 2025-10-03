@@ -402,6 +402,29 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-print-events-to-stdout-on-error]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-print-events-to-stdout-on-error[`quarkus.log.handler.splunk.print-events-to-stdout-on-error`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.log.handler.splunk.print-events-to-stdout-on-error+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+
+Whether to log events that could not be sent to Splunk when a failure occurred (after retries)
+using the standard output of the process.
+Applications that deal with sensitive data may want to disable this.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_PRINT_EVENTS_TO_STDOUT_ON_ERROR+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_PRINT_EVENTS_TO_STDOUT_ON_ERROR+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-format]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-format[`quarkus.log.handler.splunk.format`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.log.handler.splunk.format+++[]

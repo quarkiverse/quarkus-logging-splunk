@@ -28,16 +28,19 @@ public class SplunkErrorCallback implements ErrorCallback {
 
     PrintStream stderr;
 
-    public SplunkErrorCallback() {
-        this(System.out, System.err); // NOSONAR
+    boolean printEventsToStdoutOnError;
+
+    public SplunkErrorCallback(boolean printEventsToStdoutOnError) {
+        this(System.out, System.err, printEventsToStdoutOnError); // NOSONAR
     }
 
     /**
      * For unit tests
      */
-    public SplunkErrorCallback(PrintStream stdout, PrintStream stderr) {
+    public SplunkErrorCallback(PrintStream stdout, PrintStream stderr, boolean printEventsToStdoutOnError) {
         this.stdout = stdout;
         this.stderr = stderr;
+        this.printEventsToStdoutOnError = printEventsToStdoutOnError;
     }
 
     /**
@@ -52,7 +55,7 @@ public class SplunkErrorCallback implements ErrorCallback {
         e.printStackTrace(new PrintWriter(stringWriter));
         this.stderr.println(stringWriter.toString());
 
-        if (!isConsoleHandlerEnabled()) {
+        if (printEventsToStdoutOnError && !isConsoleHandlerEnabled()) {
             for (HttpEventCollectorEventInfo logEvent : list) {
                 this.stdout.println(logEvent.getMessage());
             }

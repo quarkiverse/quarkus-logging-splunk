@@ -106,6 +106,18 @@ public interface SplunkHandlerConfig {
     Optional<String> middleware();
 
     /**
+     * Whether to log events that could not be sent to Splunk when a failure occurred (after retries)
+     * using the standard output of the process.
+     * Applications that deal with sensitive data may want to disable this
+     *
+     * @see <a href=
+     *      "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html#data-to-exclude">OWASP logging cheat
+     *      guide</a>
+     */
+    @WithDefault("true")
+    boolean printEventsToStdoutOnError();
+
+    /**
      * The log format, defining which metadata are inlined inside the log main payload.
      * <p>
      * Specific metadata (hostname, category, thread name, ...), as well as MDC key/value map, can also be sent in a structured
