@@ -24,6 +24,7 @@ public class SplunkContainer extends GenericContainer<SplunkContainer> {
 
     public SplunkContainer(DockerImageName dockerImageName) {
         super(dockerImageName);
+        withEnv("SPLUNK_GENERAL_TERMS", "--accept-sgt-current-at-splunk-com");
         withEnv("SPLUNK_START_ARGS", "--accept-license");
         withEnv("SPLUNK_PASSWORD", SPLUNK_PASSWORD);
         withEnv("SPLUNK_HEC_TOKEN", HEC_TOKEN);
