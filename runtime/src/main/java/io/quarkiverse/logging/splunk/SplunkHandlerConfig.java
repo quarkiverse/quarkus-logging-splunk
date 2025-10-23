@@ -108,13 +108,13 @@ public interface SplunkHandlerConfig {
     /**
      * Whether to log events that could not be sent to Splunk when a failure occurred (after retries)
      * using the standard output of the process.
-     * Applications that deal with sensitive data may want to disable this
+     * Applications that deal with sensitive data may want to keep it disabled
      *
      * @see <a href=
      *      "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html#data-to-exclude">OWASP logging cheat
      *      guide</a>
      */
-    @WithDefault("true")
+    @WithDefault("false")
     boolean printEventsToStdoutOnError();
 
     /**
