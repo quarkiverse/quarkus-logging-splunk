@@ -142,7 +142,7 @@ Batched events that cannot be sent to the Splunk indexer will be logged to stdou
 * Formatted using console handler settings if the console handler is enabled
 * Formatted using splunk handler settings otherwise
 
-It is recommended to disable this feature for applications dealing with sensitive data, as logs might contain sensitive information.
+It is recommended to keep this feature disabled for applications dealing with sensitive data, as logs might contain sensitive information.
 
 In any case, the root cause of the failure is always logged to stderr.
 
