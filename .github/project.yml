@@ -2,3 +2,5 @@ name: Quarkiverse Extension
 release:
   current-version: 5.0.0
   next-version: 5.0.0-SNAPSHOT
+  additional-notes: |
+    Requires Quarkus >= 3.27 LTS and Java >= 21

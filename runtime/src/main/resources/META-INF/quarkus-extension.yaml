@@ -11,6 +11,7 @@ metadata:
   categories:
     - "logging"
   status: "stable"
-  guide: https://docs.quarkiverse.io/quarkus-logging-splunk/dev/index.html
+  guide: "https://docs.quarkiverse.io/quarkus-logging-splunk/dev/index.html"
+  icon-url: "https://cdn.worldvectorlogo.com/logos/splunk.svg"
   config:
     - "quarkus.log.handler.splunk"
