@@ -32,8 +32,14 @@ import io.quarkus.runtime.logging.LogFilterFactory;
 @Recorder
 public class SplunkLogHandlerRecorder {
 
-    public RuntimeValue<Optional<Handler>> initializeHandler(SplunkConfig rootConfig,
-            DiscoveredLogComponents discoveredLogComponents) {
+    private final RuntimeValue<SplunkConfig> runtimeConfig;
+
+    public SplunkLogHandlerRecorder(RuntimeValue<SplunkConfig> runtimeConfig) {
+        this.runtimeConfig = runtimeConfig;
+    }
+
+    public RuntimeValue<Optional<Handler>> initializeHandler(DiscoveredLogComponents discoveredLogComponents) {
+        SplunkConfig rootConfig = runtimeConfig.getValue();
         if (!rootConfig.config().enabled()) {
             return new RuntimeValue<>(Optional.empty());
         }
@@ -42,8 +48,8 @@ public class SplunkLogHandlerRecorder {
         return new RuntimeValue<>(Optional.of(handler));
     }
 
-    public RuntimeValue<Map<String, Handler>> initializeHandlers(SplunkConfig rootConfig,
-            DiscoveredLogComponents discoveredLogComponents) {
+    public RuntimeValue<Map<String, Handler>> initializeHandlers(DiscoveredLogComponents discoveredLogComponents) {
+        SplunkConfig rootConfig = runtimeConfig.getValue();
         if (rootConfig.namedHandlers() == null || rootConfig.namedHandlers().isEmpty()) {
             return new RuntimeValue<>(Collections.EMPTY_MAP);
         }

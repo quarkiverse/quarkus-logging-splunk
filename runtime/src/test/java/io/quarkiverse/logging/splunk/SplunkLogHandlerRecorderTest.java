@@ -66,7 +66,8 @@ class SplunkLogHandlerRecorderTest {
         SplunkConfig rootConfig = createAsyncRootConfig();
 
         // Act
-        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder(new RuntimeValue(rootConfig))
+                .initializeHandler(null);
 
         // Assert
         assertTrue(handler.getValue().isPresent());
