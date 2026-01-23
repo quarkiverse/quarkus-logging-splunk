@@ -71,7 +71,7 @@ public class SplunkLogHandlerRecorder {
                 new PatternFormatter(config.format()));
         applyFilter(discoveredLogComponents, config.filter(), splunkLogHandler);
 
-        return config.async().enabled()
+        return (config.async().enable() || config.async().enabled())
                 ? createAsyncHandler(config.async(), config.level(), splunkLogHandler)
                 : splunkLogHandler;
     }

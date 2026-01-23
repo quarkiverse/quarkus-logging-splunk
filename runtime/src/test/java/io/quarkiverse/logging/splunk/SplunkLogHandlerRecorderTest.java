@@ -1,5 +1,9 @@
 package io.quarkiverse.logging.splunk;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -74,6 +78,52 @@ class SplunkLogHandlerRecorderTest {
         assertFalse(asyncHandler.isAutoFlush());
     }
 
+    @Test
+    void shouldNotCreateAsyncHandlerWhenEnabledFalseAndEnableFalse() {
+        SplunkConfig rootConfig = createRootConfigWithAsyncSettings(false, false);
+
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+
+        assertThat(handler.getValue().isPresent(), is(true));
+        assertThat(handler.getValue().get(), not(instanceOf(AsyncHandler.class)));
+    }
+
+    @Test
+    void shouldCreateAsyncHandlerWhenEnabledFalseAndEnableTrue() {
+        SplunkConfig rootConfig = createRootConfigWithAsyncSettings(false, true);
+
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+
+        assertThat(handler.getValue().isPresent(), is(true));
+        assertThat(handler.getValue().get(), instanceOf(AsyncHandler.class));
+        AsyncHandler asyncHandler = (AsyncHandler) handler.getValue().get();
+        assertThat(asyncHandler.isAutoFlush(), is(false));
+    }
+
+    @Test
+    void shouldCreateAsyncHandlerWhenEnabledTrueAndEnableFalse() {
+        SplunkConfig rootConfig = createRootConfigWithAsyncSettings(true, false);
+
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+
+        assertThat(handler.getValue().isPresent(), is(true));
+        assertThat(handler.getValue().get(), instanceOf(AsyncHandler.class));
+        AsyncHandler asyncHandler = (AsyncHandler) handler.getValue().get();
+        assertThat(asyncHandler.isAutoFlush(), is(false));
+    }
+
+    @Test
+    void shouldCreateAsyncHandlerWhenEnabledTrueAndEnableTrue() {
+        SplunkConfig rootConfig = createRootConfigWithAsyncSettings(true, true);
+
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+
+        assertThat(handler.getValue().isPresent(), is(true));
+        assertThat(handler.getValue().get(), instanceOf(AsyncHandler.class));
+        AsyncHandler asyncHandler = (AsyncHandler) handler.getValue().get();
+        assertThat(asyncHandler.isAutoFlush(), is(false));
+    }
+
     private SplunkHandlerConfig createConfig() {
         SplunkHandlerConfig config = mock(SplunkHandlerConfig.class);
         when(config.token()).thenReturn(Optional.of("token"));
@@ -125,6 +175,24 @@ class SplunkLogHandlerRecorderTest {
         when(asyncConfig.overflow()).thenReturn(AsyncHandler.OverflowAction.BLOCK);
         when(handlerConfig.async()).thenReturn(asyncConfig);
 
+        return rootConfig;
+    }
+
+    private SplunkConfig createRootConfigWithAsyncSettings(boolean enabled, boolean enable) {
+        SplunkHandlerConfig handlerConfig = createConfig();
+        when(handlerConfig.middleware()).thenReturn(Optional.of(TestMiddleware.class.getName()));
+        // Override batchInterval duration
+        when(handlerConfig.batchInterval()).thenReturn(Duration.ofSeconds(10));
+
+        AsyncConfig asyncConfig = mock(AsyncConfig.class);
+        when(asyncConfig.enable()).thenReturn(enable);
+        when(asyncConfig.enabled()).thenReturn(enabled);
+        when(asyncConfig.queueLength()).thenReturn(512);
+        when(asyncConfig.overflow()).thenReturn(AsyncHandler.OverflowAction.BLOCK);
+        when(handlerConfig.async()).thenReturn(asyncConfig);
+
+        SplunkConfig rootConfig = mock(SplunkConfig.class);
+        when(rootConfig.config()).thenReturn(handlerConfig);
         return rootConfig;
     }
 
