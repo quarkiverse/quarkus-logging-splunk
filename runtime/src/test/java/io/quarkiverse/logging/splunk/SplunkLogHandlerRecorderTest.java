@@ -83,7 +83,8 @@ class SplunkLogHandlerRecorderTest {
     void shouldNotCreateAsyncHandlerWhenEnabledFalseAndEnableFalse() {
         SplunkConfig rootConfig = createRootConfigWithAsyncSettings(false, false);
 
-        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder(new RuntimeValue(rootConfig))
+                .initializeHandler(null);
 
         assertThat(handler.getValue().isPresent(), is(true));
         assertThat(handler.getValue().get(), not(instanceOf(AsyncHandler.class)));
@@ -93,7 +94,8 @@ class SplunkLogHandlerRecorderTest {
     void shouldCreateAsyncHandlerWhenEnabledFalseAndEnableTrue() {
         SplunkConfig rootConfig = createRootConfigWithAsyncSettings(false, true);
 
-        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder(new RuntimeValue(rootConfig))
+                .initializeHandler(null);
 
         assertThat(handler.getValue().isPresent(), is(true));
         assertThat(handler.getValue().get(), instanceOf(AsyncHandler.class));
@@ -105,7 +107,8 @@ class SplunkLogHandlerRecorderTest {
     void shouldCreateAsyncHandlerWhenEnabledTrueAndEnableFalse() {
         SplunkConfig rootConfig = createRootConfigWithAsyncSettings(true, false);
 
-        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder(new RuntimeValue(rootConfig))
+                .initializeHandler(null);
 
         assertThat(handler.getValue().isPresent(), is(true));
         assertThat(handler.getValue().get(), instanceOf(AsyncHandler.class));
@@ -117,7 +120,8 @@ class SplunkLogHandlerRecorderTest {
     void shouldCreateAsyncHandlerWhenEnabledTrueAndEnableTrue() {
         SplunkConfig rootConfig = createRootConfigWithAsyncSettings(true, true);
 
-        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder().initializeHandler(rootConfig, null);
+        RuntimeValue<Optional<Handler>> handler = new SplunkLogHandlerRecorder(new RuntimeValue(rootConfig))
+                .initializeHandler(null);
 
         assertThat(handler.getValue().isPresent(), is(true));
         assertThat(handler.getValue().get(), instanceOf(AsyncHandler.class));
