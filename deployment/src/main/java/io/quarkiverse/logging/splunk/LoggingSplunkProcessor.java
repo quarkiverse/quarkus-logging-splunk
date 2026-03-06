@@ -53,18 +53,17 @@ class LoggingSplunkProcessor {
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    LogHandlerBuildItem logHandler(SplunkLogHandlerRecorder recorder, SplunkConfig config,
-            CombinedIndexBuildItem combinedIndexBuildItem) {
+    LogHandlerBuildItem logHandler(SplunkLogHandlerRecorder recorder, CombinedIndexBuildItem combinedIndexBuildItem) {
         DiscoveredLogComponents discoveredLogComponents = discoverLogComponents(combinedIndexBuildItem.getIndex());
-        return new LogHandlerBuildItem(recorder.initializeHandler(config, discoveredLogComponents));
+        return new LogHandlerBuildItem(recorder.initializeHandler(discoveredLogComponents));
     }
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    NamedLogHandlersBuildItem logNamedHandlers(SplunkLogHandlerRecorder recorder, SplunkConfig config,
+    NamedLogHandlersBuildItem logNamedHandlers(SplunkLogHandlerRecorder recorder,
             CombinedIndexBuildItem combinedIndexBuildItem) {
         DiscoveredLogComponents discoveredLogComponents = discoverLogComponents(combinedIndexBuildItem.getIndex());
-        return new NamedLogHandlersBuildItem(recorder.initializeHandlers(config, discoveredLogComponents));
+        return new NamedLogHandlersBuildItem(recorder.initializeHandlers(discoveredLogComponents));
     }
 
     @BuildStep
