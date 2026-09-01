@@ -10,11 +10,12 @@ import java.util.logging.ErrorManager;
 import java.util.logging.Filter;
 import java.util.logging.Formatter;
 
+import io.quarkiverse.logging.splunk.middleware.HttpEventCollectorResendMiddleware;
 import org.jboss.logmanager.ExtHandler;
 import org.jboss.logmanager.ExtLogRecord;
 import org.jboss.logmanager.filters.AllFilter;
 
-import com.splunk.logging.HttpEventCollectorResendMiddleware;
+
 import com.splunk.logging.HttpEventCollectorSender;
 
 public class SplunkLogHandler extends ExtHandler {
@@ -45,7 +46,7 @@ public class SplunkLogHandler extends ExtHandler {
     @Override
     public void doPublish(ExtLogRecord record) {
         String formatted = formatMessage(record);
-        if (formatted.length() == 0) {
+        if (formatted.isEmpty()) {
             // nothing to write; don't bother
             return;
         }
@@ -54,7 +55,7 @@ public class SplunkLogHandler extends ExtHandler {
                 record.getLevel().toString(),
                 formatted,
                 includeLoggerName ? record.getLoggerName() : null,
-                includeThreadName ? String.format(Locale.US, "%d", record.getThreadID()) : null,
+                includeThreadName ? String.format(Locale.US, "%d", record.getLongThreadID()) : null,
                 record.getMdcCopy(),
                 (!includeException || record.getThrown() == null) ? null : record.getThrown().getMessage(),
                 null);
