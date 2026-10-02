@@ -130,9 +130,17 @@ public interface SplunkHandlerConfig {
      * Whether to send the thrown exception message as a structured metadata of the log event (as opposed to %e in a formatted
      * message, it does not include the exception name or stacktrace).
      * Only applicable to 'nested' serialization.
+     *
+     * @see #exceptionEncoding() for different ways the exception can be encoded in the log event
      */
     @WithDefault("false")
     boolean includeException();
+
+    /**
+     * The format used to encode exceptions in log events.
+     */
+    @WithDefault("message-only")
+    ExceptionEncoding exceptionEncoding();
 
     /**
      * Whether to send the logger name as a structured metadata of the log event (equivalent of %c in a formatted message).
@@ -260,6 +268,35 @@ public interface SplunkHandlerConfig {
         RAW,
         NESTED,
         FLAT
+    }
+
+    enum ExceptionEncoding {
+        /**
+         * Encode the exception as a single string containing its message.
+         */
+        MESSAGE_ONLY,
+        /**
+         * Encode the exception as a JSON string, containing the following fields:
+         * <dl>
+         * <dt>{@code detailMessage}</dt>
+         * <dd>The message of the exception.</dd>
+         *
+         * <dt>{@code exceptionClass}</dt>
+         * <dd>The class of the exception</dd>
+         *
+         * <dt>{@code fileName}</dt>
+         * <dd>The name of the source file the exception was thrown in. Only present if the exception has a stacktrace
+         * attached.</dd>
+         *
+         * <dt>{@code methodName}</dt>
+         * <dd>The name of the method the exception was thrown in. Only present if the exception has a stracktrace
+         * attached.</dd>
+         *
+         * <dt>{@code lineNumber}</dt>
+         * <dd>The line the exception was thrown on. Only present if the exception has a stacktrace attached.</dd>
+         * </dl>
+         */
+        JSON,
     }
 
     /**
