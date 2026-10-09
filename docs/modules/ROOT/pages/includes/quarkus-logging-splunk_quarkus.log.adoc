@@ -334,6 +334,27 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |`+++false+++`
 
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-exception-encoding]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-exception-encoding[`+++quarkus.log.handler.splunk.exception-encoding+++`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.log.handler.splunk.exception-encoding+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+The format used to encode exceptions in log events.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK_EXCEPTION_ENCODING+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK_EXCEPTION_ENCODING+++`
+endif::add-copy-button-to-env-var[]
+--
+a|`message-only`, `json`
+|`+++message-only+++`
+
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-include-logger-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-include-logger-name[`+++quarkus.log.handler.splunk.include-logger-name+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.log.handler.splunk.include-logger-name+++[]
@@ -1044,6 +1065,27 @@ endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`+++false+++`
+
+a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-exception-encoding]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-exception-encoding[`+++quarkus.log.handler.splunk."handler-name".exception-encoding+++`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.log.handler.splunk."handler-name".exception-encoding+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+The format used to encode exceptions in log events.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__EXCEPTION_ENCODING+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_LOG_HANDLER_SPLUNK__HANDLER_NAME__EXCEPTION_ENCODING+++`
+endif::add-copy-button-to-env-var[]
+--
+a|`message-only`, `json`
+|`+++message-only+++`
 
 a| [[quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-logger-name]] [.property-path]##link:#quarkus-logging-splunk_quarkus-log-handler-splunk-handler-name-include-logger-name[`+++quarkus.log.handler.splunk."handler-name".include-logger-name+++`]##
 ifdef::add-copy-button-to-config-props[]
