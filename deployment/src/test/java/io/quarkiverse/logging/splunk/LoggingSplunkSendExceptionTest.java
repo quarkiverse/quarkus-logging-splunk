@@ -18,12 +18,12 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.verify.VerificationTimes;
 
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 class LoggingSplunkSendExceptionTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = AbstractMockServerTest.withMockServerConfig()
+    static final QuarkusExtensionTest unitTest = AbstractMockServerTest.withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-failure.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class).addClass(AbstractMockServerTest.class));
 

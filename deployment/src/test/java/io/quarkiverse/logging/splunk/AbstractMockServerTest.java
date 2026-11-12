@@ -13,7 +13,7 @@ import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.ClearType;
 import org.mockserver.model.HttpRequest;
 
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 public abstract class AbstractMockServerTest {
 
@@ -61,13 +61,13 @@ public abstract class AbstractMockServerTest {
     }
 
     /**
-     * QuarkusUnitTest 3.16+ only supports one call to #withConfigurationResource
+     * QuarkusExtensionTest 3.16+ only supports one call to #withConfigurationResource
      * So use #overrideConfigKey instead of a properties.
      * See https://github.com/quarkusio/quarkus/issues/43914
      */
-    protected static QuarkusUnitTest withMockServerConfig() {
+    protected static QuarkusExtensionTest withMockServerConfig() {
 
-        return new QuarkusUnitTest()
+        return new QuarkusExtensionTest()
                 // Switch from HTTPS to HTTP
                 .overrideConfigKey("quarkus.log.handler.splunk.url", "http://localhost:8088")
                 // Avoid infinite loop of logging via splunk handler, mockserver must only log to stdout !

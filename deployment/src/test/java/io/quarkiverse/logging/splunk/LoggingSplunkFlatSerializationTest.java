@@ -9,12 +9,12 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 public class LoggingSplunkFlatSerializationTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = withMockServerConfig()
+    static final QuarkusExtensionTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-flat.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 
