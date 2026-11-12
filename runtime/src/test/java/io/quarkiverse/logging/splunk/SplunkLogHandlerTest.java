@@ -59,6 +59,7 @@ class SplunkLogHandlerTest {
         handler.setFormatter(formatter);
         ExtLogRecord record = new ExtLogRecord(Level.ALL, "Hello {0}", SplunkLogHandlerTest.class.getName());
         record.setParameters(new String[] { "world" });
+        record.setThreadID(1);
 
         handler.publish(record);
 
