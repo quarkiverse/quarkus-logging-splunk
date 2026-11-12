@@ -35,7 +35,7 @@ public class DevServicesLoggingSplunkProcessor {
 
     private static final String SPLUNK_LATEST = "registry-1.docker.io/splunk/splunk:latest";
 
-    private static volatile DevServicesResultBuildItem.RunningDevService devService;
+    private static volatile RunningSplunkContainer devService;
 
     private static volatile DevServicesLoggingSplunkBuildTimeConfig capturedDevServiceConfig;
 
@@ -84,7 +84,7 @@ public class DevServicesLoggingSplunkProcessor {
                 return null;
             } else {
                 compressor.close();
-                log.infof("The Splunk container is ready on %s", devService.getConfig().get(HANDLER_URL_CONFIG_PROP));
+                log.infof("The Splunk container is ready on %s", devService.config().get(HANDLER_URL_CONFIG_PROP));
             }
         } catch (Throwable t) {
             compressor.closeAndDumpCaptured();
@@ -112,7 +112,7 @@ public class DevServicesLoggingSplunkProcessor {
         return devService.toBuildItem();
     }
 
-    private DevServicesResultBuildItem.RunningDevService startContainer(DevServicesLoggingSplunkBuildTimeConfig config,
+    private RunningSplunkContainer startContainer(DevServicesLoggingSplunkBuildTimeConfig config,
             DockerStatusBuildItem dockerStatusBuildItem, LaunchMode launchMode, Optional<Duration> timeout) {
         if (!isEnabled(config)) {
             // explicitly disabled
@@ -136,8 +136,7 @@ public class DevServicesLoggingSplunkProcessor {
 
         splunkContainer.start();
 
-        return new DevServicesResultBuildItem.RunningDevService(SPLUNK, splunkContainer.getContainerId(),
-                splunkContainer::close, getDevServiceExposedConfig(splunkContainer, config));
+        return new RunningSplunkContainer(splunkContainer, getDevServiceExposedConfig(splunkContainer, config));
     }
 
     private Map<String, String> getDevServiceExposedConfig(SplunkContainer container,
@@ -164,5 +163,23 @@ public class DevServicesLoggingSplunkProcessor {
 
     private boolean isEnabled(DevServicesLoggingSplunkBuildTimeConfig config) {
         return config.enabled();
+    }
+
+    /**
+     * A Splunk container started and stopped by this processor.
+     */
+    private record RunningSplunkContainer(SplunkContainer container, Map<String, String> config) {
+
+        DevServicesResultBuildItem toBuildItem() {
+            return DevServicesResultBuildItem.discovered()
+                    .name(SPLUNK)
+                    .containerId(container.getContainerId())
+                    .config(config)
+                    .build();
+        }
+
+        void close() {
+            container.close();
+        }
     }
 }
