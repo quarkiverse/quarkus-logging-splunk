@@ -4,9 +4,15 @@
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+registries:
+  splunk:
+    type: maven-repository
+    url: https://splunk.jfrog.io/splunk/ext-releases-local/
 updates:
   - package-ecosystem: "maven"
     directory: "/"
+    registries:
+      - splunk
     schedule:
       interval: "daily"
     ignore:
