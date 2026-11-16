@@ -123,9 +123,7 @@ public class SplunkLogHandler extends ExtHandler {
     private String generateErrorDetail(final Throwable throwable) {
         String exceptionDetail = "";
 
-        /*
-         * Exception details are only populated when any ERROR OR FATAL event occurred
-         */
+        // Same structure as https://github.com/splunk/splunk-library-javalogging/blob/19a3ea050f0a849365f8eabd54153c885931c016/src/main/java/com/splunk/logging/HttpEventCollectorLoggingHandler.java#L255-L265
         try {
             // Exception thrown in application is wrapped with relevant information instead of just a message.
             Map<String, String> exceptionDetailMap = new LinkedHashMap<>();
