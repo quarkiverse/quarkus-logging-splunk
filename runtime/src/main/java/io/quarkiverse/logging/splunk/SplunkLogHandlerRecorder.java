@@ -156,6 +156,7 @@ public class SplunkLogHandlerRecorder {
             SplunkHandlerConfig config) {
         return new SplunkLogHandler(sender,
                 config.includeException(),
+                config.exceptionEncoding(),
                 config.includeLoggerName(),
                 config.includeThreadName(),
                 config.disableCertificateValidation(),
