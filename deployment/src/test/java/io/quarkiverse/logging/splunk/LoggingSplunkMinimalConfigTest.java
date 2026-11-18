@@ -13,12 +13,12 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 class LoggingSplunkMinimalConfigTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = withMockServerConfig()
+    static final QuarkusExtensionTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-minimal.properties")
             .overrideConfigKey("quarkus.log.handler.splunk.token", "12345678-1234-1234-1234-1234567890AB")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));

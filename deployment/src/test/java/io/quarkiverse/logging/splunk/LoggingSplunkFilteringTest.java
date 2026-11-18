@@ -18,12 +18,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import io.quarkus.logging.LoggingFilter;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 class LoggingSplunkFilteringTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = withMockServerConfig()
+    static final QuarkusExtensionTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-filtering.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 

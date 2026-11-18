@@ -22,12 +22,12 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockserver.verify.VerificationTimes;
 
 import io.quarkus.bootstrap.logging.InitialConfigurator;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 class LoggingSplunkNestedSerializationTest extends AbstractMockServerTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = withMockServerConfig()
+    static final QuarkusExtensionTest unitTest = withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-nested.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class));
 

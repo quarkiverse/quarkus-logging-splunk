@@ -23,14 +23,14 @@ import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.ClearType;
 import org.mockserver.verify.VerificationTimes;
 
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 @Disabled("This test is not so important, and there's no clear evidence of " +
-        "why it's flaky and may come from the QuarkusUnitTest harness")
+        "why it's flaky and may come from the QuarkusExtensionTest harness")
 class LoggingSplunkSendErrorTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest unitTest = AbstractMockServerTest.withMockServerConfig()
+    static final QuarkusExtensionTest unitTest = AbstractMockServerTest.withMockServerConfig()
             .withConfigurationResource("application-splunk-logging-failure.properties")
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class).addClass(AbstractMockServerTest.class));
 
